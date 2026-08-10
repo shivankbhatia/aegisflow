@@ -2,7 +2,7 @@ from ..llm.client import get_llm
 from .base import CoderOutputSchema
 
 class CoderAgent:
-    def __init__(self, llm_model: str = "llama-3.1-8b-instant"):
+    def __init__(self, llm_model: str = "openai/gpt-oss-20b"):
         self.llm = get_llm(llm_model)
 
     def process(

@@ -39,8 +39,8 @@ source .venv/bin/activate
 pip install -e .
 
 # 4. Set Environment Variables
-export OPENAI_API_BASE="https://dashscope.aliyuncs.com/compatible-mode/v1"
-export OPENAI_API_KEY="your-qwen-api-key"
+export GROQ_API_KEY="your-groq-api-key"
+export AEGIS_MODEL="llama-3.1-8b-instant"
 export DATABASE_URL="postgresql://aegis:password@localhost:5432/aegisflow"
 ```
 

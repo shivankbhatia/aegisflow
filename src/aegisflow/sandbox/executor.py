@@ -2,7 +2,7 @@ import docker
 from typing import Tuple
 
 class SandboxExecutor:
-    def __init__(self, image: str = "python:3.10-slim"):
+    def __init__(self, image: str = "python:3.11-slim"):
         self.client = docker.from_env()
         self.image = image
         # Ensure image is pulled (this might take a bit on first run)

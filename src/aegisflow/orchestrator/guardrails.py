@@ -26,11 +26,14 @@ class GuardrailsInterceptor:
         self.tool_cache[call_hash] = result
         return result
 
-    def check_recursion(self, state: dict):
-        # A simple check: if the last N actions are identical, break loop
-        messages = state.get("messages", [])
-        if len(messages) >= self.max_recursion * 2:
-            # Check for cyclical repeating patterns (simplified)
-            recent_tool_calls = [m.tool_calls for m in messages[-4:] if hasattr(m, 'tool_calls') and m.tool_calls]
-            if len(recent_tool_calls) >= 2 and recent_tool_calls[-1] == recent_tool_calls[-2]:
-                raise Exception("Recursion Limit Exceeded: Agent is stuck in a loop calling the same tools.")
+    def check_recursion(self, state):
+        count = state.get("recursion_count", 0)
+
+        if count >= self.max_recursion:
+            raise Exception(
+                f"Maximum recursion limit of {self.max_recursion} reached."
+            )
+
+        return {
+            "recursion_count": count + 1
+        }
