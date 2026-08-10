@@ -1,8 +1,9 @@
 from pydantic import BaseModel, Field
 
 class BaseAgentSchema(BaseModel):
-    """Base schema that all agent outputs should inherit from."""
-    thought: str = Field(description="The internal reasoning or thought process before making a decision.")
+    rationale: str = Field(
+        description="Brief explanation supporting the decision."
+    )
 
 class TriageOutputSchema(BaseAgentSchema):
     plan: str = Field(description="The outlined plan to solve the issue.")

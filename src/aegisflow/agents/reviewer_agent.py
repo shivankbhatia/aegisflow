@@ -1,10 +1,11 @@
 from langchain_openai import ChatOpenAI
 from .base import ReviewerOutputSchema
+from ..llm.client import get_llm
 from ..sandbox.executor import SandboxExecutor
 
 class ReviewerAgent:
-    def __init__(self, llm_model: str = "qwen-max"):
-        self.llm = ChatOpenAI(model=llm_model)
+    def __init__(self, llm_model: str):
+        self.llm = get_llm(llm_model)
         self.sandbox = SandboxExecutor()
 
     def process(self, code_patch: str, test_patch: str) -> ReviewerOutputSchema:

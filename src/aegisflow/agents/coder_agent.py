@@ -1,18 +1,27 @@
-from langchain_openai import ChatOpenAI
+from ..llm.client import get_llm
 from .base import CoderOutputSchema
 
 class CoderAgent:
-    def __init__(self, llm_model: str = "qwen-max"):
-        self.llm = ChatOpenAI(model=llm_model)
+    def __init__(self, llm_model: str = "llama-3.1-8b-instant"):
+        self.llm = get_llm(llm_model)
 
-    def process(self, plan: str, files: list[str]) -> CoderOutputSchema:
+    def process(
+        self,
+        plan: str,
+        files: list[str]
+    ) -> CoderOutputSchema:
         prompt = f"""
-        You are a Coder Agent. Implement a fix for the given plan.
+        You are a Coder Agent.
+        Implement a fix for the given plan.
         Also write a unit test to verify the fix.
-
-        Plan: {plan}
-        Relevant Files: {', '.join(files)}
+        Plan:
+        {plan}
+        Relevant Files:
+        {', '.join(files)}
         """
-        
-        structured_llm = self.llm.with_structured_output(CoderOutputSchema)
+
+        structured_llm = self.llm.with_structured_output(
+            CoderOutputSchema
+        )
+
         return structured_llm.invoke(prompt)
