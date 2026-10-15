@@ -1,17 +1,17 @@
-from dotenv import load_dotenv
 import os
-from langchain_openai import ChatOpenAI
-import dotenv
+from dotenv import load_dotenv
 
 load_dotenv()
 
+from langchain_openai import ChatOpenAI
+
+
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
+DEFAULT_MODEL = "openai/gpt-oss-20b"
+
 
 def get_llm(model: str | None = None) -> ChatOpenAI:
-    model = model or os.getenv(
-        "AEGIS_MODEL",
-        "openai/gpt-oss-20b"
-    )
+    model = model or os.getenv("AEGIS_MODEL", DEFAULT_MODEL)
 
     api_key = os.getenv("GROQ_API_KEY")
 
