@@ -18,7 +18,7 @@ class Fake:
 
 def make_agents(review_fn=None, coder_fn=None):
     triage = Fake(lambda n, task: SimpleNamespace(plan="p", required_files=["a.py"]))
-    coder = Fake(coder_fn or (lambda n, plan, files: SimpleNamespace(code_patch="c", test_patch="t")))
+    coder = Fake(coder_fn or (lambda n, plan, files, **kw: SimpleNamespace(code_patch="c", test_patch="t")))
     reviewer = Fake(review_fn or (lambda n, code_patch, test_patch: SimpleNamespace(approved=True, feedback="ok")))
     return Agents(triage, coder, reviewer)
 

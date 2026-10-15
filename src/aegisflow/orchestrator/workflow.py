@@ -68,6 +68,9 @@ def build_workflow(
         result = agents.coder.process(
             plan=state["plan"],
             files=state["required_files"],
+            feedback=state.get("feedback", ""),
+            previous_code=state.get("code_patch", ""),
+            previous_tests=state.get("test_patch", ""),
         )
         return {
             "code_patch": result.code_patch,
