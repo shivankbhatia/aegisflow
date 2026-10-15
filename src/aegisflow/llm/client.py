@@ -6,7 +6,7 @@ load_dotenv()
 from langchain_openai import ChatOpenAI
 
 
-GROQ_BASE_URL = "https://api.groq.com/openai/v1"
+DEFAULT_BASE_URL = "https://api.groq.com/openai/v1"
 DEFAULT_MODEL = "openai/gpt-oss-20b"
 
 
@@ -23,6 +23,6 @@ def get_llm(model: str | None = None) -> ChatOpenAI:
     return ChatOpenAI(
         model=model,
         api_key=api_key,
-        base_url=GROQ_BASE_URL,
+        base_url=os.getenv("AEGIS_BASE_URL", DEFAULT_BASE_URL),
         temperature=0.1,
     )
