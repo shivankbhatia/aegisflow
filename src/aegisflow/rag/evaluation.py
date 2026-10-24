@@ -20,6 +20,7 @@ class GoldenQuestion:
     kind: str = "single"  # "single" | "multi_hop"
     reference_answer: str | None = None
     verified: bool = False  # set True only after a human has checked it
+    reviewed_by: str | None = None  # records delegated assistant review transparently
 
 
 def save_questions(questions: Iterable[GoldenQuestion], path: str | Path) -> None:
