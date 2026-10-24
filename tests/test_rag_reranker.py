@@ -67,8 +67,18 @@ def test_reranked_hybrid_retriever_returns_reranker_order_and_respects_k():
     )
 
     assert asyncio.run(retrieve("query", 2)) == ["dense-a", "sparse-b"]
+
+
+def test_reranked_hybrid_retriever_can_limit_candidates_for_low_latency():
+    model = FakeCrossEncoder()
+    reranker = CrossEncoderReranker(model=model)
+    retrieve = make_reranked_hybrid_retriever(
+        FakeIndex(), lambda _query: [1.0], reranker,
+        strategy="structure-aware", candidate_k=3,
+    )
+    assert asyncio.run(retrieve("query", 2, candidate_limit=2)) == ["dense-a", "shared"]
     pairs, _kwargs = model.calls[0]
-    assert len(pairs) == 3
+    assert pairs == [("query", "text shared"), ("query", "text dense-a")]
 
 
 def test_reranked_hybrid_retriever_rejects_bad_candidate_limits():

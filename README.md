@@ -58,7 +58,26 @@ uvicorn aegisflow.api.main:app --reload
 | `GET /runs/{id}` | Status (`queued`, `running`, `completed`, `failed`, `interrupted`), plan, patches, attempts, tokens |
 | `POST /runs/{id}/resume` | Resume a `failed` or `interrupted` run from its last checkpoint |
 | `WS /ws/events/{id}` | Per-node events for the current process, then `done` or `error` |
+| `POST /query` `{"query": "...", "k": 5}` | Grounded RAG answer streamed as SSE `token`, `citations`, `done`, or `error` events |
+| `POST /ingest` | Start local corpus indexing in the background; returns a `job_id` |
+| `GET /ingest/{job_id}` | Read ingestion job status and document/chunk counts |
 | `GET /health` | Liveness |
+
+Set `AEGIS_RAG_ENABLED=1` to load the local embedder and reranker during startup.
+Their MPS inference shares a process-wide lock. If Metal still reports a
+command-buffer assertion on your setup, set `AEGIS_RAG_DEVICE=cpu` to use CPU
+inference; `mps` is also an accepted explicit setting. Reranking defaults to 30
+hybrid candidates after the measured 50-candidate p95 exceeded the latency
+target; set `AEGIS_RAG_CANDIDATE_K` to a value from 1 to 50 to tune this tradeoff.
+The live `/query` endpoint further caps candidates to the requested `k` (5 by
+default), while evaluation retrievers retain the configured candidate pool.
+`POST /ingest` indexes Markdown and reStructuredText documents found under
+`data/raw/` using structure-aware chunks. `/query` cites retrieved contexts as
+`[n]`; the final `citations` event maps valid markers to chunk IDs and reports
+any invalid markers. Configure answer generation with `AEGIS_RAG_MAX_TOKENS`
+and `AEGIS_RAG_REASONING_EFFORT`. Request logs include retrieval and rerank
+latency, time to first token, estimated token count, and a configurable cost
+proxy (`AEGIS_COST_PER_TOKEN_USD`).
 
 ```bash
 curl -XPOST localhost:8000/run -H 'content-type: application/json' \
@@ -89,7 +108,10 @@ src/aegisflow/
 
 ## Roadmap
 
-Retrieval-augmented generation over a document corpus (hybrid search, reranking, evaluation harness), exposed to the agents as a tool.
+- [x] Retrieval-augmented generation over the pinned documentation corpus, with
+  pgvector dense retrieval, PostgreSQL full-text search, RRF, reranking, and a
+  streaming `/query` API. See [RESULTS.md](RESULTS.md) for the final ablation.
+- [ ] Expose RAG retrieval as a tool to the multi-agent workflow.
 
 ### Hybrid retrieval ranking note
 
@@ -101,10 +123,14 @@ experiment.
 
 ### Cross-encoder reranking
 
-Hybrid retrieval can rerank its top 50 candidates with
+Hybrid retrieval can rerank its candidate pool with
 `BAAI/bge-reranker-base`. The cross-encoder truncates each query/passage pair
 to 512 tokens, scores batches of 16, and uses MPS when PyTorch reports it
 available (otherwise CPU). Set `AEGIS_RAG_ENABLED=1` to load the embedder and
 reranker once in the FastAPI lifespan. Run `python scripts/evaluate_reranker.py`
 to compare MRR, recall@10, and latency with the hybrid baseline; it retries
 with 30 candidates if 50 adds at least 300 ms at p95.
+
+See [the live query latency investigation](eval/latency_investigation.md) for
+the measured CPU/MPS timings, the candidate-count adjustment, the Groq quota
+error, and the p95 measurement status.

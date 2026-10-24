@@ -208,6 +208,21 @@ class PgVectorIndex:
             ).fetchall()
         return {row[0]: row[1] for row in rows}
 
+    def fetch_chunks(self, ids: Sequence[str], *, strategy: str) -> dict[str, dict]:
+        """Fetch passage text and citation metadata for retrieved chunks."""
+        if not ids:
+            return {}
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT id, text, source, heading_path, doc_id FROM chunks "
+                "WHERE strategy = %s AND id = ANY(%s)",
+                (strategy, list(ids)),
+            ).fetchall()
+        return {
+            row[0]: {"text": row[1], "source": row[2], "heading_path": list(row[3]), "doc_id": row[4]}
+            for row in rows
+        }
+
     def sparse_search(
         self,
         query: str,

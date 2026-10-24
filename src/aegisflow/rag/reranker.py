@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import asyncio
+import os
+import time
 import platform
 import threading
 from collections.abc import Callable, Sequence
@@ -27,6 +29,7 @@ class CrossEncoderReranker:
         batch_size: int = RERANK_BATCH_SIZE,
         max_length: int = MAX_RERANK_TOKENS,
         model=None,
+        inference_lock: threading.Lock | None = None,
     ) -> None:
         if batch_size < 1:
             raise ValueError("batch_size must be positive")
@@ -37,7 +40,7 @@ class CrossEncoderReranker:
         self.device = device
         self.batch_size = batch_size
         self.max_length = max_length
-        self._lock = threading.Lock()
+        self._lock = inference_lock or threading.Lock()
         if model is None:
             from sentence_transformers import CrossEncoder
 
@@ -46,6 +49,18 @@ class CrossEncoderReranker:
 
     @staticmethod
     def _preferred_device() -> str:
+        configured = os.getenv("AEGIS_RAG_DEVICE")
+        if configured:
+            if configured not in {"mps", "cpu"}:
+                raise ValueError("AEGIS_RAG_DEVICE must be 'mps' or 'cpu'")
+            if configured == "mps":
+                try:
+                    import torch
+                    if not torch.backends.mps.is_available():
+                        raise RuntimeError("AEGIS_RAG_DEVICE=mps but PyTorch MPS is unavailable")
+                except ImportError as exc:
+                    raise RuntimeError("AEGIS_RAG_DEVICE=mps requires PyTorch") from exc
+            return configured
         if platform.system() == "Darwin":
             try:
                 import torch
@@ -99,9 +114,18 @@ def make_reranked_hybrid_retriever(
     if len(weights) != 2:
         raise ValueError("hybrid weights must contain dense and sparse weights")
 
-    async def retrieve(query: str, k: int) -> list[str]:
+    async def retrieve(
+        query: str,
+        k: int,
+        *,
+        timing_callback=None,
+        candidate_limit: int | None = None,
+    ) -> list[str]:
         if k < 1:
             raise ValueError("k must be positive")
+        if candidate_limit is not None and candidate_limit < 1:
+            raise ValueError("candidate_limit must be positive")
+        effective_candidate_k = min(candidate_k, candidate_limit or candidate_k)
 
         def fetch_candidates() -> list[tuple[str, str]]:
             vector = embed_query(query)
@@ -112,14 +136,20 @@ def make_reranked_hybrid_retriever(
                 [chunk_id for chunk_id, _ in sparse],
                 k_rrf=k_rrf,
                 weights=weights,
-                limit=candidate_k,
+                limit=effective_candidate_k,
             )
             ids = [chunk_id for chunk_id, _ in fused]
             texts = index.fetch_texts(ids, strategy=strategy)
             return [(chunk_id, texts[chunk_id]) for chunk_id in ids if chunk_id in texts]
 
+        retrieval_start = time.perf_counter()
         candidates = await asyncio.to_thread(fetch_candidates)
+        retrieval_ms = (time.perf_counter() - retrieval_start) * 1000
+        rerank_start = time.perf_counter()
         ranked = await reranker.ascore(query, candidates)
+        rerank_ms = (time.perf_counter() - rerank_start) * 1000
+        if timing_callback is not None:
+            timing_callback(retrieval_ms, rerank_ms)
         return [chunk_id for chunk_id, _score in ranked[:k]]
 
     return retrieve
