@@ -1,0 +1,15 @@
+{"id":"h001","source":"langchain","question":"How do you implement a custom streaming callback handler for token-by-token processing in LangChain Runnables?"}
+{"id":"h002","source":"langchain","question":"What is the recommended approach for managing conversation history with stateful agents using langchain-postgres?"}
+{"id":"h003","source":"langchain","question":"How does LangGraph orchestration differ from traditional LangChain AgentExecutors when handling multi-agent loops?"}
+{"id":"h004","source":"langchain","question":"What are the best practices for caching retriever calls in LangChain to minimize redundant vector database operations?"}
+{"id":"h005","source":"fastapi","question":"How do you properly handle connection pooling within FastAPI's lifespan event handler for asynchronous endpoints?"}
+{"id":"h006","source":"fastapi","question":"What is the exact mechanism behind FastAPI's dependency injection when resolving sub-dependencies with yield statements?"}
+{"id":"h007","source":"fastapi","question":"How can you implement custom rate limiting using FastAPI middleware alongside an asynchronous Redis backend?"}
+{"id":"h008","source":"fastapi","question":"What are the edge cases when using Pydantic v2 model serialization inside FastAPI background tasks?"}
+{"id":"h009","source":"psycopg","question":"How do you configure asynchronous connection pooling using psycopg_pool.AsyncConnectionPool for optimal throughput?"}
+{"id":"h010","source":"psycopg","question":"What is the syntax difference between psycopg2 and psycopg (v3) when executing parameterized batch inserts with executemany?"}
+{"id":"h011","source":"psycopg","question":"How do you stream large query results asynchronously using server-side cursors in psycopg to prevent memory bloat?"}
+{"id":"h012","source":"psycopg","question":"How does psycopg handle automatic reconnection and retry logic in case of transient database connection failures?"}
+{"id":"h013","source":"langchain","question":"How do you pass context from a FastAPI request dependency down into a LangChain custom tool execution chain?"}
+{"id":"h014","source":"psycopg","question":"What are the performance trade-offs of using psycopg's connection pool inside a FastAPI dependency compared to a global pool?"}
+{"id":"h015","source":"psycopg","question":"How do you handle custom type casting and JSONB mapping between Pydantic models, FastAPI endpoints, and psycopg?"}

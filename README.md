@@ -48,6 +48,7 @@ uvicorn aegisflow.api.main:app --reload
 | `AEGIS_BASE_URL` | `https://api.groq.com/openai/v1` | Any OpenAI-compatible base URL |
 | `AEGIS_PROMPT_OVERHEAD` | measured per model | Fixed prompt tokens added by the provider |
 | `DATABASE_URL` | `postgresql://aegis:password@localhost:5432/aegisflow` | Checkpoint database |
+| `AEGIS_RAG_ENABLED` | `0` | Load the local BGE embedder and cross-encoder once during FastAPI startup |
 
 ## API
 
@@ -89,3 +90,21 @@ src/aegisflow/
 ## Roadmap
 
 Retrieval-augmented generation over a document corpus (hybrid search, reranking, evaluation harness), exposed to the agents as a tool.
+
+### Hybrid retrieval ranking note
+
+The RAG index combines pgvector cosine search with PostgreSQL full-text search
+using the `simple` configuration, then fuses their rankings with Reciprocal Rank
+Fusion (RRF). PostgreSQL's `ts_rank_cd` is **not true BM25**. If BM25 is worth
+testing later, compare `pg_search` or an in-memory `rank_bm25` index as an
+experiment.
+
+### Cross-encoder reranking
+
+Hybrid retrieval can rerank its top 50 candidates with
+`BAAI/bge-reranker-base`. The cross-encoder truncates each query/passage pair
+to 512 tokens, scores batches of 16, and uses MPS when PyTorch reports it
+available (otherwise CPU). Set `AEGIS_RAG_ENABLED=1` to load the embedder and
+reranker once in the FastAPI lifespan. Run `python scripts/evaluate_reranker.py`
+to compare MRR, recall@10, and latency with the hybrid baseline; it retries
+with 30 candidates if 50 adds at least 300 ms at p95.

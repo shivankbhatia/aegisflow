@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from ..orchestrator.ledger import postgres_checkpointer
+from ..rag.runtime import load_rag_runtime
 from .routes import router
 from .runs import RunManager
 
@@ -18,8 +19,13 @@ def create_app(dsn: str | None = None, agents_factory=None) -> FastAPI:
     async def lifespan(app: FastAPI):
         async with postgres_checkpointer(dsn) as saver:
             app.state.runs = RunManager(saver, agents_factory)
-            yield
-            await app.state.runs.aclose()
+            try:
+                rag_enabled = os.getenv("AEGIS_RAG_ENABLED", "0").lower() in {"1", "true", "yes"}
+                if rag_enabled:
+                    app.state.rag = await load_rag_runtime(dsn)
+                yield
+            finally:
+                await app.state.runs.aclose()
 
     app = FastAPI(
         title="AegisFlow",
