@@ -1,8 +1,10 @@
 import os
+import uuid
 
 import psycopg
 import pytest
 
+from aegisflow.rag.types import Chunk
 from aegisflow.rag.vector_index import PgVectorIndex, reciprocal_rank_fusion
 
 
@@ -48,11 +50,31 @@ def _pg_up() -> bool:
 def test_sparse_search_finds_fastapi_background_tasks_for_exact_identifiers():
     index = PgVectorIndex(DSN)
     index.initialize()
-    rows = index.sparse_search(
-        "BackgroundTasks add_task",
-        strategy="structure-aware",
-        source="fastapi",
-        k=10,
+    strategy = "sparse-test-" + uuid.uuid4().hex
+    chunk = Chunk(
+        "fastapi/tutorial/background-tasks#test",
+        "fastapi/tutorial/background-tasks",
+        "FastAPI BackgroundTasks lets you add_task to run work after a response.",
+        {
+            "source": "fastapi",
+            "heading_path": ["Tutorial", "Background Tasks"],
+            "chunk_strategy": strategy,
+            "token_count": 12,
+        },
     )
-    assert rows
-    assert rows[0][0].startswith("fastapi/tutorial/background-tasks#")
+    try:
+        index.replace_strategy(
+            [chunk], [[0.0] * 384], strategy=strategy,
+            doc_ids=[chunk.doc_id],
+        )
+        rows = index.sparse_search(
+            "BackgroundTasks add_task",
+            strategy=strategy,
+            source="fastapi",
+            k=10,
+        )
+        assert rows
+        assert rows[0][0] == chunk.id
+    finally:
+        with psycopg.connect(DSN) as connection:
+            connection.execute("DELETE FROM chunks WHERE strategy = %s", (strategy,))
