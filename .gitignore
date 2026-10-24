@@ -18,3 +18,4 @@ venv.bak/
 
 # Sandbox artifacts
 sandbox_data/
+data/raw/
