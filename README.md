@@ -48,7 +48,9 @@ uvicorn aegisflow.api.main:app --reload
 | `AEGIS_BASE_URL` | `https://api.groq.com/openai/v1` | Any OpenAI-compatible base URL |
 | `AEGIS_PROMPT_OVERHEAD` | measured per model | Fixed prompt tokens added by the provider |
 | `DATABASE_URL` | `postgresql://aegis:password@localhost:5432/aegisflow` | Checkpoint database |
-| `AEGIS_RAG_ENABLED` | `0` | Load the local BGE embedder and cross-encoder once during FastAPI startup |
+| `AEGIS_RAG_ENABLED` | `0` | Enable RAG and load the selected local models during FastAPI startup |
+| `AEGIS_RAG_MODE` | `dense` | `dense`, `hybrid`, or `hybrid_rerank` |
+| `AEGIS_RAG_STRATEGY` | `structure-aware` | `fixed-size`, `structure-aware`, or `semantic` |
 | `AEGIS_INGEST_TOKEN` | unset | Required token for `POST /ingest` and `GET /ingest/{job_id}` |
 
 ## API
@@ -64,14 +66,16 @@ uvicorn aegisflow.api.main:app --reload
 | `GET /ingest/{job_id}` | Read ingestion job status and document/chunk counts; requires `X-Ingest-Token` |
 | `GET /health` | Liveness |
 
-Set `AEGIS_RAG_ENABLED=1` to load the local embedder and reranker during startup.
-Their MPS inference shares a process-wide lock. If Metal still reports a
+Set `AEGIS_RAG_ENABLED=1` to load the embedder and selected retrieval mode
+during startup. The selected mode defaults to `dense` with `structure-aware`
+chunks, based on the current Phase A decision. The reranker loads only for
+`AEGIS_RAG_MODE=hybrid_rerank`. The embedder and reranker share a process-wide
+MPS inference lock. If Metal still reports a
 command-buffer assertion on your setup, set `AEGIS_RAG_DEVICE=cpu` to use CPU
 inference; `mps` is also an accepted explicit setting. Reranking defaults to 30
-hybrid candidates after the measured 50-candidate p95 exceeded the latency
-target; set `AEGIS_RAG_CANDIDATE_K` to a value from 1 to 50 to tune this tradeoff.
-The live `/query` endpoint further caps candidates to the requested `k` (5 by
-default), while evaluation retrievers retain the configured candidate pool.
+hybrid candidates when that mode is selected; set `AEGIS_RAG_CANDIDATE_K` to a
+value from 1 to 50 to tune this tradeoff. The live `/query` endpoint further
+caps reranker candidates to the requested `k` (5 by default).
 Set a private `AEGIS_INGEST_TOKEN` in the server environment before using the
 ingest endpoints. Both the start request and job-status request must include
 the matching `X-Ingest-Token` header. If the variable is unset, ingestion

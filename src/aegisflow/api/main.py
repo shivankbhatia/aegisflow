@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from ..orchestrator.ledger import postgres_checkpointer
 from ..llm_gateway import from_env
-from ..rag.runtime import load_rag_runtime
+from ..rag.runtime import load_rag_runtime, rag_config_from_env
 from .routes import router
 from .runs import RunManager
 
@@ -18,10 +18,12 @@ def create_app(dsn: str | None = None, agents_factory=None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
+        rag_enabled = os.getenv("AEGIS_RAG_ENABLED", "0").lower() in {"1", "true", "yes"}
+        if rag_enabled:
+            rag_config_from_env()  # fail before opening resources for invalid settings
         async with postgres_checkpointer(dsn) as saver:
             app.state.runs = RunManager(saver, agents_factory)
             try:
-                rag_enabled = os.getenv("AEGIS_RAG_ENABLED", "0").lower() in {"1", "true", "yes"}
                 if rag_enabled:
                     app.state.rag = await load_rag_runtime(dsn)
                     app.state.gateway = from_env()

@@ -76,7 +76,8 @@ async def query_rag(body: QueryRequest, request: Request):
         retrieval_ms = timing["retrieval_ms"] or total_retrieval_pipeline_ms
         rerank_ms = timing["rerank_ms"]
         chunks = await asyncio.to_thread(
-            runtime.index.fetch_chunks, ids, strategy="structure-aware"
+            runtime.index.fetch_chunks, ids,
+            strategy=getattr(runtime, "strategy", "structure-aware"),
         )
         contexts = [(chunk_id, chunks[chunk_id]) for chunk_id in ids if chunk_id in chunks]
     except Exception as exc:

@@ -2,11 +2,13 @@
 import asyncio
 import json
 import math
+import random
+import statistics
 import time
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Awaitable, Callable, Iterable, Sequence
+from typing import Awaitable, Callable, Iterable, Mapping, Sequence
 
 # async (query, k) -> ranked chunk ids, best first
 Retriever = Callable[[str, int], Awaitable[list[str]]]
@@ -119,7 +121,12 @@ async def evaluate(
     }
 
 
-def document_level_view(retriever: Retriever, questions: Sequence[GoldenQuestion]) -> tuple[Retriever, list[GoldenQuestion]]:
+def document_level_view(
+    retriever: Retriever,
+    questions: Sequence[GoldenQuestion],
+    *,
+    chunk_fetch_limit: int | None = None,
+) -> tuple[Retriever, list[GoldenQuestion]]:
     """Compare chunking strategies using document identity, not colliding chunk IDs."""
     def document_id(chunk_id: str) -> str:
         return chunk_id.split("#", 1)[0]
@@ -127,7 +134,8 @@ def document_level_view(retriever: Retriever, questions: Sequence[GoldenQuestion
     async def retrieve_documents(query: str, k: int) -> list[str]:
         # Over-fetch chunks so repeated hits from one document do not leave
         # document-level top-k artificially short.
-        ids = await retriever(query, max(k * 10, 50))
+        fetch_k = chunk_fetch_limit if chunk_fetch_limit is not None else max(k * 10, 50)
+        ids = await retriever(query, fetch_k)
         # Keep the first (best ranked) hit for each document, up to k docs.
         return list(dict.fromkeys(document_id(chunk_id) for chunk_id in ids))[:k]
 
@@ -136,6 +144,70 @@ def document_level_view(retriever: Retriever, questions: Sequence[GoldenQuestion
         for q in questions
     ]
     return retrieve_documents, doc_questions
+
+
+def paired_bootstrap(
+    report_a: str | Path | Mapping,
+    report_b: str | Path | Mapping,
+    metric: str,
+    *,
+    resamples: int = 10_000,
+    confidence: float = 0.95,
+    seed: int = 0,
+) -> dict:
+    """Compare two reports on matched questions; differences are B minus A."""
+    if resamples < 1:
+        raise ValueError("resamples must be positive")
+    if not 0 < confidence < 1:
+        raise ValueError("confidence must be between 0 and 1")
+
+    def read_report(report):
+        return json.loads(Path(report).read_text(encoding="utf-8")) if isinstance(report, (str, Path)) else report
+
+    a, b = read_report(report_a), read_report(report_b)
+    key = "rr" if metric == "mrr" else metric
+
+    def values_by_id(report):
+        rows = report.get("per_question", [])
+        values = {}
+        for row in rows:
+            if row["id"] in values:
+                raise ValueError(f"duplicate question id: {row['id']}")
+            if key not in row or not math.isfinite(float(row[key])):
+                raise ValueError(f"metric {metric!r} missing or non-finite for {row.get('id')}")
+            values[row["id"]] = float(row[key])
+        return values
+
+    av, bv = values_by_id(a), values_by_id(b)
+    ids = sorted(av.keys() & bv.keys())
+    if not ids:
+        raise ValueError("reports have no matching question IDs")
+    differences = [bv[qid] - av[qid] for qid in ids]
+    rng = random.Random(seed)
+    n = len(differences)
+    samples = sorted(
+        sum(differences[rng.randrange(n)] for _ in range(n)) / n
+        for _ in range(resamples)
+    )
+    tail = (1 - confidence) / 2
+    low_i = max(0, math.floor(tail * resamples))
+    high_i = min(resamples - 1, math.ceil((1 - tail) * resamples) - 1)
+    return {
+        "metric": metric,
+        "difference": "report_b - report_a",
+        "n": n,
+        "mean_difference": statistics.fmean(differences),
+        "confidence": confidence,
+        "ci_low": samples[low_i],
+        "ci_high": samples[high_i],
+        "better": sum(d > 0 for d in differences),
+        "worse": sum(d < 0 for d in differences),
+        "tied": sum(d == 0 for d in differences),
+        "unmatched_a": sorted(av.keys() - bv.keys()),
+        "unmatched_b": sorted(bv.keys() - av.keys()),
+        "resamples": resamples,
+        "seed": seed,
+    }
 
 
 def save_report(report: dict, name: str, results_dir: str | Path = "eval/results") -> Path:

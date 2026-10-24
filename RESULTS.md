@@ -1,5 +1,20 @@
 # Phase 2 retrieval evaluation
 
+## Phase A selection rule (written before the next evaluation run)
+
+Among the nine served-mode/chunker combinations, select the configuration with
+the highest document-level recall@5 whose measured retrieval p95 is below
+150 ms. Compare that candidate with the incumbent dense-only,
+structure-aware configuration using a paired bootstrap over question-level
+recall@5 differences. If the 95% interval includes zero, keep the incumbent
+dense-only configuration; it is simpler than adding hybrid retrieval or a
+reranker. This rule will also govern the 15- and 30-candidate reranker tradeoff
+runs. The rule selects **dense / structure-aware**. It had the highest
+recall@5 among configurations below the latency cutoff (0.938; p95 32.9 ms).
+Every other latency-feasible configuration has a paired 95% interval versus
+this incumbent that includes zero, so dense-only remains selected. This is a
+dev-set decision, not a held-out result.
+
 ## What these results establish
 
 These are exploratory measurements on the current 81-question set, not an
@@ -36,27 +51,52 @@ semantic leads on MRR and recall@1. These measurements use the
 existing source-derived question set, so they are not evidence of
 generalization to independently authored questions.
 
-## Exact served retrieval comparison at k=5
+## Phase A live citation spot-check
 
-The API is configured for structure-aware chunks and caps its fused hybrid
-candidate set to the request `k` before reranking. The table compares that
-served behavior with dense-only retrieval at the same `k=5`, against the same
-structure-aware gold chunk IDs.
+Five live `/query` calls ran on the selected dense / structure-aware service.
+Four returned topical page titles. One LangChain callback question returned
+`trace-with-langchain` and an invalid `[0]` marker. The LangGraph `persistence`
+and Psycopg `pool` pages had empty heading paths. TTFT p50 was 836 ms and p95
+was 5,654 ms for these five samples; this small spot-check is not a stable
+latency benchmark. Details are in the [sample report](eval/results/phase-a-live-citation-check.json).
 
-| Configuration | Recall@5 | Hit@5 | MRR | Retrieval pipeline p95 |
-|---|---:|---:|---:|---:|
-| Dense structure-aware, k=5 | **0.852** | **0.889** | **0.668** | 37.9 ms |
-| Hybrid, k=5 | 0.778 | 0.827 | 0.548 | 311.4 ms |
-| Served hybrid + rerank, k=5 | 0.778 | 0.827 | 0.661 | 713.4 ms |
+## Served document-level comparison at k=5
 
-The served hybrid + rerank path is behind dense on recall@5 and hit@5, and its
-MRR is slightly lower. It does not support a retrieval quality improvement
-claim. Since the reranker sees only five fused candidates, it can reorder
-those candidates but cannot increase recall beyond the candidate set. The
-older 30-candidate offline score is not a measure of the served endpoint.
+All nine configurations use the same k=5 output, with document IDs scored
+against document-level gold. Dense and hybrid retrieve five chunks; hybrid +
+rerank uses a five-chunk candidate pool and returns five chunks.
+
+| Mode | Chunker | Document recall@5 | Retrieval p95 |
+|---|---|---:|---:|
+| Dense | Fixed-size | 0.926 | 38.4 ms |
+| Hybrid | Fixed-size | 0.920 | 119.4 ms |
+| Hybrid + rerank | Fixed-size | 0.920 | 606.0 ms |
+| Dense | Structure-aware | **0.938** | 32.9 ms |
+| Hybrid | Structure-aware | 0.914 | 319.8 ms |
+| Hybrid + rerank | Structure-aware | 0.914 | 705.4 ms |
+| Dense | Semantic | 0.920 | 33.8 ms |
+| Hybrid | Semantic | 0.920 | 230.9 ms |
+| Hybrid + rerank | Semantic | 0.920 | 666.3 ms |
+
+The 15-candidate and 30-candidate reranker runs on structure-aware chunks
+scored 0.957 and 0.944 document recall@5, with p95 1,607.5 ms and 2,928.9 ms.
+Both miss the 150 ms latency limit. The reranker can only reorder its
+candidate pool.
 
 These are local CPU retrieval/reranking pipeline p95 values, not API time to
-first token.
+first token. The paired bootstrap matched questions by ID over 10,000
+resamples (seed 20261024). Differences are candidate minus dense/structure-aware:
+
+| Candidate | Recall@5 difference | 95% CI | Better / worse questions |
+|---|---:|---:|---:|
+| Dense / fixed-size | -0.012 | [-0.062, 0.037] | 3 / 4 |
+| Dense / semantic | -0.019 | [-0.068, 0.025] | 2 / 4 |
+| Hybrid / fixed-size | -0.019 | [-0.074, 0.031] | 4 / 5 |
+| Hybrid / structure-aware | -0.025 | [-0.068, 0.006] | 1 / 3 |
+| Hybrid / semantic | -0.019 | [-0.074, 0.031] | 3 / 4 |
+| Hybrid + rerank / structure-aware | -0.025 | [-0.068, 0.006] | 1 / 3 |
+
+All listed intervals include zero. Counts omit tied questions.
 
 ## Generation, judge, and live latency status
 
@@ -77,15 +117,25 @@ first token.
 - Document-level fixed-size: [report](eval/results/doc-level-dense-fixed-size-20261024-125925.json)
 - Document-level structure-aware: [report](eval/results/doc-level-dense-structure-aware-20261024-125927.json)
 - Document-level semantic: [report](eval/results/doc-level-dense-semantic-20261024-125930.json)
-- Served dense structure-aware k=5: [report](eval/results/served-baseline-dense-structure-aware-k5-20261024-125936.json)
-- Served hybrid structure-aware k=5: [report](eval/results/served-hybrid-structure-aware-k5-20261024-125952.json)
-- Served hybrid + rerank structure-aware k=5: [report](eval/results/served-hybrid-rerank-structure-aware-k5-20261024-130040.json)
+- Bootstrap summary: [report](eval/results/served-doc-bootstrap-20261024.json)
+- Dense fixed-size: [report](eval/results/served-doc-dense-fixed-size-k5-20261024-165839.json)
+- Hybrid fixed-size: [report](eval/results/served-doc-hybrid-fixed-size-k5-20261024-165846.json)
+- Hybrid + rerank fixed-size: [report](eval/results/served-doc-hybrid_rerank-fixed-size-k5-20261024-165929.json)
+- Dense structure-aware: [report](eval/results/served-doc-dense-structure-aware-k5-20261024-165932.json)
+- Hybrid structure-aware: [report](eval/results/served-doc-hybrid-structure-aware-k5-20261024-165947.json)
+- Hybrid + rerank structure-aware: [report](eval/results/served-doc-hybrid_rerank-structure-aware-k5-20261024-170035.json)
+- Dense semantic: [report](eval/results/served-doc-dense-semantic-k5-20261024-170038.json)
+- Hybrid semantic: [report](eval/results/served-doc-hybrid-semantic-k5-20261024-170047.json)
+- Hybrid + rerank semantic: [report](eval/results/served-doc-hybrid_rerank-semantic-k5-20261024-170130.json)
+- Reranker pool 15: [report](eval/results/served-doc-hybrid-rerank-structure-aware-k5-pool15-20261024-170332.json)
+- Reranker pool 30: [report](eval/results/served-doc-hybrid-rerank-structure-aware-k5-pool30-20261024-170703.json)
 
 ## Resume bullet
 
 Built a pgvector-backed RAG over 946 documentation pages with dense and hybrid
 retrieval, RRF, a cross-encoder reranker, and a streaming API. In the current
-81-question source-derived evaluation, served hybrid + rerank at k=5 scored
-0.778 recall@5 versus 0.852 for dense-only; the chunker comparison was rerun at the
-document level. Full answer faithfulness, citation validity, and live API p95
-remain unmeasured.
+81-question source-derived evaluation, dense structure-aware was selected at
+0.938 document recall@5 and 32.9 ms retrieval p95; hybrid and reranking failed
+the paired quality or latency rule. Five live requests had a 5,654 ms TTFT p95
+and exposed one retrieval/citation issue. Held-out answer evaluation and
+larger-sample live API p95 remain unmeasured.

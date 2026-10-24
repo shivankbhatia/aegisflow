@@ -3,7 +3,8 @@ import pytest
 
 from aegisflow.rag.evaluation import (
     GoldenQuestion, evaluate, format_comparison, hit_at_k, judge_agreement,
-    load_questions, recall_at_k, reciprocal_rank, review_questions, save_questions, save_report,
+    load_questions, paired_bootstrap, recall_at_k, reciprocal_rank, review_questions,
+    save_questions, save_report,
 )
 from aegisflow.rag.types import Chunk
 
@@ -78,6 +79,30 @@ def test_judge_agreement():
     assert judge_agreement([0.9, 0.2, 0.85, 0.5], [True, False, False, False]) == 0.75
     with pytest.raises(ValueError):
         judge_agreement([], [])
+
+
+def test_paired_bootstrap_matches_ids_and_reports_known_differences(tmp_path):
+    a = {"per_question": [
+        {"id": "q1", "recall@5": 0.0},
+        {"id": "q2", "recall@5": 1.0},
+        {"id": "q3", "recall@5": 0.0},
+    ]}
+    b = {"per_question": [
+        {"id": "q3", "recall@5": 1.0},
+        {"id": "q1", "recall@5": 1.0},
+        {"id": "q2", "recall@5": 1.0},
+    ]}
+    pa, pb = tmp_path / "a.json", tmp_path / "b.json"
+    pa.write_text(json.dumps(a))
+    pb.write_text(json.dumps(b))
+
+    result = paired_bootstrap(pa, pb, "recall@5", resamples=2_000, seed=7)
+
+    assert result["n"] == 3
+    assert result["mean_difference"] == pytest.approx(2 / 3)
+    assert (result["better"], result["worse"], result["tied"]) == (2, 0, 1)
+    assert result["ci_low"] <= result["mean_difference"] <= result["ci_high"]
+    assert result["unmatched_a"] == result["unmatched_b"] == []
 
 
 def test_review_questions_yes_no_edit_quit():
