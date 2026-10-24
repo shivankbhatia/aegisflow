@@ -113,9 +113,15 @@ PostgreSQL 15 pgvector service and runs the default tests without secrets; a
 hosted push result is still needed to claim CI green.
 
 The new manifest helper records git SHA/dirty state, model, endpoint host, UTC
-date, temperature, Python, and key library versions. `save_report` rejects a
-missing or incomplete manifest. The saved older reports predate this protocol;
-newly generated reports include the manifest.
+date, temperature, Python, QA config version, and key library versions.
+`save_report` rejects a missing or incomplete manifest. The saved older reports
+predate this protocol; newly generated reports include the manifest.
+
+The tunable QA prompts and limits now live in `src/aegisflow/rag/qa_config.py`
+and are passed through the graph. `qa-v0.1-provisional` is not frozen: its
+verifier threshold and revise limit must still be calibrated using the planned
+30 answers and 15 independent human labels. Do not tag or use this version as
+the final frozen config yet.
 
 The separate file `eval/router_relabels_independent.jsonl` records query-only
 route labels and rationales; `scripts/compare_router_labels.py` prints any

@@ -5,10 +5,11 @@ from __future__ import annotations
 import os
 import platform
 import subprocess
-import sys
 from datetime import datetime, timezone
 from importlib.metadata import PackageNotFoundError, version
 from urllib.parse import urlparse
+
+from .qa_config import DEFAULT_QA_CONFIG
 
 
 KEY_LIBRARIES = (
@@ -50,9 +51,10 @@ def make_run_manifest(*, cwd: str | None = None) -> dict:
     return {
         **git,
         "model": os.getenv("AEGIS_MODEL", "openai/gpt-oss-20b"),
+        "qa_config_version": DEFAULT_QA_CONFIG.version,
         "base_url_host": urlparse(base_url).hostname,
         "date_utc": datetime.now(timezone.utc).isoformat(),
-        "temperature": float(os.getenv("AEGIS_TEMPERATURE", "0")),
+        "temperature": DEFAULT_QA_CONFIG.temperature,
         "python_version": platform.python_version(),
         "python_implementation": platform.python_implementation(),
         "libraries": {name: _version(name) for name in KEY_LIBRARIES},
@@ -73,7 +75,7 @@ def validate_run_manifest(manifest: dict) -> None:
     """Raise if a saved evaluation report lacks reproducibility metadata."""
     required = {
         "sha", "dirty", "model", "base_url_host", "date_utc", "temperature",
-        "python_version", "libraries",
+        "python_version", "libraries", "qa_config_version",
     }
     missing = required - manifest.keys()
     if missing:

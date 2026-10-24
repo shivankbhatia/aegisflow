@@ -1,6 +1,6 @@
 {
   "name": "qa-deterministic-guardrails",
-  "created_at": "2026-10-24T18:46:24.942554+00:00",
+  "created_at": "2026-10-24T18:49:32.536530+00:00",
   "model": "not applicable (deterministic checks only)",
   "judge_status": "No judge used; LLM-judged quality remains uncalibrated",
   "direct_injection_heuristic": {
@@ -37,11 +37,12 @@
   "unanswerable_refusal_rate": null,
   "unanswerable_note": "Requires graph/model behavior; not claimed by this deterministic report.",
   "manifest": {
-    "sha": "7e99f9cc565526f05356ebe4fa17a8926cb8a8a4",
+    "sha": "78fcbd8fd0be246cee47cf6c5bee230f7d09bbbb",
     "dirty": true,
     "model": "openai/gpt-oss-20b",
+    "qa_config_version": "qa-v0.1-provisional",
     "base_url_host": "api.groq.com",
-    "date_utc": "2026-10-24T18:46:24.966137+00:00",
+    "date_utc": "2026-10-24T18:49:32.556878+00:00",
     "temperature": 0.0,
     "python_version": "3.14.7",
     "python_implementation": "CPython",

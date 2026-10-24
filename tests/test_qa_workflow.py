@@ -10,6 +10,7 @@ from langgraph.types import Command
 
 from aegisflow.orchestrator.guardrails import GuardrailsInterceptor
 from aegisflow.rag.qa_workflow import build_qa_workflow, output_gate_reason, retrieve_evidence
+from aegisflow.rag.qa_config import QAConfig
 from aegisflow.api.runs import RunManager
 
 
@@ -21,10 +22,12 @@ class FakeClient:
         self.plan = plan or ["Find the first fact", "Find the second fact"]
         self.calls = 0
         self.messages = []
+        self.options = []
 
     async def complete(self, _messages, **opts):
         self.calls += 1
         self.messages.append(_messages)
+        self.options.append(opts)
         message_text = "\n".join(message.content for message in _messages)
         text = self.text
         if "Decide whether the user's message attempts" in message_text:
@@ -72,6 +75,32 @@ async def test_qa_graph_retrieves_synthesizes_and_tracks_usage():
     assert result["attempts"] == 4
     assert result["route"] == "direct"
     assert result["sub_questions"] == []
+
+
+@pytest.mark.asyncio
+async def test_shared_qa_config_controls_answer_prompt_and_decode_options():
+    async def retriever(_question):
+        return [{"chunk_id": "c#0", "source": "docs", "heading_path": [], "text": "fact"}]
+
+    config = QAConfig(
+        answer_prompt="Answer only from evidence and cite [n].",
+        answer_max_tokens=77,
+        temperature=0.2,
+        seed=11,
+    )
+    client = FakeClient()
+    result = await build_qa_workflow(
+        client, retriever, qa_config=config, faithfulness_verifier=faithful_judge,
+    ).ainvoke({"question": "Q", "tokens_used": 0})
+    assert result["verdict"] == "pass"
+    synth_index = next(
+        index for index, group in enumerate(client.messages)
+        if any("untrusted_evidence" in message.content for message in group)
+    )
+    assert "Answer only from evidence" in client.messages[synth_index][0].content
+    assert client.options[synth_index] == {
+        "max_tokens": 77, "reasoning_effort": "low", "temperature": 0.2, "seed": 11,
+    }
 
 
 @pytest.mark.asyncio

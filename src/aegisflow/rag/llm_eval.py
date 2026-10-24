@@ -79,14 +79,30 @@ async def judge_faithfulness(
     answer: str,
     contexts: Sequence[str],
     opts: dict | None = None,
+    *,
+    instruction: str | None = None,
+    max_tokens: int | None = None,
+    reasoning_effort: str | None = None,
+    temperature: float | None = None,
+    seed: int | None = None,
 ) -> Judgement:
     ctx = "\n\n".join(f"[Context {i + 1}]\n{c}" for i, c in enumerate(contexts))
     prompt = (
-        "You are a strict fact-checker. Split the ANSWER into atomic factual claims and count how many "
-        "are fully supported by the CONTEXT and how many are not. Use only the context, not world knowledge.\n\n"
+        (instruction or "You are a strict fact-checker. Split the ANSWER into atomic factual claims and count how many "
+         "are fully supported by the CONTEXT and how many are not. Use only the context, not world knowledge.")
+        + "\n\n"
         f"QUESTION:\n{question}\n\nANSWER:\n{answer}\n\n{ctx}"
     )
-    res = await complete_structured(client, [Message("user", prompt)], FaithfulnessVerdict, **(opts or GEN_OPTS))
+    call_opts = {**GEN_OPTS, **(opts or {})}
+    if max_tokens is not None:
+        call_opts["max_tokens"] = max_tokens
+    if reasoning_effort is not None:
+        call_opts["reasoning_effort"] = reasoning_effort
+    if temperature is not None:
+        call_opts["temperature"] = temperature
+    if seed is not None:
+        call_opts["seed"] = seed
+    res = await complete_structured(client, [Message("user", prompt)], FaithfulnessVerdict, **call_opts)
     v = res.value
     total = v.supported_claims + v.unsupported_claims
     return Judgement(v.supported_claims / total if total else 1.0, v, res.usage.total_tokens, res.attempts)
