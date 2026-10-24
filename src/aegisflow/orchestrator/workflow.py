@@ -34,10 +34,11 @@ class Agents:
     reviewer: Any
 
 
-def default_agents(guardrails: GuardrailsInterceptor) -> Agents:
+def default_agents(guardrails: GuardrailsInterceptor, client=None) -> Agents:
     """Needs GROQ_API_KEY and a running Docker daemon."""
-    load_dotenv()
-    client = from_env()
+    if client is None:
+        load_dotenv()
+        client = from_env()
     return Agents(
         TriageAgent(client),
         CoderAgent(client),
