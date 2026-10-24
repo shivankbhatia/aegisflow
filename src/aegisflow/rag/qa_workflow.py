@@ -309,8 +309,11 @@ def build_qa_workflow(
                     flagged, detail, tokens, attempts = await classifier(client, state["question"])
                 if flagged:
                     reason = "The request was flagged as prompt injection: " + detail
-            except Exception:
+            except Exception as exc:
                 # Fail closed: malformed or unavailable classifier output cannot proceed.
+                usage = getattr(exc, "usage", None)
+                tokens = int(getattr(usage, "total_tokens", 0))
+                attempts = int(getattr(exc, "attempts", 0))
                 reason = "The request could not be safely classified and was refused."
         try:
             total = spend(state, tokens)

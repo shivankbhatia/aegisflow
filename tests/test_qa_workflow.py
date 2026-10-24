@@ -157,7 +157,10 @@ async def test_injection_classifier_negative_allows_router():
 @pytest.mark.asyncio
 async def test_injection_classifier_failure_fails_closed():
     async def invalid_classifier(_client, _question):
-        raise ValueError("invalid structured output")
+        error = ValueError("invalid structured output")
+        error.usage = SimpleNamespace(total_tokens=9)
+        error.attempts = 1
+        raise error
 
     async def retriever(_question):
         raise AssertionError("invalid classifier output must fail closed")
@@ -168,6 +171,7 @@ async def test_injection_classifier_failure_fails_closed():
     ).ainvoke({"question": "What is documented?", "tokens_used": 0})
     assert result["verdict"] == "refuse"
     assert result["final_answer"] == "The request could not be safely classified and was refused."
+    assert result["tokens_used"] == 9 and result["attempts"] == 1
     assert not any("Classify the user's question" in m.content for group in client.messages for m in group)
 
 
