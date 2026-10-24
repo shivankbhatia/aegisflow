@@ -119,6 +119,25 @@ async def evaluate(
     }
 
 
+def document_level_view(retriever: Retriever, questions: Sequence[GoldenQuestion]) -> tuple[Retriever, list[GoldenQuestion]]:
+    """Compare chunking strategies using document identity, not colliding chunk IDs."""
+    def document_id(chunk_id: str) -> str:
+        return chunk_id.split("#", 1)[0]
+
+    async def retrieve_documents(query: str, k: int) -> list[str]:
+        # Over-fetch chunks so repeated hits from one document do not leave
+        # document-level top-k artificially short.
+        ids = await retriever(query, max(k * 10, 50))
+        # Keep the first (best ranked) hit for each document, up to k docs.
+        return list(dict.fromkeys(document_id(chunk_id) for chunk_id in ids))[:k]
+
+    doc_questions = [
+        replace(q, gold_chunk_ids=tuple(dict.fromkeys(document_id(cid) for cid in q.gold_chunk_ids)))
+        for q in questions
+    ]
+    return retrieve_documents, doc_questions
+
+
 def save_report(report: dict, name: str, results_dir: str | Path = "eval/results") -> Path:
     results_dir = Path(results_dir)
     results_dir.mkdir(parents=True, exist_ok=True)

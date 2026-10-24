@@ -3,10 +3,11 @@ import json
 import logging
 import os
 import re
+import secrets
 import time
 import uuid
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException, Request, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, BackgroundTasks, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, Field
 from starlette.responses import StreamingResponse
 
@@ -162,8 +163,21 @@ async def _run_ingest(request: Request, job_id: str) -> None:
         jobs[job_id] = {"status": "failed", "error": str(exc)}
 
 
+def _require_ingest_token(request: Request, token: str | None) -> None:
+    expected = os.getenv("AEGIS_INGEST_TOKEN")
+    if not expected:
+        raise HTTPException(503, "Ingestion is disabled until AEGIS_INGEST_TOKEN is configured")
+    if token is None or not secrets.compare_digest(token, expected):
+        raise HTTPException(401, "Invalid or missing X-Ingest-Token")
+
+
 @router.post("/ingest", status_code=202)
-async def ingest_rag(background_tasks: BackgroundTasks, request: Request):
+async def ingest_rag(
+    background_tasks: BackgroundTasks,
+    request: Request,
+    x_ingest_token: str | None = Header(default=None, alias="X-Ingest-Token"),
+):
+    _require_ingest_token(request, x_ingest_token)
     if getattr(request.app.state, "rag", None) is None:
         raise HTTPException(503, "RAG is disabled; set AEGIS_RAG_ENABLED=1 and restart")
     if not hasattr(request.app.state, "ingest_jobs"):
@@ -175,7 +189,12 @@ async def ingest_rag(background_tasks: BackgroundTasks, request: Request):
 
 
 @router.get("/ingest/{job_id}")
-async def get_ingest_job(job_id: str, request: Request):
+async def get_ingest_job(
+    job_id: str,
+    request: Request,
+    x_ingest_token: str | None = Header(default=None, alias="X-Ingest-Token"),
+):
+    _require_ingest_token(request, x_ingest_token)
     job = getattr(request.app.state, "ingest_jobs", {}).get(job_id)
     if job is None:
         raise HTTPException(404, "unknown ingestion job")

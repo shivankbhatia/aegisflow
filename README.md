@@ -49,6 +49,7 @@ uvicorn aegisflow.api.main:app --reload
 | `AEGIS_PROMPT_OVERHEAD` | measured per model | Fixed prompt tokens added by the provider |
 | `DATABASE_URL` | `postgresql://aegis:password@localhost:5432/aegisflow` | Checkpoint database |
 | `AEGIS_RAG_ENABLED` | `0` | Load the local BGE embedder and cross-encoder once during FastAPI startup |
+| `AEGIS_INGEST_TOKEN` | unset | Required token for `POST /ingest` and `GET /ingest/{job_id}` |
 
 ## API
 
@@ -59,8 +60,8 @@ uvicorn aegisflow.api.main:app --reload
 | `POST /runs/{id}/resume` | Resume a `failed` or `interrupted` run from its last checkpoint |
 | `WS /ws/events/{id}` | Per-node events for the current process, then `done` or `error` |
 | `POST /query` `{"query": "...", "k": 5}` | Grounded RAG answer streamed as SSE `token`, `citations`, `done`, or `error` events |
-| `POST /ingest` | Start local corpus indexing in the background; returns a `job_id` |
-| `GET /ingest/{job_id}` | Read ingestion job status and document/chunk counts |
+| `POST /ingest` | Start local corpus indexing in the background; requires `X-Ingest-Token` |
+| `GET /ingest/{job_id}` | Read ingestion job status and document/chunk counts; requires `X-Ingest-Token` |
 | `GET /health` | Liveness |
 
 Set `AEGIS_RAG_ENABLED=1` to load the local embedder and reranker during startup.
@@ -71,6 +72,10 @@ hybrid candidates after the measured 50-candidate p95 exceeded the latency
 target; set `AEGIS_RAG_CANDIDATE_K` to a value from 1 to 50 to tune this tradeoff.
 The live `/query` endpoint further caps candidates to the requested `k` (5 by
 default), while evaluation retrievers retain the configured candidate pool.
+Set a private `AEGIS_INGEST_TOKEN` in the server environment before using the
+ingest endpoints. Both the start request and job-status request must include
+the matching `X-Ingest-Token` header. If the variable is unset, ingestion
+returns 503; if the header is absent or incorrect, it returns 401.
 `POST /ingest` indexes Markdown and reStructuredText documents found under
 `data/raw/` using structure-aware chunks. `/query` cites retrieved contexts as
 `[n]`; the final `citations` event maps valid markers to chunk IDs and reports
@@ -110,7 +115,10 @@ src/aegisflow/
 
 - [x] Retrieval-augmented generation over the pinned documentation corpus, with
   pgvector dense retrieval, PostgreSQL full-text search, RRF, reranking, and a
-  streaming `/query` API. See [RESULTS.md](RESULTS.md) for the final ablation.
+  streaming `/query` API. Current retrieval evidence is exploratory: chunker
+  metrics are compared at document level, and served hybrid + rerank at k=5 trails
+  dense-only on this source-derived set. See [RESULTS.md](RESULTS.md) for
+  limitations and reports.
 - [ ] Expose RAG retrieval as a tool to the multi-agent workflow.
 
 ### Hybrid retrieval ranking note

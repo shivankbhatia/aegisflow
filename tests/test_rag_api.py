@@ -69,3 +69,27 @@ def test_query_sse_preserves_insufficient_evidence_answer():
     events = parse_sse(response.text)
     assert "".join(data["text"] for name, data in events if name == "token") == "insufficient evidence"
     assert [event for event, _ in events] == ["token", "citations", "done"]
+
+
+def test_ingest_requires_configured_token(monkeypatch):
+    monkeypatch.setenv("AEGIS_INGEST_TOKEN", "local-secret")
+    app = FastAPI()
+    app.include_router(router)
+    with TestClient(app) as client:
+        missing = client.post("/ingest")
+        wrong = client.get("/ingest/job-id", headers={"X-Ingest-Token": "wrong"})
+        accepted_auth_but_disabled = client.post(
+            "/ingest", headers={"X-Ingest-Token": "local-secret"}
+        )
+    assert missing.status_code == 401
+    assert wrong.status_code == 401
+    assert accepted_auth_but_disabled.status_code == 503
+
+
+def test_ingest_disabled_without_configured_token(monkeypatch):
+    monkeypatch.delenv("AEGIS_INGEST_TOKEN", raising=False)
+    app = FastAPI()
+    app.include_router(router)
+    with TestClient(app) as client:
+        response = client.post("/ingest")
+    assert response.status_code == 503
