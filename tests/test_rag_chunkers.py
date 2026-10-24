@@ -1,7 +1,7 @@
 import tiktoken
 
 from aegisflow.rag.clean import Section
-from aegisflow.rag.chunkers import fixed_size_chunks, structure_aware_chunks
+from aegisflow.rag.chunkers import fixed_size_chunks, semantic_chunks, structure_aware_chunks
 from aegisflow.rag.ingest import SQLiteChunkStore
 from aegisflow.rag.types import Chunk
 
@@ -51,6 +51,21 @@ def test_structure_chunks_keep_fences_whole_and_include_metadata():
         assert chunk.metadata["source"] == "docs"
         assert chunk.metadata["title"] == "Guide"
         assert chunk.metadata["chunk_strategy"] == "structure-aware"
+
+
+def test_semantic_chunks_break_at_low_similarity_and_enforce_metadata():
+    vectors = [[1.0, 0.0], [1.0, 0.0], [0.0, 1.0]]
+    chunks = semantic_chunks(
+        [Section(["Guide"], "First sentence. Second sentence. Third sentence.")],
+        doc_id="docs/guide",
+        source="docs",
+        title="Guide",
+        embed_documents=lambda _units: vectors,
+    )
+
+    assert len(chunks) == 2
+    assert all(chunk.metadata["chunk_strategy"] == "semantic" for chunk in chunks)
+    assert all(chunk.metadata["token_count"] <= 500 for chunk in chunks)
 
 
 def test_reingest_unchanged_raw_document_keeps_chunk_row_count():

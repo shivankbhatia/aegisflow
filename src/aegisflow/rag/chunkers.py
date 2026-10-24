@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Callable, Sequence
 
 from aegisflow.rag.clean import Section
@@ -310,6 +311,132 @@ def structure_aware_chunks(
     return chunks
 
 
-def semantic_chunks(*args, **kwargs) -> list[Chunk]:
-    """Semantic chunking is implemented with the 2.2 embedder."""
-    raise NotImplementedError("Build semantic chunking after the 2.2 embedder")
+def _sentences(text: str) -> list[str]:
+    pieces = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\"'])", text.strip())
+    return [piece.strip() for piece in pieces if piece.strip()]
+
+
+def _cosine(left: Sequence[float], right: Sequence[float]) -> float:
+    if len(left) != len(right):
+        raise ValueError("Embedding vectors must have the same dimensions")
+    dot = sum(float(a) * float(b) for a, b in zip(left, right))
+    left_norm = sum(float(a) * float(a) for a in left) ** 0.5
+    right_norm = sum(float(b) * float(b) for b in right) ** 0.5
+    if left_norm == 0 or right_norm == 0:
+        raise ValueError("Embedding vectors must be non-zero")
+    return dot / (left_norm * right_norm)
+
+
+def semantic_chunks(
+    sections: Sequence[Section],
+    *,
+    doc_id: str,
+    source: str,
+    title: str,
+    embed_documents: Callable[[list[str]], Sequence[Sequence[float]]],
+    token_counter: TokenCounter | None = None,
+    max_tokens: int = 500,
+) -> list[Chunk]:
+    """Group sentence/code units at document-local similarity drops.
+
+    The boundary threshold is the 20th percentile of adjacent-unit cosine
+    similarities for this document. Fenced code blocks are kept as units; an
+    oversized block is emitted as independently balanced fenced fragments.
+    """
+    units: list[tuple[list[str], str, bool]] = []
+    for section in sections:
+        for paragraph, is_code in _paragraph_blocks(section.body):
+            for unit in ([paragraph] if is_code else _sentences(paragraph)):
+                units.append((section.heading_path, unit, is_code))
+    if not units:
+        return []
+
+    vectors = list(embed_documents([unit for _path, unit, _code in units]))
+    if len(vectors) != len(units):
+        raise ValueError("Embedder returned a different number of vectors than input units")
+    similarities = [_cosine(vectors[i], vectors[i + 1]) for i in range(len(vectors) - 1)]
+    if similarities:
+        ordered = sorted(similarities)
+        position = 0.20 * (len(ordered) - 1)
+        lower = int(position)
+        upper = min(lower + 1, len(ordered) - 1)
+        fraction = position - lower
+        threshold = ordered[lower] * (1 - fraction) + ordered[upper] * fraction
+    else:
+        threshold = float("-inf")
+
+    chunks: list[Chunk] = []
+    current_units: list[str] = []
+    current_path: list[str] = []
+
+    def render(path: list[str], text_units: list[str]) -> str:
+        prefix = " > ".join(path)
+        content = "\n\n".join(text_units).strip()
+        return f"{prefix}\n\n{content}".strip() if prefix else content
+
+    def flush() -> None:
+        nonlocal current_units, current_path
+        if current_units:
+            chunks.append(
+                _make_chunk(
+                    doc_id,
+                    len(chunks),
+                    render(current_path, current_units),
+                    source=source,
+                    title=title,
+                    heading_path=current_path,
+                    strategy="semantic",
+                    token_counter=token_counter,
+                )
+            )
+            current_units = []
+            current_path = []
+
+    for index, (path, unit, is_code) in enumerate(units):
+        if current_units and similarities[index - 1] < threshold:
+            flush()
+        path_for_chunk = current_path if current_units else path
+        candidate = render(path_for_chunk, [*current_units, unit])
+        if current_units and _count(candidate, token_counter) > max_tokens:
+            flush()
+            path_for_chunk = path
+            candidate = render(path_for_chunk, [unit])
+        if _count(candidate, token_counter) > max_tokens:
+            if is_code:
+                fragments = _split_oversized_code(
+                    unit,
+                    prefix=" > ".join(path),
+                    max_tokens=max_tokens,
+                    token_counter=token_counter,
+                )
+            else:
+                prefix = " > ".join(path)
+                body_limit = max_tokens - (_count(prefix + "\n\n", token_counter) if prefix else 0)
+                if body_limit < 1:
+                    raise ValueError("Heading path exceeds the chunk token limit")
+                fragments = [
+                    f"{prefix}\n\n{part}".strip() if prefix else part
+                    for part in _split_long_paragraph(unit, body_limit, token_counter)
+                ]
+            flush()
+            for fragment in fragments:
+                if _count(fragment, token_counter) > max_tokens:
+                    raise ValueError("Could not enforce semantic chunk token limit")
+                chunks.append(
+                    _make_chunk(
+                        doc_id,
+                        len(chunks),
+                        fragment,
+                        source=source,
+                        title=title,
+                        heading_path=path,
+                        strategy="semantic",
+                        token_counter=token_counter,
+                    )
+                )
+            continue
+        if not current_units:
+            current_path = list(path)
+        current_units.append(unit)
+    flush()
+    return chunks
