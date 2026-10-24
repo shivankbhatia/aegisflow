@@ -1,25 +1,31 @@
-from ..llm.client import get_llm
+import asyncio
+
+from ..llm_gateway import LLMClient, Message, StructuredResult, complete_structured
 from ..sandbox.executor import SandboxExecutor
-from .base import ReviewerOutputSchema
+from .base import LLM_OPTS, ReviewerOutputSchema
 
 
 class ReviewerAgent:
 
-    def __init__(self, llm_model: str | None = None):
-        self.llm = get_llm(llm_model)
-        self.sandbox = SandboxExecutor()
+    def __init__(self, client: LLMClient, sandbox=None, guardrails=None):
+        self.client = client
+        self.sandbox = sandbox or SandboxExecutor()
+        self.guardrails = guardrails
 
-    def process(
-        self,
-        code_patch: str,
-        test_patch: str,
-    ) -> ReviewerOutputSchema:
+    async def process(
+        self, code_patch: str, test_patch: str
+    ) -> StructuredResult[ReviewerOutputSchema]:
 
         combined_code = f"{code_patch}\n\n{test_patch}"
 
-        success, logs = self.sandbox.execute_code(
-            combined_code
-        )
+        if self.guardrails:
+            run = lambda code: self.guardrails.cache_tool_call(
+                "sandbox", {"code": code}, self.sandbox.execute_code
+            )
+        else:
+            run = self.sandbox.execute_code
+        # Docker SDK is blocking: keep it off the event loop.
+        success, logs = await asyncio.to_thread(run, combined_code)
 
         prompt = f"""
 You are a Reviewer Agent.
@@ -37,9 +43,6 @@ Test Patch:
 Sandbox Output (Success: {success}):
 {logs}
 """
-
-        structured_llm = self.llm.with_structured_output(
-            ReviewerOutputSchema
+        return await complete_structured(
+            self.client, [Message("user", prompt)], ReviewerOutputSchema, **LLM_OPTS
         )
-
-        return structured_llm.invoke(prompt)

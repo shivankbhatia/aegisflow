@@ -1,17 +1,11 @@
-"""Durable checkpoint storage.
+"""Durable checkpoint storage via the official LangGraph async Postgres saver."""
+from contextlib import asynccontextmanager
 
-Uses the official LangGraph Postgres saver instead of a hand-rolled
-BaseCheckpointSaver: it implements the full interface (put_writes, blobs,
-list, pending writes) that crash-resume depends on.
-"""
-from contextlib import contextmanager
-from typing import Generator
-
-from langgraph.checkpoint.postgres import PostgresSaver
+from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 
 
-@contextmanager
-def postgres_checkpointer(dsn: str) -> Generator[PostgresSaver, None, None]:
-    with PostgresSaver.from_conn_string(dsn) as saver:
-        saver.setup()  # idempotent: creates tables / runs migrations
+@asynccontextmanager
+async def postgres_checkpointer(dsn: str):
+    async with AsyncPostgresSaver.from_conn_string(dsn) as saver:
+        await saver.setup()  # idempotent
         yield saver

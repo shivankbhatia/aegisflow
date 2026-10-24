@@ -1,7 +1,7 @@
 import re
 
-from ..llm.client import get_llm
-from .base import CoderOutputSchema
+from ..llm_gateway import LLMClient, Message, StructuredResult, complete_structured
+from .base import LLM_OPTS, CoderOutputSchema
 
 _FENCE = re.compile(r"^```[a-zA-Z]*\n|\n```\s*$")
 
@@ -12,17 +12,17 @@ def _strip_fences(text: str) -> str:
 
 class CoderAgent:
 
-    def __init__(self, llm_model: str | None = None):
-        self.llm = get_llm(llm_model)
+    def __init__(self, client: LLMClient):
+        self.client = client
 
-    def process(
+    async def process(
         self,
         plan: str,
         files: list[str],
         feedback: str = "",
         previous_code: str = "",
         previous_tests: str = "",
-    ) -> CoderOutputSchema:
+    ) -> StructuredResult[CoderOutputSchema]:
 
         retry_block = ""
         if feedback:
@@ -61,11 +61,9 @@ Relevant Files:
 {', '.join(files)}
 {retry_block}"""
 
-        structured_llm = self.llm.with_structured_output(
-            CoderOutputSchema
+        res = await complete_structured(
+            self.client, [Message("user", prompt)], CoderOutputSchema, **LLM_OPTS
         )
-
-        result = structured_llm.invoke(prompt)
-        result.code_patch = _strip_fences(result.code_patch)
-        result.test_patch = _strip_fences(result.test_patch)
-        return result
+        res.value.code_patch = _strip_fences(res.value.code_patch)
+        res.value.test_patch = _strip_fences(res.value.test_patch)
+        return res

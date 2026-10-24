@@ -1,13 +1,13 @@
-from ..llm.client import get_llm
-from .base import TriageOutputSchema
+from ..llm_gateway import LLMClient, Message, StructuredResult, complete_structured
+from .base import LLM_OPTS, TriageOutputSchema
 
 
 class TriageAgent:
 
-    def __init__(self, llm_model: str | None = None):
-        self.llm = get_llm(llm_model)
+    def __init__(self, client: LLMClient):
+        self.client = client
 
-    def process(self, issue_description: str) -> TriageOutputSchema:
+    async def process(self, issue_description: str) -> StructuredResult[TriageOutputSchema]:
         prompt = f"""
 You are a Triage Agent.
 
@@ -19,9 +19,6 @@ Identify which files might need to be changed.
 Issue:
 {issue_description}
 """
-
-        structured_llm = self.llm.with_structured_output(
-            TriageOutputSchema
+        return await complete_structured(
+            self.client, [Message("user", prompt)], TriageOutputSchema, **LLM_OPTS
         )
-
-        return structured_llm.invoke(prompt)

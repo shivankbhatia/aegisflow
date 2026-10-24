@@ -33,21 +33,23 @@ def _crashing_review(n, code_patch, test_patch):
     return SimpleNamespace(approved=True, feedback="ok")
 
 
-def test_resume_does_not_reexecute_completed_nodes(make_agents_factory):
+@pytest.mark.asyncio
+async def test_resume_does_not_reexecute_completed_nodes(make_agents_factory):
     thread_id = f"t-{uuid.uuid4()}"
     agents = make_agents_factory(review_fn=_crashing_review)
 
-    with postgres_checkpointer(DSN) as saver:
+    async with postgres_checkpointer(DSN) as saver:
         with pytest.raises(SimulatedCrash):
-            run_workflow("task", thread_id=thread_id, agents=agents, checkpointer=saver)
+            await run_workflow("task", thread_id=thread_id, agents=agents, checkpointer=saver)
 
     assert (agents.triage.calls, agents.coder.calls, agents.reviewer.calls) == (1, 1, 1)
 
     # New connection + new graph object = simulated process restart.
-    with postgres_checkpointer(DSN) as saver:
-        result = resume_workflow(thread_id, checkpointer=saver, agents=agents)
+    async with postgres_checkpointer(DSN) as saver:
+        result = await resume_workflow(thread_id, checkpointer=saver, agents=agents)
 
     assert result["approved"] is True
+    assert result["tokens_used"] == 30  # triage + coder + resumed reviewer; completed nodes not recounted
     assert agents.triage.calls == 1   # not re-run
     assert agents.coder.calls == 1    # not re-run
     assert agents.reviewer.calls == 2 # failed once, completed on resume

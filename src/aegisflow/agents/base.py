@@ -16,3 +16,8 @@ class CoderOutputSchema(BaseAgentSchema):
 class ReviewerOutputSchema(BaseAgentSchema):
     approved: bool = Field(description="Whether the code passes review and tests.")
     feedback: str = Field(description="Specific feedback if rejected, or approval message.")
+
+
+# gpt-oss is a reasoning model: reasoning tokens count against max_tokens.
+# reasoning_effort is gpt-oss specific; drop it if you switch models.
+LLM_OPTS = {"max_tokens": 2000, "reasoning_effort": "low"}

@@ -5,22 +5,15 @@ import json
 
 class GuardrailsInterceptor:
 
-    def __init__(
-        self,
-        max_recursion: int = 3,
-        max_tokens: int = 10000,
-    ):
+    def __init__(self, max_recursion: int = 3, max_tokens: int = 50000):
         self.max_recursion = max_recursion
         self.max_tokens = max_tokens
-        self.current_tokens = 0
         self.tool_cache = {}
 
-    def track_tokens(self, tokens_used: int):
-        self.current_tokens += tokens_used
-
-        if self.current_tokens > self.max_tokens:
+    def check_budget(self, total_tokens: int):
+        if total_tokens > self.max_tokens:
             raise Exception(
-                f"Budget Exceeded: Used {self.current_tokens} "
+                f"Budget Exceeded: Used {total_tokens} "
                 f"tokens, limit is {self.max_tokens}"
             )
 

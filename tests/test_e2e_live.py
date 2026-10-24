@@ -9,6 +9,7 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-def test_workflow_live():
-    result = run_workflow("Fix the hello function so it returns 'Hello, World!'")
+@pytest.mark.asyncio
+async def test_workflow_live():
+    result = await run_workflow("Fix the hello function so it returns 'Hello, World!'")
     assert "approved" in result
