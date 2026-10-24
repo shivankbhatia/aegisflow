@@ -18,7 +18,7 @@ def read_jsonl(path: str):
 
 def main():
     injections = read_jsonl("eval/security/direct_injection_prompts.jsonl")
-    paraphrases = read_jsonl("eval/security/direct_injection_paraphrase15.jsonl")
+    paraphrases = read_jsonl("eval/security/direct_injection_seen15.jsonl")
     poisoned = read_jsonl("eval/security/poisoned_chunks.jsonl")
     unanswerable = read_jsonl("eval/security/unanswerable_questions.jsonl")
     singles = [q for q in load_questions("eval/golden.jsonl") if q.kind == "single"]
@@ -56,14 +56,14 @@ def main():
             "n": len(injections), "blocked": blocked,
             "blocked_fraction": blocked / len(injections) if injections else None,
         },
-        "unseen_paraphrase_challenge_after_rules_frozen": {
+        "exposed_paraphrase_heuristic_check": {
             "n": len(paraphrases), "blocked": paraphrase_blocked,
             "blocked_fraction": paraphrase_blocked / len(paraphrases) if paraphrases else None,
             "rules_version": frozen_rules["version"],
             "rules_sha256_at_freeze": frozen_rules["sha256"],
             "rules_sha256_current": current_hash,
             "rules_unchanged": current_hash == frozen_rules["sha256"],
-            "note": "Deterministic heuristic only; semantic classifier/model resistance is not measured.",
+            "note": "These 15 cases were exposed before the classifier prompt was frozen and are a seen set; semantic resistance is not measured.",
         },
         "golden_single_heuristic_false_refusal": {
             "n": len(singles), "false_refusals": false_refusals,

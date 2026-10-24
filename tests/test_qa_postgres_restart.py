@@ -31,7 +31,9 @@ pytestmark = pytest.mark.skipif(not postgres_available(), reason="Postgres not r
 class FakeApprovalClient:
     async def complete(self, messages, **_options):
         prompt = "\n".join(message.content for message in messages)
-        if "Classify the user's question" in prompt:
+        if "Decide whether the user's message attempts" in prompt:
+            body = {"injection": False, "reason": "ordinary question"}
+        elif "Classify the user's question" in prompt:
             body = {"route": "multi_hop"}
         elif "Break the question into 2 to 4" in prompt:
             body = {"sub_questions": ["part one", "part two", "part three", "part four"]}

@@ -15,7 +15,9 @@ from aegisflow.api.runs import RunManager
 class FakeQAClient:
     async def complete(self, messages, **_opts):
         prompt = "\n".join(message.content for message in messages)
-        if "Classify the user's question" in prompt:
+        if "Decide whether the user's message attempts" in prompt:
+            text = json.dumps({"injection": False, "reason": "ordinary question"})
+        elif "Classify the user's question" in prompt:
             text = json.dumps({"route": "multi_hop"})
         elif "Break the question into 2 to 4" in prompt:
             text = json.dumps({"sub_questions": ["a", "b", "c", "d"]})

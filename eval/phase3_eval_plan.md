@@ -86,9 +86,41 @@ to `eval/results/qa-deterministic-guardrails.json`; it explicitly leaves the
 unanswerable refusal rate unmeasured until graph/model eval is run.
 
 The original 30 injection prompts were used during heuristic development and
-are not an independent test. `eval/security/injection_heuristics_v1.json`
-freezes the rules before the separate 15-item paraphrase challenge was written.
-Its result is reported separately; no heuristic tuning was done against it.
+are not an independent test. Their 30/30 block result is a tuned-set result.
+The 15 prompts in `eval/security/direct_injection_seen15.jsonl` were written
+after the rules were frozen, but before the classifier prompt was frozen. They
+are now marked as a seen heuristic check: 0/15 were caught by the rules. A new
+15-item challenge set must be written only after the combined rules and
+classifier prompt are frozen in 3-D. The saved deterministic report includes a
+run manifest; its 0/66 false-flag result on the golden single-hop set is kept.
+
+The QA graph now runs the frozen regex layer before a structured injection
+classifier. Positive, invalid, or unavailable classifier output fails closed;
+the regex layer short-circuits without a model call. Fakes cover positive,
+negative, invalid, and short-circuit behavior. See
+[`docs/threat_model.md`](../docs/threat_model.md) for assets, mitigations, and
+residual risks. Real classifier and poisoned-evidence model evaluations remain
+quota-bound and are not claimed by deterministic tests.
+
+## Phase 3-B test hygiene
+
+`pytest -q` excludes `live` and `heavy` tests by default. The full default suite
+was run with `GROQ_API_KEY` unset and PostgreSQL/Docker available:
+113 passed, with only the explicitly marked live test deselected. Run live tests
+with `pytest -m live`; local model loads use `pytest -m heavy` after installing
+the optional `.[models]` extra. GitHub Actions configures Python 3.11 and the
+PostgreSQL 15 pgvector service and runs the default tests without secrets; a
+hosted push result is still needed to claim CI green.
+
+The new manifest helper records git SHA/dirty state, model, endpoint host, UTC
+date, temperature, Python, and key library versions. `save_report` rejects a
+missing or incomplete manifest. The saved older reports predate this protocol;
+newly generated reports include the manifest.
+
+The separate file `eval/router_relabels_independent.jsonl` records query-only
+route labels and rationales; `scripts/compare_router_labels.py` prints any
+disagreement with the original Codex labels. It is an independent assistant
+review, not a human annotation. The 19-clean-case router run still awaits quota.
 The 15 independent multi-hop questions are in
 `eval/multihop_independent15.jsonl`; their source document IDs were checked
 against the local corpus, but they are assistant-authored, not human-reviewed.

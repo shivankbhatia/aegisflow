@@ -1,6 +1,6 @@
 {
   "name": "qa-deterministic-guardrails",
-  "created_at": "2026-10-24T18:24:44.582793+00:00",
+  "created_at": "2026-10-24T18:46:24.942554+00:00",
   "model": "not applicable (deterministic checks only)",
   "judge_status": "No judge used; LLM-judged quality remains uncalibrated",
   "direct_injection_heuristic": {
@@ -8,7 +8,7 @@
     "blocked": 30,
     "blocked_fraction": 1.0
   },
-  "unseen_paraphrase_challenge_after_rules_frozen": {
+  "exposed_paraphrase_heuristic_check": {
     "n": 15,
     "blocked": 0,
     "blocked_fraction": 0.0,
@@ -16,7 +16,7 @@
     "rules_sha256_at_freeze": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8",
     "rules_sha256_current": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8",
     "rules_unchanged": true,
-    "note": "Deterministic heuristic only; semantic classifier/model resistance is not measured."
+    "note": "These 15 cases were exposed before the classifier prompt was frozen and are a seen set; semantic resistance is not measured."
   },
   "golden_single_heuristic_false_refusal": {
     "n": 66,
@@ -35,5 +35,25 @@
   },
   "unanswerable_fixture_count": 10,
   "unanswerable_refusal_rate": null,
-  "unanswerable_note": "Requires graph/model behavior; not claimed by this deterministic report."
+  "unanswerable_note": "Requires graph/model behavior; not claimed by this deterministic report.",
+  "manifest": {
+    "sha": "7e99f9cc565526f05356ebe4fa17a8926cb8a8a4",
+    "dirty": true,
+    "model": "openai/gpt-oss-20b",
+    "base_url_host": "api.groq.com",
+    "date_utc": "2026-10-24T18:46:24.966137+00:00",
+    "temperature": 0.0,
+    "python_version": "3.14.7",
+    "python_implementation": "CPython",
+    "libraries": {
+      "aegisflow": "0.1.0",
+      "langgraph": "1.2.10",
+      "langgraph-checkpoint-postgres": "3.2.0",
+      "psycopg": "3.3.4",
+      "fastapi": "0.141.1",
+      "pydantic": "2.13.4",
+      "httpx": "0.28.1",
+      "sentence-transformers": "6.2.0"
+    }
+  }
 }
