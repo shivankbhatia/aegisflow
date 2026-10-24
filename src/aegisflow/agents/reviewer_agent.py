@@ -1,32 +1,48 @@
-from langchain_openai import ChatOpenAI
-from .base import ReviewerOutputSchema
-from ..llm.client import get_llm
+import asyncio
+
+from ..llm_gateway import LLMClient, Message, StructuredResult, complete_structured
 from ..sandbox.executor import SandboxExecutor
+from .base import LLM_OPTS, ReviewerOutputSchema
+
 
 class ReviewerAgent:
-    def __init__(self, llm_model: str):
-        self.llm = get_llm(llm_model)
-        self.sandbox = SandboxExecutor()
 
-    def process(self, code_patch: str, test_patch: str) -> ReviewerOutputSchema:
-        # 1. Run the code and tests in the sandbox
+    def __init__(self, client: LLMClient, sandbox=None, guardrails=None):
+        self.client = client
+        self.sandbox = sandbox or SandboxExecutor()
+        self.guardrails = guardrails
+
+    async def process(
+        self, code_patch: str, test_patch: str
+    ) -> StructuredResult[ReviewerOutputSchema]:
+
         combined_code = f"{code_patch}\n\n{test_patch}"
-        success, logs = self.sandbox.execute_code(combined_code)
 
-        # 2. Have the LLM review the results
+        if self.guardrails:
+            run = lambda code: self.guardrails.cache_tool_call(
+                "sandbox", {"code": code}, self.sandbox.execute_code
+            )
+        else:
+            run = self.sandbox.execute_code
+        # Docker SDK is blocking: keep it off the event loop.
+        success, logs = await asyncio.to_thread(run, combined_code)
+
         prompt = f"""
-        You are a Reviewer Agent. Review the code patch, test patch, and sandbox execution logs.
-        Decide whether to approve the patch or provide feedback.
+You are a Reviewer Agent.
 
-        Code Patch:
-        {code_patch}
+Review the code patch, test patch, and sandbox execution logs.
 
-        Test Patch:
-        {test_patch}
+Decide whether to approve the patch or provide feedback.
 
-        Sandbox Output (Success: {success}):
-        {logs}
-        """
+Code Patch:
+{code_patch}
 
-        structured_llm = self.llm.with_structured_output(ReviewerOutputSchema)
-        return structured_llm.invoke(prompt)
+Test Patch:
+{test_patch}
+
+Sandbox Output (Success: {success}):
+{logs}
+"""
+        return await complete_structured(
+            self.client, [Message("user", prompt)], ReviewerOutputSchema, **LLM_OPTS
+        )
