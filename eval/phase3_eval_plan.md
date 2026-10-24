@@ -123,10 +123,11 @@ verifier threshold and revise limit must still be calibrated using the planned
 30 answers and 15 independent human labels. Do not tag or use this version as
 the final frozen config yet.
 
-The separate file `eval/router_relabels_independent.jsonl` records query-only
+The file `eval/router_relabels_second_pass.jsonl` records assistant-written
 route labels and rationales; `scripts/compare_router_labels.py` prints any
-disagreement with the original Codex labels. It is an independent assistant
-review, not a human annotation. The 19-clean-case router run still awaits quota.
+disagreement with the original Codex labels. This is not a blind relabel: the
+original IDs encode each route, so the labels are not independent and cannot
+replace a human label pass. The 19-clean-case router run still awaits quota.
 The 15 independent multi-hop questions are in
 `eval/multihop_independent15.jsonl`; their source document IDs were checked
 against the local corpus, but they are assistant-authored, not human-reviewed.

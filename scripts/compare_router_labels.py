@@ -14,7 +14,7 @@ def read_jsonl(path: str) -> dict[str, dict]:
 
 
 def main() -> None:
-    independent = read_jsonl("eval/router_relabels_independent.jsonl")
+    independent = read_jsonl("eval/router_relabels_second_pass.jsonl")
     codex = read_jsonl("eval/router_queries.jsonl")
     if independent.keys() != codex.keys():
         raise SystemExit("independent and Codex label files have different query IDs")
