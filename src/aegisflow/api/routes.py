@@ -21,6 +21,12 @@ router = APIRouter()
 
 class WorkflowRequest(BaseModel):
     task_description: str = Field(min_length=1)
+    graph: str = "code"
+
+
+class ApprovalRequest(BaseModel):
+    approve: bool
+    feedback: str = ""
 
 
 class RunResponse(BaseModel):
@@ -204,7 +210,11 @@ async def get_ingest_job(
 
 @router.post("/run", response_model=RunResponse, status_code=202)
 async def trigger_workflow(body: WorkflowRequest, request: Request):
-    run_id = request.app.state.runs.start(body.task_description)
+    if body.graph not in {"code", "qa"}:
+        raise HTTPException(422, "graph must be 'code' or 'qa'")
+    if body.graph == "qa" and not getattr(request.app.state.runs, "qa_enabled", True):
+        raise HTTPException(503, "QA graph is disabled; set AEGIS_RAG_ENABLED=1 and restart")
+    run_id = request.app.state.runs.start(body.task_description, graph=body.graph)
     return {"run_id": run_id, "status": "queued"}
 
 
@@ -225,6 +235,17 @@ async def resume_run(run_id: str, request: Request):
     if info["status"] not in ("interrupted", "failed"):
         raise HTTPException(409, f"run is {info['status']}; only interrupted or failed runs resume")
     runs.resume(run_id)
+    return {"run_id": run_id, "status": "queued"}
+
+
+@router.post("/runs/{run_id}/approve", response_model=RunResponse, status_code=202)
+async def approve_run(run_id: str, body: ApprovalRequest, request: Request):
+    try:
+        await request.app.state.runs.approve(run_id, body.approve, body.feedback)
+    except ValueError as exc:
+        if await request.app.state.runs.status(run_id) is None:
+            raise HTTPException(404, "unknown run") from exc
+        raise HTTPException(409, str(exc)) from exc
     return {"run_id": run_id, "status": "queued"}
 
 

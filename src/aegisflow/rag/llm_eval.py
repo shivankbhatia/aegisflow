@@ -69,6 +69,8 @@ class FaithfulnessVerdict(BaseModel):
 class Judgement:
     score: float  # supported / total claims; 1.0 when the answer makes no claims
     verdict: FaithfulnessVerdict
+    tokens_used: int = 0
+    attempts: int = 0
 
 
 async def judge_faithfulness(
@@ -87,4 +89,4 @@ async def judge_faithfulness(
     res = await complete_structured(client, [Message("user", prompt)], FaithfulnessVerdict, **(opts or GEN_OPTS))
     v = res.value
     total = v.supported_claims + v.unsupported_claims
-    return Judgement(v.supported_claims / total if total else 1.0, v)
+    return Judgement(v.supported_claims / total if total else 1.0, v, res.usage.total_tokens, res.attempts)

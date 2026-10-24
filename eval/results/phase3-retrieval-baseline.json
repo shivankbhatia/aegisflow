@@ -1,0 +1,2441 @@
+{
+  "name": "phase3-retrieval-only-baseline",
+  "created_at": "2026-10-24T18:06:25.655325+00:00",
+  "complete": true,
+  "pipeline": "plain served retriever; document-level coverage; no LLM calls",
+  "eval_set": "eval/golden.jsonl",
+  "eval_set_count": 81,
+  "model": "not applicable (retrieval-only)",
+  "retrieval_model": "BAAI/bge-base-en-v1.5",
+  "retrieval_mode": "dense",
+  "chunking_strategy": "structure-aware",
+  "k": 10,
+  "metrics": {
+    "multi_hop_all_gold_documents_retrieved_fraction": 0.8,
+    "multi_hop_n": 15,
+    "all_question_gold_document_coverage_fraction": 0.9382716049382716,
+    "latency_mean_s": 0.055999359567426896
+  },
+  "per_question": [
+    {
+      "id": "s00_000",
+      "kind": "single",
+      "question": "What is an environment variable and why is it commonly used for external settings in Python applications?",
+      "gold_document_ids": [
+        "fastapi/advanced/settings"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/settings",
+        "fastapi/environment-variables"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/settings#0",
+        "fastapi/environment-variables#0",
+        "fastapi/advanced/settings#1",
+        "fastapi/advanced/settings#6",
+        "fastapi/advanced/settings#9",
+        "fastapi/advanced/settings#5",
+        "fastapi/advanced/settings#3",
+        "fastapi/advanced/settings#7",
+        "fastapi/advanced/settings#13",
+        "fastapi/advanced/settings#10"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.24922533400240354
+    },
+    {
+      "id": "s00_001",
+      "kind": "single",
+      "question": "What does the log output show when Uvicorn starts up with multiple workers?",
+      "gold_document_ids": [
+        "fastapi/deployment/server-workers"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/deployment/concepts",
+        "fastapi/deployment/server-workers"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/deployment/server-workers#3",
+        "fastapi/deployment/server-workers#6",
+        "fastapi/deployment/server-workers#4",
+        "fastapi/deployment/server-workers#1",
+        "fastapi/deployment/server-workers#5",
+        "fastapi/deployment/server-workers#7",
+        "fastapi/deployment/server-workers#0",
+        "fastapi/deployment/server-workers#9",
+        "fastapi/deployment/server-workers#2",
+        "fastapi/deployment/concepts#14"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04629087500507012
+    },
+    {
+      "id": "s00_003",
+      "kind": "single",
+      "question": "What happens if you try to access the FastAPI docs UI at http://127.0.0.1:8000/docs instead of the proxy URL http://127.0.0.1:9999/api/v1/docs?",
+      "gold_document_ids": [
+        "fastapi/advanced/behind-a-proxy"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/how-to/conditional-openapi",
+        "fastapi/tutorial/metadata"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/behind-a-proxy#12",
+        "fastapi/advanced/behind-a-proxy#5",
+        "fastapi/advanced/behind-a-proxy#13",
+        "fastapi/advanced/behind-a-proxy#4",
+        "fastapi/tutorial/metadata#0",
+        "fastapi/tutorial/metadata#4",
+        "fastapi/advanced/behind-a-proxy#7",
+        "fastapi/advanced/behind-a-proxy#3",
+        "fastapi/how-to/conditional-openapi#1",
+        "fastapi/advanced/behind-a-proxy#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.05517720799980452
+    },
+    {
+      "id": "s00_005",
+      "kind": "single",
+      "question": "Which key security feature should be prioritized when deploying a FastAPI application to ensure safe communication with API clients?",
+      "gold_document_ids": [
+        "fastapi/deployment/concepts"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/deployment/concepts",
+        "fastapi/features",
+        "fastapi/index",
+        "fastapi/reference/security/index",
+        "fastapi/tutorial/security/first-steps",
+        "fastapi/tutorial/security/index",
+        "fastapi/tutorial/security/oauth2-jwt"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/deployment/concepts#0",
+        "fastapi/tutorial/security/index#5",
+        "fastapi/reference/security/index#0",
+        "fastapi/tutorial/security/first-steps#0",
+        "fastapi/tutorial/security/oauth2-jwt#13",
+        "fastapi/tutorial/security/first-steps#5",
+        "fastapi/features#5",
+        "fastapi/index#23",
+        "fastapi/advanced/security/oauth2-scopes#13",
+        "fastapi/reference/security/index#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04304145900096046
+    },
+    {
+      "id": "s00_006",
+      "kind": "single",
+      "question": "Which FastAPI version range supports using both Pydantic v1 and v2 models in the same application during migration?",
+      "gold_document_ids": [
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/alternatives",
+        "fastapi/features",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#4",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#0",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#8",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#7",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#5",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#3",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#6",
+        "fastapi/alternatives#17",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#2",
+        "fastapi/features#10"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.043416957996669225
+    },
+    {
+      "id": "s00_007",
+      "kind": "single",
+      "question": "In FastAPI, how can you create a dependency that has sub-dependencies and what type of query parameter does the example 'dependable' dependency use?",
+      "gold_document_ids": [
+        "fastapi/tutorial/dependencies/sub-dependencies"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/dependencies/classes-as-dependencies",
+        "fastapi/tutorial/dependencies/index",
+        "fastapi/tutorial/dependencies/sub-dependencies"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/dependencies/sub-dependencies#0",
+        "fastapi/tutorial/dependencies/sub-dependencies#2",
+        "fastapi/tutorial/dependencies/index#1",
+        "fastapi/tutorial/dependencies/classes-as-dependencies#3",
+        "fastapi/tutorial/dependencies/classes-as-dependencies#2",
+        "fastapi/tutorial/dependencies/index#0",
+        "fastapi/tutorial/dependencies/index#6",
+        "fastapi/tutorial/dependencies/sub-dependencies#1",
+        "fastapi/tutorial/dependencies/classes-as-dependencies#4",
+        "fastapi/tutorial/dependencies/sub-dependencies#3"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04224945799796842
+    },
+    {
+      "id": "s40_002",
+      "kind": "single",
+      "question": "What packages must be installed to use the LangChain Azure Cosmos DB vector store integration?",
+      "gold_document_ids": [
+        "langchain/python/integrations/providers/microsoft"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/azure_cosmosdb_nosql",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index",
+        "langchain/javascript/integrations/vectorstores/azure_cosmosdb_nosql",
+        "langchain/python/integrations/providers/microsoft",
+        "langchain/python/integrations/vectorstores/index"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#22",
+        "langchain/python/integrations/providers/microsoft#22",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#19",
+        "langchain/python/integrations/providers/microsoft#19",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#17",
+        "langchain/python/integrations/providers/microsoft#17",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/azure_cosmosdb_nosql#1",
+        "langchain/javascript/integrations/vectorstores/azure_cosmosdb_nosql#1",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index#9",
+        "langchain/python/integrations/vectorstores/index#9"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.05024408399913227
+    },
+    {
+      "id": "m24_005",
+      "kind": "multi_hop",
+      "question": "Behind an HTTPS-terminating proxy, which forwarded headers communicate the original URL, protocol, and host to FastAPI, and what must the server be configured to trust before interpreting them?",
+      "gold_document_ids": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/deployment/https"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/deployment/docker",
+        "fastapi/deployment/https"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/behind-a-proxy#0",
+        "fastapi/deployment/https#13",
+        "fastapi/advanced/behind-a-proxy#3",
+        "fastapi/advanced/behind-a-proxy#1",
+        "fastapi/deployment/docker#12",
+        "fastapi/advanced/behind-a-proxy#2",
+        "fastapi/advanced/behind-a-proxy#5",
+        "fastapi/advanced/behind-a-proxy#4",
+        "fastapi/advanced/behind-a-proxy#7",
+        "fastapi/deployment/https#2"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04544083399377996
+    },
+    {
+      "id": "s32_007",
+      "kind": "single",
+      "question": "What are the key performance metrics to consider when evaluating multi\u2011agent patterns for latency and cost in language\u2011model applications?",
+      "gold_document_ids": [
+        "langchain/langchain/multi-agent/index"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/langchain/multi-agent/handoffs",
+        "langchain-docs/src/oss/langchain/multi-agent/index",
+        "langchain/langchain/multi-agent/handoffs",
+        "langchain/langchain/multi-agent/index"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/langchain/multi-agent/index#5",
+        "langchain/langchain/multi-agent/index#5",
+        "langchain-docs/src/oss/langchain/multi-agent/index#11",
+        "langchain/langchain/multi-agent/index#11",
+        "langchain-docs/src/oss/langchain/multi-agent/index#9",
+        "langchain/langchain/multi-agent/index#9",
+        "langchain-docs/src/oss/langchain/multi-agent/handoffs#22",
+        "langchain/langchain/multi-agent/handoffs#22",
+        "langchain-docs/src/oss/langchain/multi-agent/index#1",
+        "langchain/langchain/multi-agent/index#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04994629099383019
+    },
+    {
+      "id": "s24_003",
+      "kind": "single",
+      "question": "What steps should a developer follow to customize the Python tool template for a new tool named 'MyTool'?",
+      "gold_document_ids": [
+        "langchain/python/integrations/tools/TEMPLATE"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/langsmith/fleet/mcp-framework",
+        "langchain-docs/src/oss/deepagents/tools",
+        "langchain-docs/src/oss/langchain/tools",
+        "langchain-docs/src/oss/python/integrations/tools/TEMPLATE",
+        "langchain-docs/src/oss/python/integrations/tools/azure_logic_apps",
+        "langchain/deepagents/tools",
+        "langchain/python/integrations/tools/TEMPLATE",
+        "langchain/python/integrations/tools/azure_logic_apps"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/deepagents/tools#0",
+        "langchain/deepagents/tools#0",
+        "langchain-docs/src/oss/python/integrations/tools/TEMPLATE#0",
+        "langchain/python/integrations/tools/TEMPLATE#0",
+        "langchain-docs/src/oss/deepagents/tools#1",
+        "langchain/deepagents/tools#1",
+        "langchain-docs/src/oss/python/integrations/tools/azure_logic_apps#3",
+        "langchain/python/integrations/tools/azure_logic_apps#3",
+        "langchain-docs/src/langsmith/fleet/mcp-framework#1",
+        "langchain-docs/src/oss/langchain/tools#2"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.05521137500181794
+    },
+    {
+      "id": "m16_006",
+      "kind": "multi_hop",
+      "question": "In FastAPI, if you want an endpoint to accept either a PlaneItem or a CarItem as the response model, how do you specify the response model in the `@app.get` decorator, and why can\u2019t you use the `|` operator directly in the `response_model` argument?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-python-types",
+        "fastapi/tutorial/extra-models"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/response-directly",
+        "fastapi/tutorial/body",
+        "fastapi/tutorial/extra-models",
+        "fastapi/tutorial/response-model"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/response-model#19",
+        "fastapi/tutorial/response-model#2",
+        "fastapi/tutorial/response-model#1",
+        "fastapi/tutorial/response-model#0",
+        "fastapi/tutorial/response-model#6",
+        "fastapi/advanced/response-directly#4",
+        "fastapi/tutorial/response-model#11",
+        "fastapi/tutorial/extra-models#8",
+        "fastapi/tutorial/body#5",
+        "fastapi/advanced/additional-responses#1"
+      ],
+      "all_gold_documents_retrieved": false,
+      "latency_s": 0.21435416599706514
+    },
+    {
+      "id": "s24_005",
+      "kind": "single",
+      "question": "What are the four troubleshooting steps recommended to resolve a rate-limiting error when using a language model API?",
+      "gold_document_ids": [
+        "langchain/langchain/errors/MODEL_RATE_LIMIT"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/langsmith/handle-model-rate-limiting",
+        "langchain-docs/src/oss/deepagents/fault-tolerance",
+        "langchain-docs/src/oss/langchain/errors/MODEL_RATE_LIMIT",
+        "langchain-docs/src/oss/langchain/models",
+        "langchain-docs/src/oss/python/integrations/chat/parallel",
+        "langchain/deepagents/fault-tolerance",
+        "langchain/langchain/errors/MODEL_RATE_LIMIT",
+        "langchain/langchain/models",
+        "langchain/python/integrations/chat/parallel"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/langchain/errors/MODEL_RATE_LIMIT#1",
+        "langchain/langchain/errors/MODEL_RATE_LIMIT#1",
+        "langchain-docs/src/langsmith/handle-model-rate-limiting#0",
+        "langchain-docs/src/langsmith/handle-model-rate-limiting#1",
+        "langchain-docs/src/oss/python/integrations/chat/parallel#12",
+        "langchain/python/integrations/chat/parallel#12",
+        "langchain-docs/src/oss/langchain/models#44",
+        "langchain/langchain/models#44",
+        "langchain-docs/src/oss/deepagents/fault-tolerance#4",
+        "langchain/deepagents/fault-tolerance#4"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.10782425000070361
+    },
+    {
+      "id": "s32_002",
+      "kind": "single",
+      "question": "In the given code, what is the purpose of the BROWSER_INSTRUCTIONS variable when creating a Deep Agent with the MCPAdapter?",
+      "gold_document_ids": [
+        "langchain/python/integrations/tools/stagehand"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/python/integrations/providers/browserbase",
+        "langchain-docs/src/oss/python/integrations/sandboxes/daytona",
+        "langchain-docs/src/oss/python/integrations/tools/stagehand",
+        "langchain-docs/src/snippets/code-samples/acp-quickstart-py",
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py",
+        "langchain-docs/src/snippets/code-samples/rubric-code-generation-agent-py",
+        "langchain/python/integrations/providers/browserbase",
+        "langchain/python/integrations/sandboxes/daytona"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py#0",
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py#2",
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py#1",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#6",
+        "langchain/python/integrations/providers/browserbase#6",
+        "langchain-docs/src/oss/python/integrations/sandboxes/daytona#2",
+        "langchain/python/integrations/sandboxes/daytona#2",
+        "langchain-docs/src/snippets/code-samples/acp-quickstart-py#0",
+        "langchain-docs/src/snippets/code-samples/rubric-code-generation-agent-py#0",
+        "langchain-docs/src/oss/python/integrations/tools/stagehand#3"
+      ],
+      "all_gold_documents_retrieved": false,
+      "latency_s": 0.09895645899814554
+    },
+    {
+      "id": "s48_006",
+      "kind": "single",
+      "question": "How can you configure a psycopg connection to return PostgreSQL :sql:`numeric` values as Python floats instead of `decimal.Decimal` instances?",
+      "gold_document_ids": [
+        "psycopg/advanced/adapt"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/adapt",
+        "psycopg/api/module",
+        "psycopg/basic/adapt",
+        "psycopg/basic/params",
+        "psycopg/index",
+        "psycopg/news"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/adapt#5",
+        "psycopg/basic/params#3",
+        "psycopg/basic/adapt#0",
+        "psycopg/basic/adapt#2",
+        "psycopg/basic/params#4",
+        "psycopg/news#12",
+        "psycopg/advanced/adapt#0",
+        "psycopg/index#0",
+        "psycopg/news#14",
+        "psycopg/api/module#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.06867570799659006
+    },
+    {
+      "id": "s16_006",
+      "kind": "single",
+      "question": "What is the recommended practice for storing user passwords in an application that uses input, output, and database models?",
+      "gold_document_ids": [
+        "fastapi/tutorial/extra-models"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/extra-models",
+        "fastapi/tutorial/response-model",
+        "fastapi/tutorial/security/get-current-user",
+        "fastapi/tutorial/sql-databases",
+        "langchain-docs/src/oss/langgraph/stores",
+        "langchain-docs/src/oss/python/integrations/chat/oci_generative_ai",
+        "langchain/langgraph/stores",
+        "langchain/python/integrations/chat/oci_generative_ai"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/extra-models#0",
+        "fastapi/tutorial/extra-models#5",
+        "fastapi/tutorial/response-model#3",
+        "fastapi/tutorial/extra-models#1",
+        "fastapi/tutorial/sql-databases#16",
+        "langchain-docs/src/oss/langgraph/stores#10",
+        "langchain/langgraph/stores#10",
+        "fastapi/tutorial/security/get-current-user#4",
+        "langchain-docs/src/oss/python/integrations/chat/oci_generative_ai#5",
+        "langchain/python/integrations/chat/oci_generative_ai#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.049704541997925844
+    },
+    {
+      "id": "s56_003",
+      "kind": "single",
+      "question": "What class hierarchy does the `!sql` object follow in psycopg3, and which classes represent literals, identifiers, placeholders, and compositions of SQL fragments?",
+      "gold_document_ids": [
+        "psycopg/api/sql"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/adapt",
+        "psycopg/advanced/cursors",
+        "psycopg/api/abc",
+        "psycopg/api/cursors",
+        "psycopg/api/index",
+        "psycopg/api/rows",
+        "psycopg/api/sql",
+        "psycopg/api/types",
+        "psycopg/index"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/api/index#0",
+        "psycopg/api/sql#0",
+        "psycopg/api/abc#0",
+        "psycopg/index#0",
+        "psycopg/api/types#0",
+        "psycopg/advanced/cursors#0",
+        "psycopg/api/cursors#0",
+        "psycopg/api/sql#1",
+        "psycopg/advanced/adapt#2",
+        "psycopg/api/rows#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.21028149999619927
+    },
+    {
+      "id": "s64_001",
+      "kind": "single",
+      "question": "What is a client\u2011side cursor in Psycopg and how does it differ from a client\u2011side\u2011binding cursor?",
+      "gold_document_ids": [
+        "psycopg/advanced/cursors"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/cursors",
+        "psycopg/advanced/typing",
+        "psycopg/api/cursors",
+        "psycopg/basic/usage"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/cursors#0",
+        "psycopg/advanced/cursors#1",
+        "psycopg/advanced/cursors#2",
+        "psycopg/advanced/cursors#4",
+        "psycopg/advanced/cursors#3",
+        "psycopg/api/cursors#0",
+        "psycopg/advanced/typing#0",
+        "psycopg/basic/usage#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.10808458300016355
+    },
+    {
+      "id": "s08_002",
+      "kind": "single",
+      "question": "What does FastAPI automatically handle when a function's return type annotation is a subclass of `Response`, such as `RedirectResponse` or `JSONResponse`?",
+      "gold_document_ids": [
+        "fastapi/tutorial/response-model"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/response-directly",
+        "fastapi/tutorial/response-model"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/response-model#11",
+        "fastapi/tutorial/response-model#10",
+        "fastapi/tutorial/response-model#6",
+        "fastapi/tutorial/response-model#0",
+        "fastapi/tutorial/response-model#2",
+        "fastapi/tutorial/response-model#8",
+        "fastapi/tutorial/response-model#12",
+        "fastapi/advanced/response-directly#1",
+        "fastapi/tutorial/response-model#1",
+        "fastapi/tutorial/response-model#13"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.06886533399665495
+    },
+    {
+      "id": "s32_003",
+      "kind": "single",
+      "question": "How does a child graph in LangGraph call a grandchild graph, and which state keys are not accessible within each graph's functions?",
+      "gold_document_ids": [
+        "langchain/langgraph/use-subgraphs"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/langgraph/application-structure",
+        "langchain-docs/src/oss/langgraph/frontend/overview",
+        "langchain-docs/src/oss/langgraph/use-subgraphs",
+        "langchain/langgraph/application-structure",
+        "langchain/langgraph/frontend/overview",
+        "langchain/langgraph/use-subgraphs"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/langgraph/use-subgraphs#9",
+        "langchain/langgraph/use-subgraphs#9",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#12",
+        "langchain/langgraph/use-subgraphs#12",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#14",
+        "langchain/langgraph/use-subgraphs#14",
+        "langchain-docs/src/oss/langgraph/application-structure#7",
+        "langchain/langgraph/application-structure#7",
+        "langchain-docs/src/oss/langgraph/frontend/overview#1",
+        "langchain/langgraph/frontend/overview#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.058308750005380716
+    },
+    {
+      "id": "s64_007",
+      "kind": "single",
+      "question": "In Psycopg, how do you properly use an asynchronous connection as a context manager to execute a query?",
+      "gold_document_ids": [
+        "psycopg/advanced/async"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/async",
+        "psycopg/advanced/cursors",
+        "psycopg/api/connections",
+        "psycopg/api/dns",
+        "psycopg/basic/usage"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/api/connections#0",
+        "psycopg/advanced/async#2",
+        "psycopg/basic/usage#1",
+        "psycopg/advanced/async#3",
+        "psycopg/basic/usage#3",
+        "psycopg/api/dns#2",
+        "psycopg/advanced/cursors#3",
+        "psycopg/advanced/cursors#1",
+        "psycopg/basic/usage#2",
+        "psycopg/advanced/async#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.049441625000326894
+    },
+    {
+      "id": "s72_002",
+      "kind": "single",
+      "question": "In psycopg, how do you use a `RawCursor` to execute a query that uses PostgreSQL native placeholders and retrieve a single row?",
+      "gold_document_ids": [
+        "psycopg/advanced/cursors"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/cursors",
+        "psycopg/advanced/typing",
+        "psycopg/api/cursors",
+        "psycopg/api/sql",
+        "psycopg/basic/from_pg2",
+        "psycopg/basic/params",
+        "psycopg/basic/usage"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/cursors#5",
+        "psycopg/advanced/cursors#0",
+        "psycopg/advanced/cursors#3",
+        "psycopg/advanced/cursors#4",
+        "psycopg/basic/usage#0",
+        "psycopg/basic/params#4",
+        "psycopg/api/sql#1",
+        "psycopg/api/cursors#0",
+        "psycopg/advanced/typing#1",
+        "psycopg/basic/from_pg2#4"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.053423625002324115
+    },
+    {
+      "id": "s72_006",
+      "kind": "single",
+      "question": "How does a Pydantic model factory ensure that rows returned from a psycopg query are compatible with the defined Person model, and what happens if they are not?",
+      "gold_document_ids": [
+        "psycopg/advanced/typing"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/body",
+        "fastapi/tutorial/body-nested-models",
+        "fastapi/tutorial/query-param-models",
+        "fastapi/tutorial/sql-databases",
+        "langchain-docs/src/langsmith/caching",
+        "psycopg/advanced/rows",
+        "psycopg/advanced/typing",
+        "psycopg/basic/from_pg2",
+        "psycopg/index"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/typing#3",
+        "fastapi/tutorial/sql-databases#7",
+        "psycopg/basic/from_pg2#6",
+        "langchain-docs/src/langsmith/caching#4",
+        "fastapi/tutorial/body#1",
+        "psycopg/advanced/rows#1",
+        "fastapi/tutorial/sql-databases#2",
+        "psycopg/index#0",
+        "fastapi/tutorial/query-param-models#1",
+        "fastapi/tutorial/body-nested-models#10"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.08716249999997672
+    },
+    {
+      "id": "s48_005",
+      "kind": "single",
+      "question": "How can you enable multiple MCP servers in a TypeScript example while selectively disabling dangerous tools for the \"google-calendar-mcp\" server?",
+      "gold_document_ids": [
+        "langchain/javascript/integrations/tools/anthropic"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/langsmith/fleet/mcp-framework",
+        "langchain-docs/src/langsmith/managed-deep-agents-mcp-connectors",
+        "langchain-docs/src/oss/deepagents/code/mcp-tools",
+        "langchain-docs/src/oss/javascript/integrations/tools/anthropic",
+        "langchain-docs/src/oss/javascript/migrate/langchain-mcp-adapters",
+        "langchain/deepagents/code/mcp-tools",
+        "langchain/javascript/integrations/tools/anthropic",
+        "langchain/javascript/migrate/langchain-mcp-adapters"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/javascript/integrations/tools/anthropic#13",
+        "langchain/javascript/integrations/tools/anthropic#13",
+        "langchain-docs/src/oss/javascript/migrate/langchain-mcp-adapters#4",
+        "langchain/javascript/migrate/langchain-mcp-adapters#4",
+        "langchain-docs/src/langsmith/fleet/mcp-framework#3",
+        "langchain-docs/src/langsmith/managed-deep-agents-mcp-connectors#2",
+        "langchain-docs/src/langsmith/managed-deep-agents-mcp-connectors#3",
+        "langchain-docs/src/oss/deepagents/code/mcp-tools#11",
+        "langchain/deepagents/code/mcp-tools#11",
+        "langchain-docs/src/oss/javascript/integrations/tools/anthropic#12"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.09612712499802001
+    },
+    {
+      "id": "s56_006",
+      "kind": "single",
+      "question": "Which SQLSTATE class is used to represent a connection exception, such as when a database connection cannot be established?",
+      "gold_document_ids": [
+        "psycopg/api/errors"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/api/cursors",
+        "psycopg/api/errors",
+        "psycopg/api/objects",
+        "psycopg/api/pool",
+        "psycopg/api/pq"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/api/errors#3",
+        "psycopg/api/errors#2",
+        "psycopg/api/errors#1",
+        "psycopg/api/errors#0",
+        "psycopg/api/errors#14",
+        "psycopg/api/errors#11",
+        "psycopg/api/objects#0",
+        "psycopg/api/cursors#4",
+        "psycopg/api/pq#3",
+        "psycopg/api/pool#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.06107570800668327
+    },
+    {
+      "id": "m16_005",
+      "kind": "multi_hop",
+      "question": "What change did FastAPI version 0.110.0 introduce regarding the handling of exceptions caught in dependencies that use `yield`, and how does this affect the visibility of errors to the server logs?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/dependencies/dependencies-with-yield#5",
+        "fastapi/advanced/advanced-dependencies#9",
+        "fastapi/advanced/advanced-dependencies#10",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#10",
+        "fastapi/advanced/advanced-dependencies#4",
+        "fastapi/advanced/advanced-dependencies#6",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#6",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#0",
+        "fastapi/advanced/advanced-dependencies#5",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.05430124999838881
+    },
+    {
+      "id": "m24_004",
+      "kind": "multi_hop",
+      "question": "In an asynchronous FastAPI test, how should you call other async helper functions, and where should objects tied to an event loop be instantiated to avoid a \u201cTask attached to a different loop\u201d error?",
+      "gold_document_ids": [
+        "fastapi/advanced/async-tests",
+        "fastapi/async"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/async-tests",
+        "fastapi/async",
+        "fastapi/index",
+        "fastapi/tutorial/server-sent-events",
+        "fastapi/tutorial/testing"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/async-tests#4",
+        "fastapi/advanced/async-tests#0",
+        "fastapi/advanced/async-tests#1",
+        "fastapi/async#22",
+        "fastapi/async#19",
+        "fastapi/tutorial/server-sent-events#3",
+        "fastapi/tutorial/testing#1",
+        "fastapi/index#12",
+        "fastapi/async#14",
+        "fastapi/async#20"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04514737499994226
+    },
+    {
+      "id": "m00_005",
+      "kind": "multi_hop",
+      "question": "In FastAPI, how can you configure an endpoint to return both a JSON response and an image/png file, ensuring that the OpenAPI documentation accurately reflects both media types and that FastAPI uses the correct response class for each?",
+      "gold_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/custom-response"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/custom-response",
+        "fastapi/advanced/response-directly",
+        "fastapi/reference/responses"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/additional-responses#4",
+        "fastapi/advanced/custom-response#0",
+        "fastapi/advanced/custom-response#10",
+        "fastapi/advanced/response-directly#1",
+        "fastapi/advanced/custom-response#1",
+        "fastapi/advanced/additional-responses#0",
+        "fastapi/reference/responses#0",
+        "fastapi/reference/responses#1",
+        "fastapi/advanced/response-directly#2",
+        "fastapi/advanced/custom-response#15"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04715287499857368
+    },
+    {
+      "id": "s56_000",
+      "kind": "single",
+      "question": "How can a Psycopg program detect a lost database connection without continuously polling with `SELECT 1`?",
+      "gold_document_ids": [
+        "psycopg/advanced/async"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/async",
+        "psycopg/basic/transactions",
+        "psycopg/news",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/async#7",
+        "psycopg/basic/transactions#0",
+        "psycopg/news#15",
+        "psycopg/basic/transactions#1",
+        "psycopg/news#0",
+        "psycopg/advanced/async#3",
+        "psycopg/advanced/async#6",
+        "psycopg/news_pool#1",
+        "psycopg/news#9",
+        "psycopg/advanced/async#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.045940457996039186
+    },
+    {
+      "id": "s48_007",
+      "kind": "single",
+      "question": "Which new feature was added to Psycopg in the 3.0.3 release that improves compatibility with Alpine Linux?",
+      "gold_document_ids": [
+        "psycopg/news"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/api/pq",
+        "psycopg/basic/from_pg2",
+        "psycopg/basic/install",
+        "psycopg/index",
+        "psycopg/news",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/news#16",
+        "psycopg/index#0",
+        "psycopg/news#0",
+        "psycopg/basic/install#0",
+        "psycopg/news#12",
+        "psycopg/basic/from_pg2#0",
+        "psycopg/news_pool#0",
+        "psycopg/api/pq#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.047106750003877096
+    },
+    {
+      "id": "s16_004",
+      "kind": "single",
+      "question": "What is the name of the guide that explains how to move from Pydantic v1 to Pydantic v2?",
+      "gold_document_ids": [
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2",
+        "langchain-docs/src/oss/langgraph/streaming"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#1",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#3",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#8",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#4",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#7",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#0",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#2",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#5",
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2#6",
+        "langchain-docs/src/oss/langgraph/streaming#51"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04439237499900628
+    },
+    {
+      "id": "s32_005",
+      "kind": "single",
+      "question": "How can a subgraph be invoked from a parent node in a StateGraph and have its output passed to subsequent nodes?",
+      "gold_document_ids": [
+        "langchain/langgraph/use-subgraphs"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/langgraph/streaming",
+        "langchain-docs/src/oss/langgraph/use-subgraphs",
+        "langchain/langgraph/streaming",
+        "langchain/langgraph/use-subgraphs"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/langgraph/use-subgraphs#3",
+        "langchain/langgraph/use-subgraphs#3",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#10",
+        "langchain/langgraph/use-subgraphs#10",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#2",
+        "langchain/langgraph/use-subgraphs#2",
+        "langchain-docs/src/oss/langgraph/streaming#33",
+        "langchain/langgraph/streaming#33",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#43",
+        "langchain/langgraph/use-subgraphs#43"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.0473931669985177
+    },
+    {
+      "id": "s40_003",
+      "kind": "single",
+      "question": "In a Node.js project that uses @langchain/google-vertexai, in what order are credentials resolved when authenticating with Google services?",
+      "gold_document_ids": [
+        "langchain/javascript/integrations/providers/google"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/chat/google_vertex_ai",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_vertex_ai",
+        "langchain-docs/src/oss/javascript/integrations/llms/google_vertex_ai",
+        "langchain-docs/src/oss/javascript/integrations/providers/google",
+        "langchain-docs/src/oss/python/integrations/chat/google_vertex_ai",
+        "langchain/javascript/integrations/chat/google_vertex_ai",
+        "langchain/javascript/integrations/embeddings/google_vertex_ai",
+        "langchain/javascript/integrations/llms/google_vertex_ai",
+        "langchain/javascript/integrations/providers/google",
+        "langchain/python/integrations/chat/google_vertex_ai"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/javascript/integrations/providers/google#8",
+        "langchain/javascript/integrations/providers/google#8",
+        "langchain-docs/src/oss/javascript/integrations/llms/google_vertex_ai#2",
+        "langchain/javascript/integrations/llms/google_vertex_ai#2",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_vertex_ai#2",
+        "langchain/javascript/integrations/embeddings/google_vertex_ai#2",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_vertex_ai#4",
+        "langchain/javascript/integrations/chat/google_vertex_ai#4",
+        "langchain-docs/src/oss/python/integrations/chat/google_vertex_ai#3",
+        "langchain/python/integrations/chat/google_vertex_ai#3"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04511404199729441
+    },
+    {
+      "id": "s40_007",
+      "kind": "single",
+      "question": "What are the default values for the `max_depth`, `max_breadth`, and `limit` parameters when instantiating a `TavilyMap` tool?",
+      "gold_document_ids": [
+        "langchain/python/integrations/tools/tavily_map"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_crawl",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_map",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_search",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_crawl",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_map",
+        "langchain/javascript/integrations/tools/tavily_crawl",
+        "langchain/javascript/integrations/tools/tavily_map",
+        "langchain/javascript/integrations/tools/tavily_search",
+        "langchain/python/integrations/tools/tavily_crawl",
+        "langchain/python/integrations/tools/tavily_map"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/tools/tavily_map#4",
+        "langchain/python/integrations/tools/tavily_map#4",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_map#5",
+        "langchain/javascript/integrations/tools/tavily_map#5",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_crawl#4",
+        "langchain/python/integrations/tools/tavily_crawl#4",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_crawl#5",
+        "langchain/javascript/integrations/tools/tavily_crawl#5",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_search#4",
+        "langchain/javascript/integrations/tools/tavily_search#4"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.045943417004309595
+    },
+    {
+      "id": "s72_003",
+      "kind": "single",
+      "question": "What is the purpose of the `returning=True` parameter in the `executemany()` method of the `Cursor` class in the database library described?",
+      "gold_document_ids": [
+        "psycopg/api/cursors"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/cursors",
+        "psycopg/advanced/typing",
+        "psycopg/api/cursors",
+        "psycopg/basic/params",
+        "psycopg/basic/usage"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/api/cursors#2",
+        "psycopg/advanced/typing#4",
+        "psycopg/api/cursors#0",
+        "psycopg/basic/usage#1",
+        "psycopg/advanced/cursors#0",
+        "psycopg/basic/params#1",
+        "psycopg/api/cursors#9"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04179974999715341
+    },
+    {
+      "id": "s64_006",
+      "kind": "single",
+      "question": "In the Psycopg 3 library, which component is responsible for converting Python types to PostgreSQL values when a query argument is passed, and how does Psycopg decide whether to use a binary or text dumper for that type?",
+      "gold_document_ids": [
+        "psycopg/advanced/adapt"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/adapt",
+        "psycopg/api/abc",
+        "psycopg/api/adapt",
+        "psycopg/api/types",
+        "psycopg/basic/adapt",
+        "psycopg/basic/params",
+        "psycopg/index"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/adapt#2",
+        "psycopg/basic/params#4",
+        "psycopg/basic/params#3",
+        "psycopg/api/adapt#0",
+        "psycopg/index#0",
+        "psycopg/api/abc#0",
+        "psycopg/api/types#0",
+        "psycopg/advanced/adapt#3",
+        "psycopg/advanced/adapt#1",
+        "psycopg/basic/adapt#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.0437795410034596
+    },
+    {
+      "id": "s72_001",
+      "kind": "single",
+      "question": "How does the `psycopg.sql` module help safely construct SQL queries involving table names in Python?",
+      "gold_document_ids": [
+        "psycopg/api/sql"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/cursors",
+        "psycopg/advanced/typing",
+        "psycopg/api/module",
+        "psycopg/api/sql",
+        "psycopg/basic/params",
+        "psycopg/basic/tstrings",
+        "psycopg/basic/usage",
+        "psycopg/index"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/api/sql#0",
+        "psycopg/basic/usage#0",
+        "psycopg/basic/params#3",
+        "psycopg/api/module#0",
+        "psycopg/api/sql#1",
+        "psycopg/advanced/typing#4",
+        "psycopg/advanced/cursors#2",
+        "psycopg/index#0",
+        "psycopg/basic/tstrings#0",
+        "psycopg/basic/params#2"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.039246584005013574
+    },
+    {
+      "id": "s64_002",
+      "kind": "single",
+      "question": "What is the purpose of the `!check` callback in a `psycopg_pool.ConnectionPool`?",
+      "gold_document_ids": [
+        "psycopg/advanced/pool"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/pool",
+        "psycopg/api/pool",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/pool#2",
+        "psycopg/advanced/pool#6",
+        "psycopg/advanced/pool#0",
+        "psycopg/api/pool#2",
+        "psycopg/api/pool#0",
+        "psycopg/news_pool#2",
+        "psycopg/advanced/pool#4",
+        "psycopg/news_pool#0",
+        "psycopg/api/pool#1",
+        "psycopg/news_pool#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.0395730409945827
+    },
+    {
+      "id": "s32_004",
+      "kind": "single",
+      "question": "How do you import and instantiate the `ChatAnthropic` model from LangChain, and what is the recommended prompt format to use with it?",
+      "gold_document_ids": [
+        "langchain/javascript/integrations/providers/anthropic"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/chat/anthropic",
+        "langchain-docs/src/oss/javascript/integrations/providers/anthropic",
+        "langchain-docs/src/oss/langgraph/quickstart",
+        "langchain-docs/src/oss/python/integrations/chat/anthropic",
+        "langchain-docs/src/oss/python/integrations/llms/anthropic",
+        "langchain/javascript/integrations/chat/anthropic",
+        "langchain/javascript/integrations/providers/anthropic",
+        "langchain/langgraph/quickstart",
+        "langchain/python/integrations/chat/anthropic",
+        "langchain/python/integrations/llms/anthropic"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/javascript/integrations/providers/anthropic#1",
+        "langchain/javascript/integrations/providers/anthropic#1",
+        "langchain-docs/src/oss/python/integrations/chat/anthropic#5",
+        "langchain/python/integrations/chat/anthropic#5",
+        "langchain-docs/src/oss/langgraph/quickstart#26",
+        "langchain/langgraph/quickstart#26",
+        "langchain-docs/src/oss/python/integrations/llms/anthropic#2",
+        "langchain/python/integrations/llms/anthropic#2",
+        "langchain-docs/src/oss/javascript/integrations/chat/anthropic#5",
+        "langchain/javascript/integrations/chat/anthropic#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.043481332999363076
+    },
+    {
+      "id": "m24_003",
+      "kind": "multi_hop",
+      "question": "How would you write an asynchronous pytest test that calls a function named `search_async` (which uses `tool.ainvoke` to perform an async search) and verifies the result contains the expected number of items, while ensuring the ASGI app\u2019s lifespan events are triggered during the test?",
+      "gold_document_ids": [
+        "fastapi/advanced/async-tests",
+        "langchain/python/integrations/tools/parallel_search"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/async-tests",
+        "langchain-docs/src/langsmith/pytest",
+        "langchain-docs/src/langsmith/test-react-agent-pytest",
+        "langchain-docs/src/oss/python/integrations/retrievers/parallel",
+        "langchain-docs/src/oss/python/integrations/tools/parallel_search",
+        "langchain/python/integrations/retrievers/parallel",
+        "langchain/python/integrations/tools/parallel_search"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/async-tests#3",
+        "fastapi/advanced/async-tests#1",
+        "langchain-docs/src/langsmith/pytest#11",
+        "langchain-docs/src/oss/python/integrations/tools/parallel_search#5",
+        "langchain/python/integrations/tools/parallel_search#5",
+        "langchain-docs/src/oss/python/integrations/retrievers/parallel#5",
+        "langchain/python/integrations/retrievers/parallel#5",
+        "fastapi/advanced/async-tests#4",
+        "fastapi/advanced/async-tests#0",
+        "langchain-docs/src/langsmith/test-react-agent-pytest#9"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.05198462500266032
+    },
+    {
+      "id": "s08_000",
+      "kind": "single",
+      "question": "What change did FastAPI version 0.106.0 introduce regarding raising exceptions after a dependency yields, and how should developers adapt their background task resource handling accordingly?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/deployment/concepts",
+        "fastapi/tutorial/background-tasks",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/advanced-dependencies#10",
+        "fastapi/advanced/advanced-dependencies#9",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#5",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#10",
+        "fastapi/advanced/advanced-dependencies#4",
+        "fastapi/advanced/advanced-dependencies#6",
+        "fastapi/deployment/concepts#10",
+        "fastapi/advanced/advanced-dependencies#5",
+        "fastapi/tutorial/background-tasks#4",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.043944457996985875
+    },
+    {
+      "id": "s48_001",
+      "kind": "single",
+      "question": "Which Python class from the langchain_google_vertexai.vision_models package can be used to generate images from a prompt?",
+      "gold_document_ids": [
+        "langchain/python/integrations/providers/google"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/chat/google_generative_ai",
+        "langchain-docs/src/oss/python/integrations/chat/qwq",
+        "langchain-docs/src/oss/python/integrations/document_loaders/google_classroom",
+        "langchain-docs/src/oss/python/integrations/providers/google",
+        "langchain-docs/src/oss/python/integrations/tools/google_imagen",
+        "langchain/javascript/integrations/chat/google_generative_ai",
+        "langchain/python/integrations/chat/qwq",
+        "langchain/python/integrations/document_loaders/google_classroom",
+        "langchain/python/integrations/providers/google",
+        "langchain/python/integrations/tools/google_imagen"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/providers/google#5",
+        "langchain/python/integrations/providers/google#5",
+        "langchain-docs/src/oss/python/integrations/tools/google_imagen#1",
+        "langchain/python/integrations/tools/google_imagen#1",
+        "langchain-docs/src/oss/python/integrations/document_loaders/google_classroom#14",
+        "langchain/python/integrations/document_loaders/google_classroom#14",
+        "langchain-docs/src/oss/python/integrations/chat/qwq#8",
+        "langchain/python/integrations/chat/qwq#8",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_generative_ai#3",
+        "langchain/javascript/integrations/chat/google_generative_ai#3"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.03901008300454123
+    },
+    {
+      "id": "s16_007",
+      "kind": "single",
+      "question": "What library must you install in a Python project to generate and verify JWT tokens for OAuth2 with Password and Bearer authentication, and what additional dependency should you consider if using RSA or ECDSA digital signature algorithms?",
+      "gold_document_ids": [
+        "fastapi/tutorial/security/oauth2-jwt"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/security/oauth2-jwt",
+        "fastapi/tutorial/security/simple-oauth2"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/security/oauth2-jwt#2",
+        "fastapi/tutorial/security/oauth2-jwt#6",
+        "fastapi/tutorial/security/oauth2-jwt#5",
+        "fastapi/tutorial/security/oauth2-jwt#7",
+        "fastapi/tutorial/security/oauth2-jwt#8",
+        "fastapi/tutorial/security/oauth2-jwt#13",
+        "fastapi/tutorial/security/simple-oauth2#7",
+        "fastapi/tutorial/security/oauth2-jwt#0",
+        "fastapi/tutorial/security/oauth2-jwt#9",
+        "fastapi/tutorial/security/simple-oauth2#12"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04132920799747808
+    },
+    {
+      "id": "s08_003",
+      "kind": "single",
+      "question": "How do you run an async test with pytest for a FastAPI application using an AsyncClient and ensure the test function is asynchronous?",
+      "gold_document_ids": [
+        "fastapi/advanced/async-tests"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/async-tests",
+        "fastapi/async",
+        "fastapi/reference/testclient",
+        "fastapi/tutorial/testing",
+        "langchain-docs/src/langsmith/pytest",
+        "langchain-docs/src/langsmith/sandbox-sdk"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/async-tests#1",
+        "fastapi/advanced/async-tests#3",
+        "fastapi/advanced/async-tests#0",
+        "fastapi/tutorial/testing#1",
+        "fastapi/advanced/async-tests#4",
+        "langchain-docs/src/langsmith/pytest#11",
+        "fastapi/tutorial/testing#0",
+        "langchain-docs/src/langsmith/sandbox-sdk#18",
+        "fastapi/reference/testclient#0",
+        "fastapi/async#22"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.043859290999535006
+    },
+    {
+      "id": "s48_002",
+      "kind": "single",
+      "question": "How can a user provide an image input along with text when using LangChain\u2019s `ChatGoogleGenerativeAI` with the model `gemini-3.7-flash`?",
+      "gold_document_ids": [
+        "langchain/python/integrations/chat/google_generative_ai"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai",
+        "langchain-docs/src/oss/python/integrations/embeddings/google_generative_ai",
+        "langchain-docs/src/oss/python/integrations/llms/google_vertex_ai",
+        "langchain/python/integrations/chat/google_generative_ai",
+        "langchain/python/integrations/embeddings/google_generative_ai",
+        "langchain/python/integrations/llms/google_vertex_ai"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#14",
+        "langchain/python/integrations/chat/google_generative_ai#14",
+        "langchain-docs/src/oss/python/integrations/llms/google_vertex_ai#18",
+        "langchain/python/integrations/llms/google_vertex_ai#18",
+        "langchain-docs/src/oss/python/integrations/llms/google_vertex_ai#15",
+        "langchain/python/integrations/llms/google_vertex_ai#15",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#18",
+        "langchain/python/integrations/chat/google_generative_ai#18",
+        "langchain-docs/src/oss/python/integrations/embeddings/google_generative_ai#0",
+        "langchain/python/integrations/embeddings/google_generative_ai#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04789554200397106
+    },
+    {
+      "id": "s32_006",
+      "kind": "single",
+      "question": "How do you configure the ClaudeBashToolMiddleware to use a custom workspace directory and run specific startup commands when creating an agent with the Claude Sonnet 4.6 model?",
+      "gold_document_ids": [
+        "langchain/python/integrations/middleware/anthropic"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/langsmith/deploy-other-frameworks",
+        "langchain-docs/src/langsmith/llm-gateway-admin-setup",
+        "langchain-docs/src/oss/deepagents/customization",
+        "langchain-docs/src/oss/python/integrations/chat/anthropic",
+        "langchain-docs/src/oss/python/integrations/middleware/anthropic",
+        "langchain/deepagents/customization",
+        "langchain/python/integrations/chat/anthropic",
+        "langchain/python/integrations/middleware/anthropic"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/langsmith/deploy-other-frameworks#5",
+        "langchain-docs/src/oss/python/integrations/middleware/anthropic#7",
+        "langchain/python/integrations/middleware/anthropic#7",
+        "langchain-docs/src/oss/python/integrations/chat/anthropic#53",
+        "langchain/python/integrations/chat/anthropic#53",
+        "langchain-docs/src/langsmith/llm-gateway-admin-setup#8",
+        "langchain-docs/src/oss/deepagents/customization#22",
+        "langchain/deepagents/customization#22",
+        "langchain-docs/src/langsmith/deploy-other-frameworks#6",
+        "langchain-docs/src/oss/python/integrations/middleware/anthropic#6"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.05218500000046333
+    },
+    {
+      "id": "s32_001",
+      "kind": "single",
+      "question": "What tool is produced by the toolkit when converting a vector store, and what is its name and description?",
+      "gold_document_ids": [
+        "langchain/javascript/integrations/tools/vectorstore"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/tools/vectorstore",
+        "langchain-docs/src/oss/python/integrations/providers/cockroachdb",
+        "langchain-docs/src/oss/python/integrations/vectorstores/TEMPLATE",
+        "langchain-docs/src/oss/python/integrations/vectorstores/google_memorystore_redis",
+        "langchain-docs/src/oss/python/integrations/vectorstores/in_memory",
+        "langchain/javascript/integrations/tools/vectorstore",
+        "langchain/python/integrations/providers/cockroachdb",
+        "langchain/python/integrations/vectorstores/TEMPLATE",
+        "langchain/python/integrations/vectorstores/google_memorystore_redis",
+        "langchain/python/integrations/vectorstores/in_memory"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/javascript/integrations/tools/vectorstore#0",
+        "langchain/javascript/integrations/tools/vectorstore#0",
+        "langchain-docs/src/oss/python/integrations/providers/cockroachdb#2",
+        "langchain/python/integrations/providers/cockroachdb#2",
+        "langchain-docs/src/oss/python/integrations/vectorstores/google_memorystore_redis#12",
+        "langchain/python/integrations/vectorstores/google_memorystore_redis#12",
+        "langchain-docs/src/oss/python/integrations/vectorstores/TEMPLATE#7",
+        "langchain/python/integrations/vectorstores/TEMPLATE#7",
+        "langchain-docs/src/oss/python/integrations/vectorstores/in_memory#0",
+        "langchain/python/integrations/vectorstores/in_memory#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.048139667000214104
+    },
+    {
+      "id": "m16_003",
+      "kind": "multi_hop",
+      "question": "In FastAPI, how can you ensure that a database session created in a dependency using `yield` is closed before a slow `StreamingResponse` is finished, and why might this be important for other concurrent requests?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/advanced/stream-data",
+        "fastapi/tutorial/dependencies/dependencies-with-yield",
+        "fastapi/tutorial/sql-databases"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/advanced-dependencies#6",
+        "fastapi/advanced/advanced-dependencies#7",
+        "fastapi/advanced/advanced-dependencies#10",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#1",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#8",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#0",
+        "fastapi/advanced/stream-data#1",
+        "fastapi/advanced/advanced-dependencies#9",
+        "fastapi/advanced/advanced-dependencies#5",
+        "fastapi/tutorial/sql-databases#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04500920799910091
+    },
+    {
+      "id": "s40_000",
+      "kind": "single",
+      "question": "How does the provided Python code select different language models based on a runtime context (cost tier and environment) and then create a LangChain agent using that selection?",
+      "gold_document_ids": [
+        "langchain/langchain/context-engineering"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/deepagents/models",
+        "langchain-docs/src/oss/langchain/context-engineering",
+        "langchain-docs/src/oss/langchain/middleware/custom",
+        "langchain-docs/src/oss/langchain/models",
+        "langchain-docs/src/oss/python/migrate/langchain-v1",
+        "langchain/deepagents/models",
+        "langchain/langchain/context-engineering",
+        "langchain/langchain/middleware/custom",
+        "langchain/langchain/models",
+        "langchain/python/migrate/langchain-v1"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/langchain/context-engineering#28",
+        "langchain/langchain/context-engineering#28",
+        "langchain-docs/src/oss/langchain/middleware/custom#30",
+        "langchain/langchain/middleware/custom#30",
+        "langchain-docs/src/oss/python/migrate/langchain-v1#18",
+        "langchain/python/migrate/langchain-v1#18",
+        "langchain-docs/src/oss/deepagents/models#8",
+        "langchain/deepagents/models#8",
+        "langchain-docs/src/oss/langchain/models#54",
+        "langchain/langchain/models#54"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04586404199653771
+    },
+    {
+      "id": "s48_003",
+      "kind": "single",
+      "question": "What steps are required to set up Browserbase for use with the Browserbase SDK and how does the Deep Agents integration improve performance?",
+      "gold_document_ids": [
+        "langchain/python/integrations/providers/browserbase"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/python/integrations/providers/browserbase",
+        "langchain/python/integrations/providers/browserbase"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#1",
+        "langchain/python/integrations/providers/browserbase#1",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#2",
+        "langchain/python/integrations/providers/browserbase#2",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#6",
+        "langchain/python/integrations/providers/browserbase#6",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#4",
+        "langchain/python/integrations/providers/browserbase#4",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#8",
+        "langchain/python/integrations/providers/browserbase#8"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.0457573749954463
+    },
+    {
+      "id": "s08_001",
+      "kind": "single",
+      "question": "In a FastAPI application, how can you attach multiple example values to a Pydantic model field using the `Field()` function?",
+      "gold_document_ids": [
+        "fastapi/tutorial/schema-extra-example"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/dataclasses",
+        "fastapi/tutorial/body",
+        "fastapi/tutorial/body-fields",
+        "fastapi/tutorial/header-param-models",
+        "fastapi/tutorial/query-param-models",
+        "fastapi/tutorial/request-form-models",
+        "fastapi/tutorial/schema-extra-example"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/request-form-models#0",
+        "fastapi/tutorial/request-form-models#1",
+        "fastapi/tutorial/schema-extra-example#1",
+        "fastapi/tutorial/schema-extra-example#9",
+        "fastapi/advanced/dataclasses#4",
+        "fastapi/tutorial/body-fields#0",
+        "fastapi/tutorial/schema-extra-example#0",
+        "fastapi/tutorial/header-param-models#1",
+        "fastapi/tutorial/body#5",
+        "fastapi/tutorial/query-param-models#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.045094249995599966
+    },
+    {
+      "id": "s56_004",
+      "kind": "single",
+      "question": "How can you compare a database field to NULL in PostgreSQL using a parameterized query with Psycopg 3?",
+      "gold_document_ids": [
+        "psycopg/basic/from_pg2"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/api/errors",
+        "psycopg/api/sql",
+        "psycopg/basic/adapt",
+        "psycopg/basic/from_pg2",
+        "psycopg/basic/params",
+        "psycopg/index",
+        "psycopg/news"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/index#0",
+        "psycopg/api/errors#1",
+        "psycopg/basic/from_pg2#5",
+        "psycopg/basic/params#3",
+        "psycopg/news#12",
+        "psycopg/basic/params#4",
+        "psycopg/basic/from_pg2#2",
+        "psycopg/basic/from_pg2#4",
+        "psycopg/api/sql#1",
+        "psycopg/basic/adapt#8"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04697158400085755
+    },
+    {
+      "id": "s64_003",
+      "kind": "single",
+      "question": "What PostgreSQL features are not supported when using Psycopg 3's pipeline mode?",
+      "gold_document_ids": [
+        "psycopg/advanced/pipeline"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/pipeline",
+        "psycopg/api/objects",
+        "psycopg/api/pq",
+        "psycopg/basic/install",
+        "psycopg/index",
+        "psycopg/news"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/basic/install#0",
+        "psycopg/news#12",
+        "psycopg/index#0",
+        "psycopg/advanced/pipeline#0",
+        "psycopg/api/objects#2",
+        "psycopg/api/pq#0",
+        "psycopg/news#0",
+        "psycopg/news#14"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.049398457995266654
+    },
+    {
+      "id": "m00_006",
+      "kind": "multi_hop",
+      "question": "How can you document an API endpoint in FastAPI so that custom 404 responses appear in the OpenAPI schema and API docs, while also ensuring that additional status codes you return directly are correctly represented?",
+      "gold_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/additional-status-codes"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/additional-status-codes",
+        "fastapi/advanced/custom-response",
+        "fastapi/how-to/extending-openapi",
+        "fastapi/reference/responses",
+        "fastapi/tutorial/frontend",
+        "fastapi/tutorial/response-status-code"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/additional-status-codes#1",
+        "fastapi/advanced/additional-responses#0",
+        "fastapi/advanced/custom-response#0",
+        "fastapi/advanced/additional-status-codes#0",
+        "fastapi/advanced/custom-response#6",
+        "fastapi/how-to/extending-openapi#0",
+        "fastapi/tutorial/frontend#3",
+        "fastapi/tutorial/response-status-code#0",
+        "fastapi/reference/responses#0",
+        "fastapi/advanced/additional-responses#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04692154100484913
+    },
+    {
+      "id": "s72_005",
+      "kind": "single",
+      "question": "In FastAPI, how can you ensure that an AsyncConnectionPool is opened when the application starts and closed when it shuts down?",
+      "gold_document_ids": [
+        "psycopg/advanced/pool"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/async",
+        "psycopg/advanced/pool",
+        "psycopg/api/pool",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/pool#3",
+        "psycopg/advanced/pool#1",
+        "psycopg/advanced/pool#11",
+        "fastapi/async#22",
+        "psycopg/api/pool#6",
+        "psycopg/advanced/pool#2",
+        "psycopg/api/pool#5",
+        "psycopg/news_pool#2",
+        "fastapi/async#19"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.040846500000043306
+    },
+    {
+      "id": "s40_001",
+      "kind": "single",
+      "question": "Which Python package should you install to use Azure OpenAI embeddings in LangChain?",
+      "gold_document_ids": [
+        "langchain/python/integrations/providers/microsoft"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/python/integrations/embeddings/azure_openai",
+        "langchain-docs/src/oss/python/integrations/embeddings/openai",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft",
+        "langchain/python/integrations/embeddings/azure_openai",
+        "langchain/python/integrations/embeddings/openai",
+        "langchain/python/integrations/providers/microsoft"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#11",
+        "langchain/python/integrations/providers/microsoft#11",
+        "langchain-docs/src/oss/python/integrations/embeddings/azure_openai#2",
+        "langchain/python/integrations/embeddings/azure_openai#2",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#9",
+        "langchain/python/integrations/providers/microsoft#9",
+        "langchain-docs/src/oss/python/integrations/embeddings/openai#7",
+        "langchain/python/integrations/embeddings/openai#7",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#2",
+        "langchain/python/integrations/providers/microsoft#2"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.037589874998957384
+    },
+    {
+      "id": "s16_002",
+      "kind": "single",
+      "question": "Which type of logs does FastAPI record for unhandled exceptions, and what optional setting can disable these logs?",
+      "gold_document_ids": [
+        "fastapi/advanced/opentelemetry"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/advanced/opentelemetry",
+        "fastapi/deployment/concepts",
+        "fastapi/tutorial/handling-errors",
+        "fastapi/tutorial/server-sent-events",
+        "fastapi/tutorial/stream-json-lines"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/opentelemetry#8",
+        "fastapi/tutorial/handling-errors#6",
+        "fastapi/tutorial/handling-errors#7",
+        "fastapi/tutorial/handling-errors#10",
+        "fastapi/deployment/concepts#10",
+        "fastapi/advanced/opentelemetry#9",
+        "fastapi/tutorial/handling-errors#9",
+        "fastapi/advanced/advanced-dependencies#9",
+        "fastapi/tutorial/stream-json-lines#6",
+        "fastapi/tutorial/server-sent-events#4"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.040012332996411715
+    },
+    {
+      "id": "s40_006",
+      "kind": "single",
+      "question": "What default parameters are used when creating an HNSW vector index with the `createHnswIndex` function if the user does not provide custom values for `m`, `efConstruction`, or `efSearch`?",
+      "gold_document_ids": [
+        "langchain/javascript/integrations/vectorstores/sap_hanavector"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector",
+        "langchain-docs/src/oss/python/integrations/vectorstores/oracle",
+        "langchain-docs/src/oss/python/integrations/vectorstores/sap_hanavector",
+        "langchain/javascript/integrations/vectorstores/sap_hanavector",
+        "langchain/python/integrations/vectorstores/oracle",
+        "langchain/python/integrations/vectorstores/sap_hanavector"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector#38",
+        "langchain/javascript/integrations/vectorstores/sap_hanavector#38",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector#10",
+        "langchain/javascript/integrations/vectorstores/sap_hanavector#10",
+        "langchain-docs/src/oss/python/integrations/vectorstores/sap_hanavector#9",
+        "langchain/python/integrations/vectorstores/sap_hanavector#9",
+        "langchain-docs/src/oss/python/integrations/vectorstores/oracle#9",
+        "langchain/python/integrations/vectorstores/oracle#9",
+        "langchain-docs/src/oss/python/integrations/vectorstores/sap_hanavector#33",
+        "langchain/python/integrations/vectorstores/sap_hanavector#33"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04382491699652746
+    },
+    {
+      "id": "s16_005",
+      "kind": "single",
+      "question": "Which authentication method described in the passage is commonly used by systems that offer options like \"login with Facebook, Google, X, GitHub\"?",
+      "gold_document_ids": [
+        "fastapi/tutorial/security/index"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/tutorial/security/first-steps",
+        "fastapi/tutorial/security/index",
+        "fastapi/tutorial/security/oauth2-jwt",
+        "langchain-docs/src/langsmith/managed-deep-agents-connections",
+        "langchain-docs/src/oss/javascript/integrations/providers/google",
+        "langchain-docs/src/oss/javascript/integrations/tools/composio",
+        "langchain-docs/src/oss/python/integrations/tools/composio",
+        "langchain/javascript/integrations/providers/google",
+        "langchain/javascript/integrations/tools/composio"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/security/index#1",
+        "langchain-docs/src/langsmith/managed-deep-agents-connections#16",
+        "fastapi/advanced/security/oauth2-scopes#13",
+        "langchain-docs/src/oss/javascript/integrations/providers/google#8",
+        "langchain/javascript/integrations/providers/google#8",
+        "fastapi/tutorial/security/oauth2-jwt#13",
+        "langchain-docs/src/oss/javascript/integrations/tools/composio#1",
+        "langchain/javascript/integrations/tools/composio#1",
+        "fastapi/tutorial/security/first-steps#4",
+        "langchain-docs/src/oss/python/integrations/tools/composio#2"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04831900000135647
+    },
+    {
+      "id": "m16_001",
+      "kind": "multi_hop",
+      "question": "In FastAPI, how does setting `Depends(scope=\"function\")` affect when a dependency that uses `yield` is closed relative to the path operation function and the response, compared to the default `scope=\"request\"`?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/reference/dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield",
+        "fastapi/tutorial/dependencies/index"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/dependencies/dependencies-with-yield#8",
+        "fastapi/advanced/advanced-dependencies#5",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#9",
+        "fastapi/advanced/advanced-dependencies#6",
+        "fastapi/advanced/security/oauth2-scopes#5",
+        "fastapi/advanced/advanced-dependencies#10",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#0",
+        "fastapi/tutorial/dependencies/index#5",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#1",
+        "fastapi/reference/dependencies#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04842866699618753
+    },
+    {
+      "id": "s32_000",
+      "kind": "single",
+      "question": "In the provided LangChain code snippet, how are short-term memory and long-term memory incorporated, and what role does semantic search play in retrieving user memories during a conversation?",
+      "gold_document_ids": [
+        "langchain/langgraph/add-memory"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/langsmith/semantic-search",
+        "langchain-docs/src/oss/langchain/short-term-memory",
+        "langchain-docs/src/oss/langgraph/add-memory",
+        "langchain/langchain/short-term-memory",
+        "langchain/langgraph/add-memory"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/langgraph/add-memory#50",
+        "langchain/langgraph/add-memory#50",
+        "langchain-docs/src/oss/langgraph/add-memory#49",
+        "langchain/langgraph/add-memory#49",
+        "langchain-docs/src/oss/langgraph/add-memory#51",
+        "langchain/langgraph/add-memory#51",
+        "langchain-docs/src/langsmith/semantic-search#0",
+        "langchain-docs/src/oss/langchain/short-term-memory#0",
+        "langchain/langchain/short-term-memory#0",
+        "langchain-docs/src/oss/langgraph/add-memory#52"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.03954945800069254
+    },
+    {
+      "id": "s08_005",
+      "kind": "single",
+      "question": "What command is shown for adding `sqlmodel` to a project using the `uv` tool?",
+      "gold_document_ids": [
+        "fastapi/tutorial/sql-databases"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/sql-databases",
+        "langchain-docs/src/langsmith/managed-deep-agents-local-development",
+        "langchain-docs/src/oss/langchain/sql-agent",
+        "langchain-docs/src/oss/python/integrations/providers/modelscope",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index",
+        "langchain-docs/src/snippets/code-samples/langgraph-sql-agent-define-steps-js",
+        "langchain/langchain/sql-agent",
+        "langchain/python/integrations/vectorstores/index"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/sql-databases#1",
+        "langchain-docs/src/langsmith/managed-deep-agents-local-development#1",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index#9",
+        "langchain/python/integrations/vectorstores/index#9",
+        "langchain-docs/src/oss/langchain/sql-agent#4",
+        "langchain/langchain/sql-agent#4",
+        "fastapi/tutorial/sql-databases#10",
+        "fastapi/tutorial/sql-databases#23",
+        "langchain-docs/src/snippets/code-samples/langgraph-sql-agent-define-steps-js#0",
+        "langchain-docs/src/oss/python/integrations/providers/modelscope#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.03539816699776566
+    },
+    {
+      "id": "s16_001",
+      "kind": "single",
+      "question": "When combining unions of form models, what fields should be sent together in a single form when the notification type is email?",
+      "gold_document_ids": [
+        "fastapi/tutorial/request-form-models"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/request-form-models",
+        "fastapi/tutorial/request-forms-and-files",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph",
+        "langchain/langgraph/thinking-in-langgraph"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/request-form-models#6",
+        "fastapi/tutorial/request-form-models#5",
+        "fastapi/tutorial/request-form-models#3",
+        "fastapi/tutorial/request-form-models#7",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#17",
+        "langchain/langgraph/thinking-in-langgraph#17",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#10",
+        "langchain/langgraph/thinking-in-langgraph#10",
+        "fastapi/tutorial/request-forms-and-files#0",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#9"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.03872033300285693
+    },
+    {
+      "id": "s16_000",
+      "kind": "single",
+      "question": "How can you expose the same FastAPI router under different URL prefixes, such as `/api/v1` and `/api/latest`?",
+      "gold_document_ids": [
+        "fastapi/tutorial/bigger-applications"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/tutorial/bigger-applications",
+        "fastapi/tutorial/frontend",
+        "langchain-docs/src/snippets/langsmith/saas-region-urls"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/behind-a-proxy#4",
+        "fastapi/tutorial/bigger-applications#23",
+        "fastapi/advanced/behind-a-proxy#7",
+        "fastapi/tutorial/bigger-applications#24",
+        "fastapi/tutorial/frontend#2",
+        "fastapi/tutorial/bigger-applications#19",
+        "fastapi/advanced/behind-a-proxy#5",
+        "fastapi/tutorial/frontend#6",
+        "langchain-docs/src/snippets/langsmith/saas-region-urls#0",
+        "fastapi/tutorial/frontend#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04002241599664558
+    },
+    {
+      "id": "s08_004",
+      "kind": "single",
+      "question": "How do you raise an error that will be shown to the client in FastAPI, and from which module should these exceptions be imported?",
+      "gold_document_ids": [
+        "fastapi/reference/exceptions"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/deployment/concepts",
+        "fastapi/reference/exceptions",
+        "fastapi/tutorial/dependencies/dependencies-with-yield",
+        "fastapi/tutorial/handling-errors"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/reference/exceptions#0",
+        "fastapi/tutorial/handling-errors#6",
+        "fastapi/tutorial/handling-errors#7",
+        "fastapi/tutorial/handling-errors#9",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#5",
+        "fastapi/advanced/advanced-dependencies#9",
+        "fastapi/tutorial/handling-errors#5",
+        "fastapi/deployment/concepts#10",
+        "fastapi/tutorial/handling-errors#10",
+        "fastapi/tutorial/handling-errors#2"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04294445899722632
+    },
+    {
+      "id": "s24_004",
+      "kind": "single",
+      "question": "How can you provide an API key when using the Google Generative AI API in your code?",
+      "gold_document_ids": [
+        "langchain/javascript/integrations/chat/google"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/chat/google",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_generative_ai",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai",
+        "langchain-docs/src/oss/python/integrations/embeddings/google_generative_ai",
+        "langchain-docs/src/oss/python/integrations/llms/google_generative_ai",
+        "langchain/javascript/integrations/chat/google",
+        "langchain/javascript/integrations/embeddings/google_generative_ai",
+        "langchain/python/integrations/chat/google_generative_ai",
+        "langchain/python/integrations/embeddings/google_generative_ai",
+        "langchain/python/integrations/llms/google_generative_ai"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_generative_ai#1",
+        "langchain/javascript/integrations/embeddings/google_generative_ai#1",
+        "langchain-docs/src/oss/javascript/integrations/chat/google#3",
+        "langchain/javascript/integrations/chat/google#3",
+        "langchain-docs/src/oss/python/integrations/llms/google_generative_ai#1",
+        "langchain/python/integrations/llms/google_generative_ai#1",
+        "langchain-docs/src/oss/python/integrations/embeddings/google_generative_ai#1",
+        "langchain/python/integrations/embeddings/google_generative_ai#1",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#0",
+        "langchain/python/integrations/chat/google_generative_ai#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04492895899602445
+    },
+    {
+      "id": "m08_003",
+      "kind": "multi_hop",
+      "question": "In a FastAPI application, how can you create a dependency that checks whether a query parameter `q` contains specific content that can be set at runtime, while also declaring a sub\u2011dependency for extracting the query value and handling an optional `last_query` cookie?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/sub-dependencies"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/reference/parameters",
+        "fastapi/tutorial/body",
+        "fastapi/tutorial/cookie-params",
+        "fastapi/tutorial/dependencies/index",
+        "fastapi/tutorial/dependencies/sub-dependencies",
+        "fastapi/tutorial/query-params-str-validations"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/dependencies/sub-dependencies#2",
+        "fastapi/tutorial/dependencies/sub-dependencies#0",
+        "fastapi/tutorial/body#6",
+        "fastapi/tutorial/dependencies/sub-dependencies#1",
+        "fastapi/tutorial/query-params-str-validations#0",
+        "fastapi/tutorial/dependencies/index#1",
+        "fastapi/advanced/advanced-dependencies#3",
+        "fastapi/reference/parameters#0",
+        "fastapi/tutorial/query-params-str-validations#1",
+        "fastapi/tutorial/cookie-params#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.046424666994425934
+    },
+    {
+      "id": "s64_004",
+      "kind": "single",
+      "question": "What is the maximum number of connections that a NullConnectionPool can maintain when the max_size parameter is set to 5?",
+      "gold_document_ids": [
+        "psycopg/api/pool"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/langsmith/self-host-terraform-azure-variables",
+        "langchain-docs/src/langsmith/self-host-terraform-gcp-variables",
+        "langchain-docs/src/snippets/langsmith/env-vars/shared",
+        "psycopg/advanced/pool",
+        "psycopg/api/pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/api/pool#7",
+        "psycopg/advanced/pool#4",
+        "psycopg/advanced/pool#5",
+        "psycopg/api/pool#3",
+        "langchain-docs/src/snippets/langsmith/env-vars/shared#21",
+        "langchain-docs/src/snippets/langsmith/env-vars/shared#10",
+        "psycopg/api/pool#1",
+        "langchain-docs/src/langsmith/self-host-terraform-gcp-variables#19",
+        "langchain-docs/src/langsmith/self-host-terraform-azure-variables#10"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04292458400595933
+    },
+    {
+      "id": "m16_002",
+      "kind": "multi_hop",
+      "question": "In FastAPI 0.118.0, when a dependency with `yield` returns a `StreamingResponse`, after which part of the request\u2011response cycle is the dependency\u2019s exit code executed? And how can you make a dependency with `yield` close earlier, before the response is sent?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/advanced/stream-data",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/advanced-dependencies#6",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#8",
+        "fastapi/advanced/advanced-dependencies#10",
+        "fastapi/advanced/advanced-dependencies#5",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#1",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#0",
+        "fastapi/advanced/advanced-dependencies#7",
+        "fastapi/advanced/stream-data#1",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#3",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04385345800255891
+    },
+    {
+      "id": "s08_007",
+      "kind": "single",
+      "question": "What feature was added to FastAPI in version 0.135.0 to enable streaming data to the client?",
+      "gold_document_ids": [
+        "fastapi/tutorial/server-sent-events"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/deployment/fastapicloud",
+        "fastapi/fastapi-cli",
+        "fastapi/features",
+        "fastapi/index",
+        "langchain-docs/src/langsmith/prompt-commit",
+        "langchain-docs/src/langsmith/sandbox-service-urls"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/index#8",
+        "fastapi/fastapi-cli#6",
+        "fastapi/index#22",
+        "fastapi/features#9",
+        "fastapi/features#0",
+        "langchain-docs/src/langsmith/prompt-commit#6",
+        "langchain-docs/src/langsmith/sandbox-service-urls#9",
+        "fastapi/index#17",
+        "fastapi/index#21",
+        "fastapi/deployment/fastapicloud#1"
+      ],
+      "all_gold_documents_retrieved": false,
+      "latency_s": 0.04203525000048103
+    },
+    {
+      "id": "s24_007",
+      "kind": "single",
+      "question": "In the LangChain Responses API, how can a developer give the model full control over the tool search process for client-executed tool search, and what steps are involved in orchestrating this with custom middleware?",
+      "gold_document_ids": [
+        "langchain/python/integrations/chat/openai"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/contributing/implement-langchain",
+        "langchain-docs/src/oss/javascript/integrations/chat/openai",
+        "langchain-docs/src/oss/javascript/integrations/tools/openai",
+        "langchain-docs/src/oss/langchain/frontend/integrations/copilotkit",
+        "langchain-docs/src/oss/python/integrations/chat/openai",
+        "langchain/contributing/implement-langchain",
+        "langchain/javascript/integrations/chat/openai",
+        "langchain/javascript/integrations/tools/openai",
+        "langchain/langchain/frontend/integrations/copilotkit",
+        "langchain/python/integrations/chat/openai"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/chat/openai#31",
+        "langchain/python/integrations/chat/openai#31",
+        "langchain-docs/src/oss/contributing/implement-langchain#1",
+        "langchain/contributing/implement-langchain#1",
+        "langchain-docs/src/oss/langchain/frontend/integrations/copilotkit#13",
+        "langchain/langchain/frontend/integrations/copilotkit#13",
+        "langchain-docs/src/oss/javascript/integrations/tools/openai#0",
+        "langchain/javascript/integrations/tools/openai#0",
+        "langchain-docs/src/oss/javascript/integrations/chat/openai#18",
+        "langchain/javascript/integrations/chat/openai#18"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04573099999834085
+    },
+    {
+      "id": "s16_003",
+      "kind": "single",
+      "question": "What change in Pydantic v2 affects the generated OpenAPI schemas for a given model, and how does it influence the number of schemas produced for input and output?",
+      "gold_document_ids": [
+        "fastapi/how-to/separate-openapi-schemas"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/alternatives",
+        "fastapi/how-to/separate-openapi-schemas",
+        "fastapi/reference/openapi/models",
+        "fastapi/tutorial/schema-extra-example",
+        "langchain-docs/src/oss/langgraph/use-graph-api"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/how-to/separate-openapi-schemas#0",
+        "fastapi/how-to/separate-openapi-schemas#1",
+        "fastapi/how-to/separate-openapi-schemas#7",
+        "fastapi/reference/openapi/models#0",
+        "fastapi/how-to/separate-openapi-schemas#2",
+        "fastapi/how-to/separate-openapi-schemas#4",
+        "fastapi/how-to/separate-openapi-schemas#6",
+        "fastapi/alternatives#17",
+        "fastapi/tutorial/schema-extra-example#9",
+        "langchain-docs/src/oss/langgraph/use-graph-api#22"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.044532791995152365
+    },
+    {
+      "id": "s48_004",
+      "kind": "single",
+      "question": "What does the passage say about Weaviate and how it is used with LangChain?",
+      "gold_document_ids": [
+        "langchain/python/integrations/vectorstores/weaviate"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/weaviate",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate",
+        "langchain/javascript/integrations/vectorstores/weaviate",
+        "langchain/python/integrations/vectorstores/weaviate"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#23",
+        "langchain/python/integrations/vectorstores/weaviate#23",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#0",
+        "langchain/python/integrations/vectorstores/weaviate#0",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/weaviate#0",
+        "langchain/javascript/integrations/vectorstores/weaviate#0",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#15",
+        "langchain/python/integrations/vectorstores/weaviate#15",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#6",
+        "langchain/python/integrations/vectorstores/weaviate#6"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.045368375001999084
+    },
+    {
+      "id": "m00_003",
+      "kind": "multi_hop",
+      "question": "When designing an OpenAPI specification for an API that returns a JSON response containing an item or a message, how should fields that can be null but are always present be marked in the schema, and which HTTP status codes should be included in the \"responses\" object to cover a successful response, a 404 error, and a validation error?",
+      "gold_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/how-to/separate-openapi-schemas"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/additional-status-codes",
+        "fastapi/how-to/separate-openapi-schemas",
+        "fastapi/tutorial/first-steps",
+        "fastapi/tutorial/response-status-code",
+        "fastapi/tutorial/schema-extra-example"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/how-to/separate-openapi-schemas#5",
+        "fastapi/advanced/additional-responses#2",
+        "fastapi/advanced/additional-responses#3",
+        "fastapi/tutorial/response-status-code#0",
+        "fastapi/tutorial/schema-extra-example#8",
+        "fastapi/tutorial/schema-extra-example#7",
+        "fastapi/advanced/additional-responses#0",
+        "fastapi/tutorial/first-steps#9",
+        "fastapi/tutorial/schema-extra-example#4",
+        "fastapi/advanced/additional-status-codes#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.050592958003107924
+    },
+    {
+      "id": "s72_007",
+      "kind": "single",
+      "question": "What parameter must you specify explicitly to keep a psycopg_pool open when you do not use it as a context manager, and what is its default value in the current version?",
+      "gold_document_ids": [
+        "psycopg/api/pool"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/pool",
+        "psycopg/api/pool",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/pool#0",
+        "psycopg/api/pool#4",
+        "psycopg/news_pool#3",
+        "psycopg/api/pool#0",
+        "psycopg/news_pool#0",
+        "psycopg/advanced/pool#10",
+        "psycopg/api/pool#1",
+        "psycopg/api/pool#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.037011500004155096
+    },
+    {
+      "id": "s24_000",
+      "kind": "single",
+      "question": "In the given file structure for a simple example, which file contains the asynchronous tests for `main.py`?",
+      "gold_document_ids": [
+        "fastapi/advanced/async-tests"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/async-tests",
+        "fastapi/tutorial/testing",
+        "langchain-docs/src/langsmith/application-structure",
+        "langchain-docs/src/oss/langgraph/application-structure",
+        "langchain-docs/src/snippets/code-samples/resolve-experiment-py",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/experiment-runs-query-pagination-after-py",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/experiment-runs-query-sort-after-py"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/async-tests#2",
+        "fastapi/tutorial/testing#4",
+        "fastapi/tutorial/testing#3",
+        "fastapi/advanced/async-tests#3",
+        "langchain-docs/src/langsmith/application-structure#2",
+        "langchain-docs/src/snippets/code-samples/resolve-experiment-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/experiment-runs-query-sort-after-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/experiment-runs-query-pagination-after-py#0",
+        "fastapi/tutorial/testing#2",
+        "langchain-docs/src/oss/langgraph/application-structure#2"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.03783133300021291
+    },
+    {
+      "id": "s08_006",
+      "kind": "single",
+      "question": "In Pydantic models for header parameters, how can you prevent underscore characters in parameter names from being automatically converted to hyphens in the expected HTTP headers?",
+      "gold_document_ids": [
+        "fastapi/tutorial/header-param-models"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/body",
+        "fastapi/tutorial/header-param-models",
+        "fastapi/tutorial/header-params",
+        "fastapi/tutorial/query-param-models",
+        "langchain-docs/src/oss/langgraph/streaming",
+        "langchain/langgraph/streaming"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/header-param-models#3",
+        "fastapi/tutorial/header-params#1",
+        "fastapi/tutorial/header-param-models#1",
+        "fastapi/tutorial/header-param-models#0",
+        "fastapi/tutorial/header-param-models#6",
+        "fastapi/tutorial/header-param-models#2",
+        "fastapi/tutorial/query-param-models#5",
+        "langchain-docs/src/oss/langgraph/streaming#51",
+        "langchain/langgraph/streaming#51",
+        "fastapi/tutorial/body#7"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.038647040993964765
+    },
+    {
+      "id": "s24_002",
+      "kind": "single",
+      "question": "When using a token from a third\u2011party application to access the API endpoint `/users/me/items/` without selecting any OAuth2 scope, what error will the client receive?",
+      "gold_document_ids": [
+        "fastapi/advanced/security/oauth2-scopes"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/tutorial/security/oauth2-jwt",
+        "fastapi/tutorial/security/simple-oauth2",
+        "langchain-docs/src/snippets/langsmith/mda-oauth-catalog"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/security/oauth2-scopes#12",
+        "fastapi/advanced/security/oauth2-scopes#3",
+        "fastapi/tutorial/security/oauth2-jwt#12",
+        "fastapi/advanced/security/oauth2-scopes#10",
+        "langchain-docs/src/snippets/langsmith/mda-oauth-catalog#0",
+        "fastapi/advanced/security/oauth2-scopes#0",
+        "fastapi/advanced/security/oauth2-scopes#8",
+        "fastapi/tutorial/security/simple-oauth2#10",
+        "fastapi/tutorial/security/simple-oauth2#7",
+        "fastapi/tutorial/security/simple-oauth2#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04258304199902341
+    },
+    {
+      "id": "s24_001",
+      "kind": "single",
+      "question": "In FastAPI, how can you set Server\u2011Sent Event (SSE) fields such as event, id, retry, or comment when returning data?",
+      "gold_document_ids": [
+        "fastapi/tutorial/server-sent-events"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/reference/sse",
+        "fastapi/tutorial/server-sent-events",
+        "fastapi/tutorial/stream-json-lines",
+        "langchain-docs/src/langsmith/event-streaming"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/server-sent-events#5",
+        "fastapi/reference/sse#0",
+        "fastapi/tutorial/stream-json-lines#6",
+        "fastapi/tutorial/server-sent-events#4",
+        "fastapi/tutorial/server-sent-events#0",
+        "fastapi/tutorial/server-sent-events#2",
+        "fastapi/tutorial/server-sent-events#9",
+        "fastapi/tutorial/server-sent-events#1",
+        "fastapi/tutorial/server-sent-events#3",
+        "langchain-docs/src/langsmith/event-streaming#13"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04268870899977628
+    },
+    {
+      "id": "mhand_001",
+      "kind": "multi_hop",
+      "question": "How should an AsyncConnectionPool be managed across FastAPI startup and shutdown, and why does psycopg recommend a pool for concurrent tasks?",
+      "gold_document_ids": [
+        "fastapi/advanced/events",
+        "psycopg/api/pool"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/async",
+        "psycopg/advanced/pool",
+        "psycopg/api/pool",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/pool#3",
+        "psycopg/api/pool#0",
+        "psycopg/advanced/pool#11",
+        "psycopg/api/pool#5",
+        "psycopg/advanced/pool#0",
+        "psycopg/news_pool#2",
+        "fastapi/async#22",
+        "psycopg/advanced/pool#1",
+        "fastapi/async#19",
+        "psycopg/api/pool#6"
+      ],
+      "all_gold_documents_retrieved": false,
+      "latency_s": 0.04558845800056588
+    },
+    {
+      "id": "mhand_002",
+      "kind": "multi_hop",
+      "question": "How does LangGraph\u2019s orchestration role differ from higher-level LangChain agent patterns, and which metrics should be compared when evaluating multi-agent latency and cost?",
+      "gold_document_ids": [
+        "langchain/langchain/multi-agent/index",
+        "langchain/langgraph/overview"
+      ],
+      "retrieved_document_ids": [
+        "langchain-docs/src/.mintlify/skills/langgraph/SKILL",
+        "langchain-docs/src/langsmith/faq",
+        "langchain-docs/src/oss/concepts/products",
+        "langchain-docs/src/oss/langchain/multi-agent/index",
+        "langchain-docs/src/oss/langgraph/overview",
+        "langchain/concepts/products",
+        "langchain/langchain/multi-agent/index",
+        "langchain/langgraph/overview"
+      ],
+      "retrieved_chunk_ids": [
+        "langchain-docs/src/oss/langgraph/overview#0",
+        "langchain/langgraph/overview#0",
+        "langchain-docs/src/.mintlify/skills/langgraph/SKILL#0",
+        "langchain-docs/src/langsmith/faq#11",
+        "langchain-docs/src/oss/langchain/multi-agent/index#5",
+        "langchain/langchain/multi-agent/index#5",
+        "langchain-docs/src/oss/concepts/products#4",
+        "langchain/concepts/products#4",
+        "langchain-docs/src/oss/concepts/products#3",
+        "langchain/concepts/products#3"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04682883300120011
+    },
+    {
+      "id": "mhand_003",
+      "kind": "multi_hop",
+      "question": "When a FastAPI dependency yields a database session, when does its cleanup code run, and what benefit does a Psycopg connection pool provide to concurrent tasks?",
+      "gold_document_ids": [
+        "fastapi/tutorial/dependencies/dependencies-with-yield",
+        "psycopg/api/pool"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/sql-databases",
+        "psycopg/advanced/pool",
+        "psycopg/api/connections",
+        "psycopg/api/module",
+        "psycopg/api/pool",
+        "psycopg/basic/transactions",
+        "psycopg/basic/usage",
+        "psycopg/news",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/api/pool#0",
+        "psycopg/basic/transactions#0",
+        "psycopg/api/connections#0",
+        "psycopg/advanced/pool#0",
+        "fastapi/tutorial/sql-databases#5",
+        "psycopg/news#0",
+        "psycopg/api/module#0",
+        "fastapi/advanced/advanced-dependencies#6",
+        "psycopg/basic/usage#3",
+        "psycopg/news_pool#0"
+      ],
+      "all_gold_documents_retrieved": false,
+      "latency_s": 0.046455000003334135
+    }
+  ]
+}

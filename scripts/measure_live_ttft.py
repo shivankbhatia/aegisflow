@@ -12,6 +12,7 @@ from pathlib import Path
 
 import httpx
 from dotenv import load_dotenv
+from aegisflow.rag.manifest import attach_run_manifest
 
 
 def percentile(values: list[float], p: float) -> float:
@@ -65,7 +66,7 @@ async def measure(samples: int, query: str, k: int, api_url: str) -> Path:
             )
 
     values = [row["first_token_ms"] for row in rows]
-    report = {
+    report = attach_run_manifest({
         "created_at": datetime.now(timezone.utc).isoformat(),
         "api_url": api_url,
         "query": query,
@@ -77,7 +78,7 @@ async def measure(samples: int, query: str, k: int, api_url: str) -> Path:
         "target_ms": 1500,
         "target_passed": percentile(values, 0.95) < 1500,
         "samples": rows,
-    }
+    })
     output_dir = Path("eval/results")
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / f"live-ttft-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}.json"

@@ -1,0 +1,470 @@
+{
+  "name": "phase3-retrieval-only-baseline",
+  "created_at": "2026-10-24T18:28:31.245354+00:00",
+  "complete": true,
+  "pipeline": "plain served retriever; document-level coverage; no LLM calls",
+  "eval_set": "eval/multihop_independent15.jsonl",
+  "eval_set_count": 15,
+  "model": "not applicable (retrieval-only)",
+  "retrieval_model": "BAAI/bge-small-en-v1.5",
+  "retrieval_mode": "dense",
+  "chunking_strategy": "structure-aware",
+  "k": 10,
+  "metrics": {
+    "multi_hop_all_gold_documents_retrieved_fraction": 0.8666666666666667,
+    "multi_hop_n": 15,
+    "all_question_gold_document_coverage_fraction": 0.8666666666666667,
+    "latency_mean_s": 0.060565808467314734
+  },
+  "per_question": [
+    {
+      "id": "mnew_001",
+      "kind": "multi_hop",
+      "question": "How should a FastAPI endpoint declare a response that may be either a PlaneItem or CarItem, and how does that decorator use of `Union` differ from the `|` syntax accepted in type annotations?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-python-types",
+        "fastapi/tutorial/extra-models"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/tutorial/body",
+        "fastapi/tutorial/extra-models",
+        "fastapi/tutorial/response-model",
+        "fastapi/tutorial/response-status-code"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/extra-models#8",
+        "fastapi/tutorial/response-model#12",
+        "fastapi/tutorial/extra-models#7",
+        "fastapi/tutorial/response-model#0",
+        "fastapi/tutorial/body#2",
+        "fastapi/tutorial/response-model#1",
+        "fastapi/tutorial/response-model#10",
+        "fastapi/tutorial/response-model#2",
+        "fastapi/tutorial/response-model#11",
+        "fastapi/tutorial/response-status-code#0"
+      ],
+      "all_gold_documents_retrieved": false,
+      "latency_s": 0.2896826249998412
+    },
+    {
+      "id": "mnew_002",
+      "kind": "multi_hop",
+      "question": "If a FastAPI route returns an ordinary item response but can also return a modeled 404, how do you declare the 404 schema and what happens to the normal response data?",
+      "gold_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/tutorial/response-model"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/custom-response",
+        "fastapi/advanced/response-directly",
+        "fastapi/how-to/extending-openapi",
+        "fastapi/reference/response",
+        "fastapi/tutorial/body",
+        "fastapi/tutorial/first-steps",
+        "fastapi/tutorial/frontend",
+        "fastapi/tutorial/response-model"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/frontend#3",
+        "fastapi/tutorial/body#2",
+        "fastapi/how-to/extending-openapi#0",
+        "fastapi/tutorial/response-model#0",
+        "fastapi/advanced/response-directly#0",
+        "fastapi/advanced/custom-response#0",
+        "fastapi/tutorial/response-model#1",
+        "fastapi/advanced/additional-responses#1",
+        "fastapi/reference/response#0",
+        "fastapi/tutorial/first-steps#9"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.047564583001076244
+    },
+    {
+      "id": "mnew_003",
+      "kind": "multi_hop",
+      "question": "How can a FastAPI route accept both a large uploaded file and ordinary form fields, and why should it use `UploadFile` instead of reading the file as bytes?",
+      "gold_document_ids": [
+        "fastapi/tutorial/request-files",
+        "fastapi/tutorial/request-forms-and-files"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/reference/uploadfile",
+        "fastapi/tutorial/request-files",
+        "fastapi/tutorial/request-forms",
+        "fastapi/tutorial/request-forms-and-files"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/request-files#1",
+        "fastapi/reference/uploadfile#0",
+        "fastapi/tutorial/request-forms-and-files#1",
+        "fastapi/tutorial/request-files#5",
+        "fastapi/tutorial/request-files#2",
+        "fastapi/tutorial/request-files#4",
+        "fastapi/tutorial/request-files#7",
+        "fastapi/tutorial/request-forms#3",
+        "fastapi/tutorial/request-files#9",
+        "fastapi/tutorial/request-files#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04258329200092703
+    },
+    {
+      "id": "mnew_004",
+      "kind": "multi_hop",
+      "question": "When testing a FastAPI route that depends on a paid external identity provider, how can the test avoid the provider call while still exercising the route with a test client?",
+      "gold_document_ids": [
+        "fastapi/advanced/testing-dependencies",
+        "fastapi/reference/testclient"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/async-tests",
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/advanced/openapi-callbacks",
+        "fastapi/advanced/testing-dependencies",
+        "fastapi/reference/testclient",
+        "langchain-docs/src/langsmith/managed-deep-agents-custom-frontend",
+        "langchain-docs/src/langsmith/managed-deep-agents-identity"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/testing-dependencies#1",
+        "fastapi/advanced/async-tests#4",
+        "fastapi/advanced/testing-dependencies#2",
+        "fastapi/reference/testclient#0",
+        "fastapi/advanced/openapi-callbacks#8",
+        "langchain-docs/src/langsmith/managed-deep-agents-identity#5",
+        "langchain-docs/src/langsmith/managed-deep-agents-custom-frontend#1",
+        "fastapi/advanced/async-tests#1",
+        "fastapi/advanced/behind-a-proxy#12",
+        "langchain-docs/src/langsmith/managed-deep-agents-custom-frontend#9"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04495737500110408
+    },
+    {
+      "id": "mnew_005",
+      "kind": "multi_hop",
+      "question": "How can a FastAPI test exercise a WebSocket endpoint, and what connection lifecycle should the test use?",
+      "gold_document_ids": [
+        "fastapi/advanced/testing-websockets",
+        "fastapi/advanced/websockets"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/async-tests",
+        "fastapi/advanced/websockets",
+        "fastapi/reference/testclient",
+        "fastapi/reference/websockets",
+        "fastapi/tutorial/testing"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/reference/testclient#0",
+        "fastapi/tutorial/testing#0",
+        "fastapi/advanced/websockets#3",
+        "fastapi/advanced/async-tests#0",
+        "fastapi/advanced/websockets#5",
+        "fastapi/reference/websockets#0",
+        "fastapi/advanced/websockets#2",
+        "fastapi/advanced/websockets#6",
+        "fastapi/tutorial/testing#1",
+        "fastapi/advanced/websockets#4"
+      ],
+      "all_gold_documents_retrieved": false,
+      "latency_s": 0.04406666700378992
+    },
+    {
+      "id": "mnew_006",
+      "kind": "multi_hop",
+      "question": "How should an application initialize and close a shared resource with FastAPI lifespan, and how can a test ensure that lifespan code runs?",
+      "gold_document_ids": [
+        "fastapi/advanced/events",
+        "fastapi/advanced/testing-events"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/events",
+        "fastapi/advanced/testing-events",
+        "fastapi/deployment/concepts",
+        "langchain-docs/src/langsmith/custom-lifespan",
+        "psycopg/advanced/pool"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/events#2",
+        "fastapi/advanced/events#0",
+        "psycopg/advanced/pool#3",
+        "fastapi/advanced/events#1",
+        "fastapi/advanced/events#5",
+        "fastapi/advanced/events#4",
+        "langchain-docs/src/langsmith/custom-lifespan#0",
+        "fastapi/advanced/testing-events#0",
+        "fastapi/deployment/concepts#6",
+        "langchain-docs/src/langsmith/custom-lifespan#1"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04453970800386742
+    },
+    {
+      "id": "mnew_007",
+      "kind": "multi_hop",
+      "question": "Uvicorn's `--workers` option starts multiple processes. What does Psycopg's process-safety rule imply about when an async connection pool should be created?",
+      "gold_document_ids": [
+        "fastapi/deployment/server-workers",
+        "psycopg/advanced/async"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/deployment/concepts",
+        "fastapi/deployment/server-workers",
+        "psycopg/advanced/async",
+        "psycopg/advanced/pool",
+        "psycopg/api/pool",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/async#1",
+        "fastapi/deployment/server-workers#1",
+        "psycopg/advanced/pool#0",
+        "psycopg/api/pool#5",
+        "psycopg/advanced/pool#1",
+        "fastapi/deployment/server-workers#9",
+        "psycopg/news_pool#2",
+        "fastapi/deployment/server-workers#7",
+        "fastapi/deployment/concepts#14",
+        "psycopg/api/pool#0"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04497862499556504
+    },
+    {
+      "id": "mnew_008",
+      "kind": "multi_hop",
+      "question": "How can a FastAPI service return a custom status code with a directly constructed response while still documenting an additional response schema?",
+      "gold_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/tutorial/response-status-code"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/additional-status-codes",
+        "fastapi/advanced/custom-response",
+        "fastapi/advanced/response-directly",
+        "fastapi/reference/responses",
+        "fastapi/tutorial/response-status-code"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/additional-status-codes#1",
+        "fastapi/advanced/additional-status-codes#0",
+        "fastapi/tutorial/response-status-code#0",
+        "fastapi/advanced/custom-response#8",
+        "fastapi/reference/responses#0",
+        "fastapi/advanced/custom-response#0",
+        "fastapi/advanced/additional-responses#0",
+        "fastapi/advanced/response-directly#3",
+        "fastapi/advanced/custom-response#6",
+        "fastapi/advanced/additional-responses#5"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.039770791998307686
+    },
+    {
+      "id": "mnew_009",
+      "kind": "multi_hop",
+      "question": "SQLModel recommends one shared engine for database connections. How can FastAPI lifespan manage this app-wide resource, and what lifecycle boundaries does lifespan provide?",
+      "gold_document_ids": [
+        "fastapi/advanced/events",
+        "fastapi/tutorial/sql-databases"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/events",
+        "fastapi/tutorial/dependencies/index",
+        "fastapi/tutorial/sql-databases"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/sql-databases#3",
+        "fastapi/tutorial/sql-databases#5",
+        "fastapi/tutorial/sql-databases#0",
+        "fastapi/advanced/events#1",
+        "fastapi/tutorial/sql-databases#10",
+        "fastapi/tutorial/dependencies/index#7",
+        "fastapi/tutorial/sql-databases#23",
+        "fastapi/advanced/events#2",
+        "fastapi/tutorial/sql-databases#1",
+        "fastapi/tutorial/sql-databases#13"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.0411954169976525
+    },
+    {
+      "id": "mnew_010",
+      "kind": "multi_hop",
+      "question": "For a dependency that yields a resource used by a streaming response, when does its cleanup normally run and how can it be made to close earlier?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/advanced/custom-response",
+        "fastapi/tutorial/dependencies/dependencies-with-yield",
+        "langchain-docs/src/oss/langchain/frontend/integrations/openui",
+        "langchain/langchain/frontend/integrations/openui"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/advanced-dependencies#6",
+        "fastapi/advanced/advanced-dependencies#7",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#8",
+        "fastapi/advanced/advanced-dependencies#8",
+        "fastapi/advanced/advanced-dependencies#10",
+        "fastapi/advanced/advanced-dependencies#5",
+        "langchain-docs/src/oss/langchain/frontend/integrations/openui#7",
+        "langchain/langchain/frontend/integrations/openui#7",
+        "fastapi/advanced/custom-response#12",
+        "fastapi/tutorial/dependencies/dependencies-with-yield#7"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04126595900015673
+    },
+    {
+      "id": "mnew_011",
+      "kind": "multi_hop",
+      "question": "If FastAPI schedules a background task that needs to update the database after sending the response, should it reuse the request's yielded session or open its own resource, and why?",
+      "gold_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/background-tasks"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/advanced/opentelemetry",
+        "fastapi/reference/background",
+        "fastapi/tutorial/background-tasks",
+        "fastapi/tutorial/sql-databases"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/advanced-dependencies#10",
+        "fastapi/advanced/advanced-dependencies#6",
+        "fastapi/advanced/advanced-dependencies#7",
+        "fastapi/tutorial/background-tasks#4",
+        "fastapi/reference/background#0",
+        "fastapi/tutorial/background-tasks#5",
+        "fastapi/advanced/opentelemetry#6",
+        "fastapi/tutorial/sql-databases#5",
+        "fastapi/tutorial/background-tasks#0",
+        "fastapi/tutorial/background-tasks#6"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04786574999889126
+    },
+    {
+      "id": "mnew_012",
+      "kind": "multi_hop",
+      "question": "In a FastAPI password/JWT OAuth2 flow, how can requested scopes be carried in the token and then required by a route so the API documents the permission?",
+      "gold_document_ids": [
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/tutorial/security/oauth2-jwt"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/reference/security/index",
+        "fastapi/tutorial/security/first-steps",
+        "fastapi/tutorial/security/oauth2-jwt",
+        "fastapi/tutorial/security/simple-oauth2"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/tutorial/security/oauth2-jwt#12",
+        "fastapi/advanced/security/oauth2-scopes#0",
+        "fastapi/tutorial/security/oauth2-jwt#13",
+        "fastapi/advanced/security/oauth2-scopes#4",
+        "fastapi/tutorial/security/first-steps#4",
+        "fastapi/advanced/security/oauth2-scopes#13",
+        "fastapi/tutorial/security/first-steps#5",
+        "fastapi/reference/security/index#0",
+        "fastapi/reference/security/index#2",
+        "fastapi/tutorial/security/simple-oauth2#7"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04257033300382318
+    },
+    {
+      "id": "mnew_013",
+      "kind": "multi_hop",
+      "question": "Behind a TLS-terminating proxy, what must the app server trust so generated redirect URLs use the original HTTPS host, and what setting supplies an external path prefix to FastAPI's generated docs URLs?",
+      "gold_document_ids": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/deployment/https"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/deployment/https"
+      ],
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/behind-a-proxy#4",
+        "fastapi/advanced/behind-a-proxy#0",
+        "fastapi/advanced/behind-a-proxy#7",
+        "fastapi/advanced/behind-a-proxy#5",
+        "fastapi/advanced/behind-a-proxy#12",
+        "fastapi/deployment/https#13",
+        "fastapi/advanced/behind-a-proxy#13",
+        "fastapi/advanced/behind-a-proxy#2",
+        "fastapi/advanced/behind-a-proxy#6",
+        "fastapi/advanced/behind-a-proxy#14"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.044560124995769
+    },
+    {
+      "id": "mnew_014",
+      "kind": "multi_hop",
+      "question": "Which asynchronous Psycopg cursor type supports a server-side cursor for iterating over a result set too large to fit in application memory, and what trade-off should the application consider?",
+      "gold_document_ids": [
+        "psycopg/advanced/async",
+        "psycopg/advanced/cursors"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/async",
+        "psycopg/advanced/cursors",
+        "psycopg/advanced/typing",
+        "psycopg/api/cursors"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/cursors#0",
+        "psycopg/advanced/cursors#4",
+        "psycopg/advanced/cursors#1",
+        "psycopg/api/cursors#0",
+        "psycopg/advanced/cursors#3",
+        "psycopg/advanced/cursors#2",
+        "psycopg/advanced/typing#0",
+        "psycopg/advanced/typing#1",
+        "psycopg/advanced/cursors#5",
+        "psycopg/advanced/async#3"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.046866959004546516
+    },
+    {
+      "id": "mnew_015",
+      "kind": "multi_hop",
+      "question": "How should an application use an asynchronous Psycopg pool to serve concurrent tasks, and what must it do before using the pool if it was created with automatic opening disabled?",
+      "gold_document_ids": [
+        "psycopg/advanced/async",
+        "psycopg/advanced/pool"
+      ],
+      "retrieved_document_ids": [
+        "psycopg/advanced/async",
+        "psycopg/advanced/pool",
+        "psycopg/api/pool",
+        "psycopg/news_pool"
+      ],
+      "retrieved_chunk_ids": [
+        "psycopg/advanced/pool#0",
+        "psycopg/api/pool#0",
+        "psycopg/api/pool#5",
+        "psycopg/advanced/pool#10",
+        "psycopg/news_pool#3",
+        "psycopg/news_pool#2",
+        "psycopg/advanced/async#1",
+        "psycopg/news_pool#0",
+        "psycopg/advanced/pool#11",
+        "psycopg/api/pool#6"
+      ],
+      "all_gold_documents_retrieved": true,
+      "latency_s": 0.04601891700440319
+    }
+  ]
+}

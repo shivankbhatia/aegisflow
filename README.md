@@ -17,15 +17,20 @@ Measured on Groq with `openai/gpt-oss-20b`: 20 concurrent calls complete in abou
 
 ## Architecture
 
-```
-POST /run ──► RunManager ──► LangGraph ──► triage ──► coder ──► reviewer ──┐
-                  │             │                        ▲                 │ rejected
-   WS /ws/events  │             │ checkpoint             └─────────────────┘ (max 3 attempts)
-                  ▼             ▼ after each node
-             live events    PostgreSQL ◄── GET /runs/{id}, POST /runs/{id}/resume
-                                    
-   agents ──► llm_gateway (retries, backoff, structured outputs) ──► Groq / any OpenAI-compatible API
-   reviewer ──► Docker sandbox (no network)
+```mermaid
+flowchart LR
+  API[FastAPI: /run, /query, /runs, WebSocket] --> RM[RunManager]
+  RM --> CG[Code-fix LangGraph\ntriage → coder → reviewer]
+  RM --> QG[QA LangGraph\nguardrails → router → retrieve / plan → synthesize → verify]
+  CG --> GW[LLM gateway\nretries, structured output, token accounting]
+  QG --> GW
+  GW --> MODEL[Groq / OpenAI-compatible API]
+  CG --> PG[(PostgreSQL\nAsyncPostgresSaver)]
+  QG --> PG
+  API --> PG
+  CG --> BOX[Docker sandbox]
+  QG --> RET[Retriever and document corpus]
+  RET --> PG
 ```
 
 ## Quickstart
@@ -98,11 +103,17 @@ Run state is durable in Postgres. Live events and error text are in memory, so a
 ## Tests
 
 ```bash
-pytest -q                                # 35 tests; Postgres-backed tests skip if it is down
-pytest tests/test_e2e_live.py            # live end-to-end: needs GROQ_API_KEY and Docker
+pytest -q                                # excludes live model calls and heavy model loads
+pytest -m live                           # opt in to real model calls (needs GROQ_API_KEY)
+pytest -m heavy                          # opt in to local embedder/reranker model loads
+pytest -m 'live or heavy'                # run both opt-in groups
 python scripts/gateway_smoke.py          # live gateway: concurrency, token calibration, streaming
 python scripts/structured_smoke.py       # live structured extraction: validity and accuracy
 ```
+
+Install local embedding/reranking models only when needed with
+`pip install -e ".[models]"`. CI installs `.[dev]`, uses PostgreSQL, and runs
+the default suite without provider secrets.
 
 ## Layout
 

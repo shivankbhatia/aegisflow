@@ -1,0 +1,71 @@
+{
+  "name": "phase3-plain-query-baseline",
+  "created_at": "2026-10-24T17:28:13.839802+00:00",
+  "complete": false,
+  "pipeline": "plain /query; no QA graph or agent routing",
+  "api_url": "http://127.0.0.1:8000",
+  "eval_set": "eval/golden.jsonl",
+  "eval_set_target_count": 81,
+  "eval_set_count": 1,
+  "eval_set_split": {
+    "multi_hop": 0,
+    "single_hop": 1
+  },
+  "judge_status": "LLM-judged, uncalibrated",
+  "human_labels_completed": 0,
+  "metrics": {
+    "multi_hop_all_gold_documents_retrieved_fraction": null,
+    "answer_correctness_mean": 1.0,
+    "faithfulness_mean": 1.0,
+    "tokens_mean": 2751.0,
+    "latency_p50_s": 1.2633777910014032,
+    "latency_p95_s": 1.2633777910014032
+  },
+  "per_question": [
+    {
+      "id": "s00_000",
+      "kind": "single",
+      "question": "What is an environment variable and why is it commonly used for external settings in Python applications?",
+      "reference_answer": "An environment variable is a value stored outside Python code in the operating system that an application can read. It is commonly used to provide external, variable, and often sensitive settings\u2014such as secret keys or database URLs\u2014to Python applications.",
+      "answer": "An **environment variable** (or *env var*) is a value that lives outside of a Python program\u2014in the operating system\u2019s environment\u2014and can be read by the program and other processes. It is typically defined with a name and a string value and is accessible through the OS API or the `os.environ` dictionary in Python.  \n\nBecause environment variables are external to the code, they can be changed without modifying the source code. This makes them ideal for configuration items that vary between deployments or that contain sensitive information, such as database URLs, email credentials, or secret keys. By storing these values in environment variables, a Python application can be configured at runtime in a secure and flexible way.  \n\nSources: [1], [2], [3]",
+      "retrieved_chunk_ids": [
+        "fastapi/advanced/settings#0",
+        "fastapi/environment-variables#0",
+        "fastapi/advanced/settings#1",
+        "fastapi/advanced/settings#6",
+        "fastapi/advanced/settings#9",
+        "fastapi/advanced/settings#5",
+        "fastapi/advanced/settings#3",
+        "fastapi/advanced/settings#7",
+        "fastapi/advanced/settings#13",
+        "fastapi/advanced/settings#10"
+      ],
+      "retrieved_document_ids": [
+        "fastapi/advanced/settings",
+        "fastapi/environment-variables"
+      ],
+      "gold_document_ids": [
+        "fastapi/advanced/settings"
+      ],
+      "all_gold_documents_retrieved": true,
+      "correctness": 1.0,
+      "correctness_rationale": "The answer correctly defines an environment variable as a value stored outside Python code in the operating system and explains why it is commonly used for external, variable, and sensitive settings such as secret keys or database URLs. It accurately reflects the reference answer without adding incorrect information.",
+      "faithfulness": 1.0,
+      "faithfulness_supported_claims": 7,
+      "faithfulness_unsupported_claims": 0,
+      "faithfulness_unsupported": [],
+      "tokens": 2751,
+      "latency_s": 1.2633777910014032,
+      "timings_ms": {
+        "retrieval": 270.46975000121165,
+        "rerank": 0.0,
+        "first_token": 909.0413330050069,
+        "total": 1249.0417920053005
+      },
+      "human_correctness": null,
+      "human_faithfulness": null
+    }
+  ],
+  "model": "openai/gpt-oss-20b",
+  "partial_status": "incomplete; do not interpret as full eval"
+}

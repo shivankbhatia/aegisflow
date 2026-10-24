@@ -18,6 +18,7 @@ from aegisflow.llm_gateway import from_env
 from aegisflow.rag.evaluation import load_questions
 from aegisflow.rag.llm_eval import judge_faithfulness
 from aegisflow.rag.vector_index import PgVectorIndex
+from aegisflow.rag.manifest import attach_run_manifest
 
 
 MARKER = re.compile(r"\[(\d+)\]")
@@ -99,7 +100,7 @@ async def run() -> Path:
     total_markers = sum(row["citation_markers"] for row in rows)
     valid_markers = sum(row["valid_citation_markers"] for row in rows)
     latencies = [row["first_token_s"] for row in rows if row["first_token_s"] is not None]
-    report = {
+    report = attach_run_manifest({
         "created_at": datetime.now(timezone.utc).isoformat(),
         "api_url": api_url,
         "questions": len(rows),
@@ -118,7 +119,7 @@ async def run() -> Path:
             "ttft_p95": bool(latencies) and percentile(latencies, 0.95) < 1.5,
         },
         "per_question": rows,
-    }
+    })
     output_dir = Path("eval/results")
     output_dir.mkdir(parents=True, exist_ok=True)
     output = output_dir / f"answers-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}.json"

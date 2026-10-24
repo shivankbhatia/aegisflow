@@ -7,6 +7,7 @@ from aegisflow.rag.evaluation import (
     save_questions, save_report,
 )
 from aegisflow.rag.types import Chunk
+from aegisflow.rag.manifest import make_run_manifest
 
 
 def test_metrics_basic_and_edges():
@@ -56,6 +57,14 @@ async def test_evaluate_rejects_empty_and_roundtrips_report(tmp_path):
     path = save_report(rep, "dense", tmp_path)
     data = json.loads(path.read_text())
     assert path.name.startswith("dense-") and data["name"] == "dense" and data["overall"]["n"] == 3
+    assert data["manifest"]["model"]
+
+
+def test_report_saver_rejects_missing_manifest(tmp_path):
+    with pytest.raises(ValueError, match="must include a run manifest"):
+        save_report({"overall": {}}, "missing-manifest", tmp_path)
+    with pytest.raises(ValueError, match="manifest missing fields"):
+        save_report({"manifest": {}, "overall": {}}, "incomplete-manifest", tmp_path)
 
 
 def test_questions_jsonl_roundtrip_and_verified_filter(tmp_path):

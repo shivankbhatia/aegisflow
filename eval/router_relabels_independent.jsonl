@@ -1,0 +1,30 @@
+{"id":"direct-01","label":"direct","rationale":"One narrow documentation fact about environment variables and a database URL."}
+{"id":"direct-02","label":"direct","rationale":"One narrow question about a specific Uvicorn startup log."}
+{"id":"direct-03","label":"direct","rationale":"One narrow question about the FastAPI application lifespan mechanism."}
+{"id":"direct-04","label":"direct","rationale":"One narrow question about one LangGraph state reducer."}
+{"id":"direct-05","label":"direct","rationale":"One narrow question about the configured PostgreSQL checkpoint saver."}
+{"id":"direct-06","label":"direct","rationale":"One focused question about the purpose of AsyncConnectionPool."}
+{"id":"direct-07","label":"direct","rationale":"One narrow question about the endpoint's streaming event format."}
+{"id":"direct-08","label":"direct","rationale":"One focused question about the meaning of FastAPI root_path."}
+{"id":"direct-09","label":"direct","rationale":"One narrow question about a single callback method."}
+{"id":"direct-10","label":"direct","rationale":"One narrow question about FastAPI request-validation status."}
+{"id":"multi_hop-01","label":"multi_hop","rationale":"Requires both branch fan-out and the merge of branch results in a workflow."}
+{"id":"multi_hop-02","label":"multi_hop","rationale":"Combines streaming run progress with durable checkpoint and restart-resume behavior."}
+{"id":"multi_hop-03","label":"multi_hop","rationale":"Combines external credential configuration with connection-pool lifecycle management."}
+{"id":"multi_hop-04","label":"multi_hop","rationale":"Combines checkpointing, retry behavior, and token-budget enforcement."}
+{"id":"multi_hop-05","label":"multi_hop","rationale":"Combines evidence framing with citation-to-source mapping in a RAG answer."}
+{"id":"multi_hop-06","label":"multi_hop","rationale":"Combines authenticated request context propagation into a tool with conversation-history persistence."}
+{"id":"multi_hop-07","label":"multi_hop","rationale":"Asks how server-side cursors and asynchronous pooling interact for a large result set."}
+{"id":"multi_hop-08","label":"multi_hop","rationale":"Combines durable PostgreSQL checkpoints with interrupt-based approval and continuation."}
+{"id":"multi_hop-09","label":"multi_hop","rationale":"Combines dense and sparse candidate retrieval with reranking before answer generation."}
+{"id":"multi_hop-10","label":"multi_hop","rationale":"Combines proxy path-prefix deployment with correct externally generated documentation links."}
+{"id":"out_of_scope-01","label":"out_of_scope","rationale":"Requests a current weather forecast, unrelated to the software documentation corpus."}
+{"id":"out_of_scope-02","label":"out_of_scope","rationale":"Requests creative writing rather than an answer about the software documentation."}
+{"id":"out_of_scope-03","label":"out_of_scope","rationale":"Requests live cryptocurrency pricing, unrelated to the documentation corpus."}
+{"id":"out_of_scope-04","label":"out_of_scope","rationale":"Requests current sports trivia, unrelated to the documentation corpus."}
+{"id":"out_of_scope-05","label":"out_of_scope","rationale":"Requests a cooking recipe unrelated to the documentation corpus."}
+{"id":"out_of_scope-06","label":"out_of_scope","rationale":"Requests general geography unrelated to the documentation corpus."}
+{"id":"out_of_scope-07","label":"out_of_scope","rationale":"Requests current entertainment recommendations unrelated to the documentation corpus."}
+{"id":"out_of_scope-08","label":"out_of_scope","rationale":"Requests a translation, unrelated to the software documentation corpus."}
+{"id":"out_of_scope-09","label":"out_of_scope","rationale":"Requests live cricket scores unrelated to the documentation corpus."}
+{"id":"out_of_scope-10","label":"out_of_scope","rationale":"Requests personal fitness planning unrelated to the documentation corpus."}

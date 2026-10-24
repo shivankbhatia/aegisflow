@@ -10,6 +10,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Awaitable, Callable, Iterable, Mapping, Sequence
 
+from .manifest import make_run_manifest, validate_run_manifest
+
 # async (query, k) -> ranked chunk ids, best first
 Retriever = Callable[[str, int], Awaitable[list[str]]]
 
@@ -114,6 +116,7 @@ async def evaluate(
 
     kinds = sorted({r["kind"] for r in rows})
     return {
+        "manifest": make_run_manifest(),
         "ks": list(ks),
         "overall": _summarize(rows, ks),
         "by_kind": {kd: _summarize([r for r in rows if r["kind"] == kd], ks) for kd in kinds},
@@ -211,6 +214,9 @@ def paired_bootstrap(
 
 
 def save_report(report: dict, name: str, results_dir: str | Path = "eval/results") -> Path:
+    if "manifest" not in report:
+        raise ValueError("evaluation report must include a run manifest")
+    validate_run_manifest(report["manifest"])
     results_dir = Path(results_dir)
     results_dir.mkdir(parents=True, exist_ok=True)
     now = datetime.now(timezone.utc)

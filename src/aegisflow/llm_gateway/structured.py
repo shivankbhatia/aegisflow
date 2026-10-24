@@ -17,10 +17,11 @@ _FENCE = re.compile(r"^```[a-zA-Z]*\s*|\s*```$")
 
 
 class StructuredOutputError(Exception):
-    def __init__(self, message: str, attempts: int, last_raw: str):
+    def __init__(self, message: str, attempts: int, last_raw: str, usage: Usage | None = None):
         super().__init__(message)
         self.attempts = attempts
         self.last_raw = last_raw
+        self.usage = usage or Usage()
 
 
 @dataclass(frozen=True)
@@ -100,7 +101,7 @@ async def complete_structured(
             raise StructuredOutputError(
                 "output truncated (finish_reason=length): raise max_tokens "
                 "or lower reasoning_effort; repairing cannot fix this",
-                attempt, last_raw,
+                attempt, last_raw, total,
             )
         try:
             value = schema.model_validate_json(extract_json(resp.text))
@@ -115,5 +116,6 @@ async def complete_structured(
             ]
 
     raise StructuredOutputError(
-        f"no valid {schema.__name__} after {max_repairs + 1} attempts", max_repairs + 1, last_raw
+        f"no valid {schema.__name__} after {max_repairs + 1} attempts",
+        max_repairs + 1, last_raw, total,
     )

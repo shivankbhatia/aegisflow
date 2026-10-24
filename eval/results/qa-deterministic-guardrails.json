@@ -1,0 +1,39 @@
+{
+  "name": "qa-deterministic-guardrails",
+  "created_at": "2026-10-24T18:24:44.582793+00:00",
+  "model": "not applicable (deterministic checks only)",
+  "judge_status": "No judge used; LLM-judged quality remains uncalibrated",
+  "direct_injection_heuristic": {
+    "n": 30,
+    "blocked": 30,
+    "blocked_fraction": 1.0
+  },
+  "unseen_paraphrase_challenge_after_rules_frozen": {
+    "n": 15,
+    "blocked": 0,
+    "blocked_fraction": 0.0,
+    "rules_version": "v1-frozen",
+    "rules_sha256_at_freeze": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8",
+    "rules_sha256_current": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8",
+    "rules_unchanged": true,
+    "note": "Deterministic heuristic only; semantic classifier/model resistance is not measured."
+  },
+  "golden_single_heuristic_false_refusal": {
+    "n": 66,
+    "false_refusals": 0,
+    "fraction": 0.0
+  },
+  "poisoned_evidence_delimiter_escape": {
+    "n": 10,
+    "safe_serializations": 10,
+    "fraction": 1.0,
+    "interpretation": "Serialization only; does not measure model resistance."
+  },
+  "citation_validation": {
+    "cases": 3,
+    "passed": 3
+  },
+  "unanswerable_fixture_count": 10,
+  "unanswerable_refusal_rate": null,
+  "unanswerable_note": "Requires graph/model behavior; not claimed by this deterministic report."
+}
