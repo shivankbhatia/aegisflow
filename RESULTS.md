@@ -1,70 +1,37 @@
-# Phase 2 retrieval evaluation
+# RAG evaluation results
 
-## Phase A selection rule (written before the next evaluation run)
+## Dev set and held-out set
 
-Among the nine served-mode/chunker combinations, select the configuration with
-the highest document-level recall@5 whose measured retrieval p95 is below
-150 ms. Compare that candidate with the incumbent dense-only,
-structure-aware configuration using a paired bootstrap over question-level
-recall@5 differences. If the 95% interval includes zero, keep the incumbent
-dense-only configuration; it is simpler than adding hybrid retrieval or a
-reranker. This rule will also govern the 15- and 30-candidate reranker tradeoff
-runs. The rule selects **dense / structure-aware**. It had the highest
-recall@5 among configurations below the latency cutoff (0.938; p95 32.9 ms).
-Every other latency-feasible configuration has a paired 95% interval versus
-this incumbent that includes zero, so dense-only remains selected. This is a
-dev-set decision, not a held-out result.
+The available evaluation set contains 81 questions (66 single-hop and 15
+multi-hop). Tuning and evaluation used the same 81 questions. The separate
+held-out set has not yet been created and reviewed, so it has not been run.
+The 81-question results below are exploratory dev-set measurements, not an
+independent estimate of generalization.
 
-## What these results establish
+The corpus used for these runs contains 946 documentation pages: 751
+LangChain, 155 FastAPI, and 40 psycopg. Evaluation used the local pgvector
+index and made no generation API calls. PyTorch MPS was unavailable, so the
+retrieval/reranking runs used CPU inference.
 
-These are exploratory measurements on the current 81-question set, not an
-independent benchmark. The set has 66 single-hop and 15 multi-hop questions.
-Although all rows have `verified: true`, provenance records 72 as
-"Codex (user-delegated)", 6 without a reviewer, and 3 as assistant-authored
-questions. Most questions were generated from indexed chunks. Treat the set as
-assistant-reviewed and source-derived, not as independently human-verified.
-No held-out tuning set was used.
+## Decision rule and outcome
 
-The corpus contains 946 documentation pages: 751 LangChain, 155 FastAPI, and
-40 psycopg. Evaluation used the local pgvector index and made no generation API
-calls. PyTorch MPS was unavailable in the offline run, so these retrieval
-measurements used CPU inference.
+Before the comparison, the rule was set to choose the configuration with the
+highest document-level recall@5 among configurations with retrieval p95 below
+150 ms. The candidate is compared with dense-only / structure-aware using a
+paired bootstrap over question-level recall@5. If the 95% interval includes
+zero, choose the simpler dense-only configuration.
 
-## Dense chunker comparison at document level
+The rule selected **dense / structure-aware**: document recall@5 was 0.938 at
+32.9 ms p95 in the served-mode comparison. Every latency-feasible alternative
+had a paired 95% interval against this incumbent that included zero. Thus the
+hybrid and reranking additions were not selected. This is a dev-set decision;
+there is no held-out result yet.
 
-Chunk IDs differ between chunking strategies, so this comparison maps each
-retrieved chunk ID and each gold chunk ID to its document ID, preserving the
-rank of the first result for each document. Each query over-fetches 50 chunks
-before deduplication, so repeated hits do not artificially shorten the
-document-level top-k. This avoids treating coincidental IDs such as `doc#3` as
-equivalent chunks. It does not establish which chunk text is best for answer
-generation.
+## Served configuration comparison (k=5)
 
-| Dense strategy | Indexed chunks | Recall@1 | Recall@5 | Recall@10 | MRR | Retrieval p95 |
-|---|---:|---:|---:|---:|---:|---:|
-| Fixed-size | 7,389 | 0.673 | 0.938 | 0.957 | 0.850 | 56.3 ms |
-| Structure-aware | 26,774 | 0.506 | 0.951 | **0.969** | 0.764 | 32.7 ms |
-| Semantic | 14,242 | **0.747** | 0.951 | 0.951 | **0.887** | 32.2 ms |
-
-No strategy dominates all measures. Structure-aware leads recall@10 while
-semantic leads on MRR and recall@1. These measurements use the
-existing source-derived question set, so they are not evidence of
-generalization to independently authored questions.
-
-## Phase A live citation spot-check
-
-Five live `/query` calls ran on the selected dense / structure-aware service.
-Four returned topical page titles. One LangChain callback question returned
-`trace-with-langchain` and an invalid `[0]` marker. The LangGraph `persistence`
-and Psycopg `pool` pages had empty heading paths. TTFT p50 was 836 ms and p95
-was 5,654 ms for these five samples; this small spot-check is not a stable
-latency benchmark. Details are in the [sample report](eval/results/phase-a-live-citation-check.json).
-
-## Served document-level comparison at k=5
-
-All nine configurations use the same k=5 output, with document IDs scored
-against document-level gold. Dense and hybrid retrieve five chunks; hybrid +
-rerank uses a five-chunk candidate pool and returns five chunks.
+Every mode returns five chunks. Hybrid + rerank uses a five-chunk candidate
+pool, matching the served path. Scores map retrieved and gold chunk IDs to
+document IDs and preserve each document's first rank.
 
 | Mode | Chunker | Document recall@5 | Retrieval p95 |
 |---|---|---:|---:|
@@ -78,16 +45,15 @@ rerank uses a five-chunk candidate pool and returns five chunks.
 | Hybrid | Semantic | 0.920 | 230.9 ms |
 | Hybrid + rerank | Semantic | 0.920 | 666.3 ms |
 
-The 15-candidate and 30-candidate reranker runs on structure-aware chunks
-scored 0.957 and 0.944 document recall@5, with p95 1,607.5 ms and 2,928.9 ms.
-Both miss the 150 ms latency limit. The reranker can only reorder its
-candidate pool.
+The 15- and 30-candidate structure-aware reranker runs achieved document
+recall@5 of 0.957 and 0.944, with p95 of 1,607.5 ms and 2,928.9 ms. Both
+exceeded the latency limit. The reranker can only reorder its candidate pool.
 
-These are local CPU retrieval/reranking pipeline p95 values, not API time to
-first token. The paired bootstrap matched questions by ID over 10,000
-resamples (seed 20261024). Differences are candidate minus dense/structure-aware:
+The paired bootstrap matched question IDs over 10,000 resamples (seed
+20261024). Differences are candidate minus dense / structure-aware; tied
+questions are omitted from better/worse counts.
 
-| Candidate | Recall@5 difference | 95% CI | Better / worse questions |
+| Candidate | Recall@5 difference | 95% CI | Better / worse |
 |---|---:|---:|---:|
 | Dense / fixed-size | -0.012 | [-0.062, 0.037] | 3 / 4 |
 | Dense / semantic | -0.019 | [-0.068, 0.025] | 2 / 4 |
@@ -96,46 +62,61 @@ resamples (seed 20261024). Differences are candidate minus dense/structure-aware
 | Hybrid / semantic | -0.019 | [-0.074, 0.031] | 3 / 4 |
 | Hybrid + rerank / structure-aware | -0.025 | [-0.068, 0.006] | 1 / 3 |
 
-All listed intervals include zero. Counts omit tied questions.
+All listed intervals include zero.
 
-## Generation, judge, and live latency status
+## Dense chunker comparison at document level
 
-- No full answer-generation evaluation was run. Faithfulness ≥0.85 and citation
-  validity ≥95% are therefore **not established**.
-- `eval/judge_calibration.json` records 90% agreement on synthetic paired
-  faithful/unfaithful examples, labeled by Codex under user delegation. It is
-  not human judge calibration; one synthetic unfaithful answer received 1.0.
-- A previous single live request measured 1,036.9 ms to first token and
-  1,478.7 ms total, with 3 valid citations and no invalid markers. This is one
-  sample, not a p95. A multi-request live measurement was skipped because of
-  the Groq quota limit.
-- An earlier 2,975 ms offline p95 came from a 30-candidate CPU reranking run.
-  It is not product latency and is not representative of the served k=5 path.
+Chunk IDs differ by chunking strategy. This comparison maps each result and
+gold chunk to its document ID, preserving the rank of the first result for
+each document. Each query fetches 50 chunks before deduplication. It measures
+document retrieval, not which chunk text is best for answer generation.
 
-## Reports
+| Dense strategy | Indexed chunks | Recall@1 | Recall@5 | Recall@10 | MRR | Retrieval p95 |
+|---|---:|---:|---:|---:|---:|---:|
+| Fixed-size | 7,389 | 0.673 | 0.938 | 0.957 | 0.850 | 56.3 ms |
+| Structure-aware | 26,774 | 0.506 | 0.951 | **0.969** | 0.764 | 32.7 ms |
+| Semantic | 14,242 | **0.747** | 0.951 | 0.951 | **0.887** | 32.2 ms |
 
-- Document-level fixed-size: [report](eval/results/doc-level-dense-fixed-size-20261024-125925.json)
-- Document-level structure-aware: [report](eval/results/doc-level-dense-structure-aware-20261024-125927.json)
-- Document-level semantic: [report](eval/results/doc-level-dense-semantic-20261024-125930.json)
-- Bootstrap summary: [report](eval/results/served-doc-bootstrap-20261024.json)
-- Dense fixed-size: [report](eval/results/served-doc-dense-fixed-size-k5-20261024-165839.json)
-- Hybrid fixed-size: [report](eval/results/served-doc-hybrid-fixed-size-k5-20261024-165846.json)
-- Hybrid + rerank fixed-size: [report](eval/results/served-doc-hybrid_rerank-fixed-size-k5-20261024-165929.json)
-- Dense structure-aware: [report](eval/results/served-doc-dense-structure-aware-k5-20261024-165932.json)
-- Hybrid structure-aware: [report](eval/results/served-doc-hybrid-structure-aware-k5-20261024-165947.json)
-- Hybrid + rerank structure-aware: [report](eval/results/served-doc-hybrid_rerank-structure-aware-k5-20261024-170035.json)
-- Dense semantic: [report](eval/results/served-doc-dense-semantic-k5-20261024-170038.json)
-- Hybrid semantic: [report](eval/results/served-doc-hybrid-semantic-k5-20261024-170047.json)
-- Hybrid + rerank semantic: [report](eval/results/served-doc-hybrid_rerank-semantic-k5-20261024-170130.json)
-- Reranker pool 15: [report](eval/results/served-doc-hybrid-rerank-structure-aware-k5-pool15-20261024-170332.json)
-- Reranker pool 30: [report](eval/results/served-doc-hybrid-rerank-structure-aware-k5-pool30-20261024-170703.json)
+No strategy leads on every metric: structure-aware has the highest recall@10,
+while semantic has the highest MRR and recall@1. This comparison uses the
+same dev set used for tuning.
+
+## Answer evaluation and live checks
+
+- No full answer-generation evaluation was run. Faithfulness ≥0.85 and
+  citation validity ≥95% have not been measured.
+- The existing judge calibration file reports 90% agreement on synthetic
+  faithful/unfaithful pairs labeled by Codex under user delegation. It is not
+  human calibration; one synthetic unfaithful answer received a score of 1.0.
+- Five live `/query` calls were spot-checked. Four returned topical page
+  titles; one LangChain callback question returned an off-target page and an
+  invalid `[0]` marker. The LangGraph `persistence` and Psycopg `pool` pages
+  had empty heading paths.
+- In those five samples, TTFT p50 was 836 ms and p95 was 5,654 ms. This sample
+  is too small to treat as a stable latency benchmark. A previous single
+  request measured 1,036.9 ms TTFT and 1,478.7 ms total with three valid
+  citations. A larger live latency run was skipped because of the Groq quota
+  limit.
+
+## Limitations
+
+The development set is source-derived and not independently human-verified.
+Results cannot establish held-out retrieval quality or answer faithfulness.
+CPU measurements are offline retrieval/reranking timings, not product TTFT.
+See [README Limitations](README.md#limitations) for provenance and evaluation
+caveats.
+
+## Linked report index
+
+All reports linked here are in `eval/results/`. Older or superseded reports
+are retained in `eval/results/archive/`.
+
+- **Dev chunker comparison:** [fixed-size](eval/results/doc-level-dense-fixed-size-20261024-125925.json), [structure-aware](eval/results/doc-level-dense-structure-aware-20261024-125927.json), and [semantic](eval/results/doc-level-dense-semantic-20261024-125930.json).
+- **Served k=5 comparison:** [bootstrap](eval/results/served-doc-bootstrap-20261024.json); [dense fixed-size](eval/results/served-doc-dense-fixed-size-k5-20261024-165839.json), [hybrid fixed-size](eval/results/served-doc-hybrid-fixed-size-k5-20261024-165846.json), [hybrid + rerank fixed-size](eval/results/served-doc-hybrid_rerank-fixed-size-k5-20261024-165929.json); [dense structure-aware](eval/results/served-doc-dense-structure-aware-k5-20261024-165932.json), [hybrid structure-aware](eval/results/served-doc-hybrid-structure-aware-k5-20261024-165947.json), [hybrid + rerank structure-aware](eval/results/served-doc-hybrid_rerank-structure-aware-k5-20261024-170035.json); [dense semantic](eval/results/served-doc-dense-semantic-k5-20261024-170038.json), [hybrid semantic](eval/results/served-doc-hybrid-semantic-k5-20261024-170047.json), and [hybrid + rerank semantic](eval/results/served-doc-hybrid_rerank-semantic-k5-20261024-170130.json).
+- **Reranker candidate tradeoff:** [pool 15](eval/results/served-doc-hybrid-rerank-structure-aware-k5-pool15-20261024-170332.json) and [pool 30](eval/results/served-doc-hybrid-rerank-structure-aware-k5-pool30-20261024-170703.json).
+- **Live citation spot-check:** [sample report](eval/results/phase-a-live-citation-check.json).
 
 ## Resume bullet
 
-Built a pgvector-backed RAG over 946 documentation pages with dense and hybrid
-retrieval, RRF, a cross-encoder reranker, and a streaming API. In the current
-81-question source-derived evaluation, dense structure-aware was selected at
-0.938 document recall@5 and 32.9 ms retrieval p95; hybrid and reranking failed
-the paired quality or latency rule. Five live requests had a 5,654 ms TTFT p95
-and exposed one retrieval/citation issue. Held-out answer evaluation and
-larger-sample live API p95 remain unmeasured.
+Not written yet: the template requires dev and held-out numbers, and the
+held-out set has not been run. Add the bullet after a reviewed held-out run.

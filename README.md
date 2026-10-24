@@ -146,3 +146,24 @@ with 30 candidates if 50 adds at least 300 ms at p95.
 See [the live query latency investigation](eval/latency_investigation.md) for
 the measured CPU/MPS timings, the candidate-count adjustment, the Groq quota
 error, and the p95 measurement status.
+
+## Limitations
+
+- The current 81-question development set is source-derived: 72 questions
+  were recorded as “Codex (user-delegated),” six have no reviewer recorded,
+  and three are marked assistant-authored. The `verified` field in the file
+  does not mean the questions were independently human-authored or reviewed.
+- Tuning and evaluation used the same 81 questions. A separate held-out set
+  has not yet been created, reviewed, or run, so the current retrieval results
+  do not establish generalization. The selected dense / structure-aware mode
+  is a development-set decision.
+- No full answer-generation evaluation has measured faithfulness or citation
+  validity. The existing 90% judge agreement is based on synthetic examples
+  labeled by Codex under user delegation, not human calibration.
+- Five live queries are only a spot-check. Their 5,654 ms TTFT p95 is not a
+  stable product latency estimate. Offline CPU retrieval/reranking p95 is not
+  TTFT, and a larger live run was skipped because of the Groq quota limit.
+- PostgreSQL `ts_rank_cd` is not BM25; hybrid-search scores should not be
+  described as BM25 results.
+
+Detailed measurements and linked report files are in [RESULTS.md](RESULTS.md).
