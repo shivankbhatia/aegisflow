@@ -1,5 +1,6 @@
 import json
 import asyncio
+import hashlib
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -11,6 +12,8 @@ from langgraph.types import Command
 from aegisflow.orchestrator.guardrails import GuardrailsInterceptor
 from aegisflow.rag.qa_workflow import build_qa_workflow, output_gate_reason, retrieve_evidence
 from aegisflow.rag.qa_config import QAConfig
+from aegisflow.rag.qa_config import CLASSIFIER_PROMPT
+from aegisflow.rag.qa_workflow import _INJECTION_PATTERNS, input_guardrail_reason
 from aegisflow.api.runs import RunManager
 
 
@@ -257,6 +260,23 @@ def test_output_gate_rejects_empty_uncited_and_unknown_citations():
     assert output_gate_reason("", evidence) == "empty_or_invalid_answer"
     assert output_gate_reason("Claim with no marker", evidence) == "invalid_or_missing_citation"
     assert output_gate_reason("Claim [2]", evidence) == "invalid_or_missing_citation"
+
+
+def test_frozen_classifier_and_regex_hashes_match_post_freeze_challenge():
+    freeze = json.loads(Path("eval/security/guardrail_freeze_v1.json").read_text())
+    prompt_hash = hashlib.sha256(CLASSIFIER_PROMPT.encode()).hexdigest()
+    rules_hash = hashlib.sha256(json.dumps(
+        [pattern.pattern for pattern in _INJECTION_PATTERNS],
+        separators=(",", ":"), ensure_ascii=False,
+    ).encode()).hexdigest()
+    challenge = [
+        json.loads(line)
+        for line in Path("eval/security/direct_injection_challenge15_v1.jsonl").read_text().splitlines()
+    ]
+    assert prompt_hash == freeze["classifier_prompt_sha256"]
+    assert rules_hash == freeze["regex_rules_sha256"]
+    assert len(challenge) == 15 and all(row["label"] == "injection" for row in challenge)
+    assert all(input_guardrail_reason(row["question"]) is None for row in challenge)
 
 
 @pytest.mark.asyncio

@@ -10,6 +10,7 @@ from aegisflow.rag.evaluation import load_questions
 from aegisflow.rag.qa_workflow import input_guardrail_reason, validate_citations
 from aegisflow.rag.qa_workflow import _INJECTION_PATTERNS
 from aegisflow.rag.manifest import attach_run_manifest
+from aegisflow.rag.qa_config import CLASSIFIER_PROMPT
 
 
 def read_jsonl(path: str):
@@ -19,6 +20,7 @@ def read_jsonl(path: str):
 def main():
     injections = read_jsonl("eval/security/direct_injection_prompts.jsonl")
     paraphrases = read_jsonl("eval/security/direct_injection_seen15.jsonl")
+    challenge = read_jsonl("eval/security/direct_injection_challenge15_v1.jsonl")
     poisoned = read_jsonl("eval/security/poisoned_chunks.jsonl")
     unanswerable = read_jsonl("eval/security/unanswerable_questions.jsonl")
     singles = [q for q in load_questions("eval/golden.jsonl") if q.kind == "single"]
@@ -28,7 +30,10 @@ def main():
     current_hash = hashlib.sha256(
         json.dumps(current_patterns, separators=(",", ":"), ensure_ascii=False).encode()
     ).hexdigest()
+    freeze = json.loads(Path("eval/security/guardrail_freeze_v1.json").read_text(encoding="utf-8"))
+    classifier_hash = hashlib.sha256(CLASSIFIER_PROMPT.encode()).hexdigest()
     paraphrase_blocked = sum(input_guardrail_reason(row["question"]) is not None for row in paraphrases)
+    challenge_rule_blocked = sum(input_guardrail_reason(row["question"]) is not None for row in challenge)
     false_refusals = sum(input_guardrail_reason(q.question) is not None for q in singles)
     evidence = [{"chunk_id": "fixture/doc#0", "source": "fixture", "heading_path": [], "text": "fact"}]
     citation_cases = [
@@ -64,6 +69,22 @@ def main():
             "rules_sha256_current": current_hash,
             "rules_unchanged": current_hash == frozen_rules["sha256"],
             "note": "These 15 cases were exposed before the classifier prompt was frozen and are a seen set; semantic resistance is not measured.",
+        },
+        "post_freeze_challenge_heuristic_check": {
+            "n": len(challenge), "blocked_by_regex": challenge_rule_blocked,
+            "blocked_fraction": challenge_rule_blocked / len(challenge) if challenge else None,
+            "challenge_version": "v1",
+            "written_after_freeze": True,
+            "interpretation": "Regex-only precheck; classifier/model resistance has not been measured.",
+        },
+        "guardrail_freeze": {
+            "version": freeze["version"],
+            "classifier_prompt_sha256_frozen": freeze["classifier_prompt_sha256"],
+            "classifier_prompt_sha256_current": classifier_hash,
+            "classifier_prompt_unchanged": classifier_hash == freeze["classifier_prompt_sha256"],
+            "regex_rules_sha256_frozen": freeze["regex_rules_sha256"],
+            "regex_rules_sha256_current": current_hash,
+            "regex_rules_unchanged": current_hash == freeze["regex_rules_sha256"],
         },
         "golden_single_heuristic_false_refusal": {
             "n": len(singles), "false_refusals": false_refusals,

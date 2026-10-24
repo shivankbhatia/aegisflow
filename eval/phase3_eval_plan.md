@@ -68,6 +68,49 @@ run. Label 15 answers for correctness and faithfulness, then calculate judge
 agreement separately for both metrics. Do not use the existing synthetic,
 Codex-labeled `eval/judge_calibration.json` as human calibration.
 
+## Pre-registered decision rules
+
+Record these rules before collecting calibration or classifier results; do not
+change them after inspecting holdout outcomes.
+
+- **Verifier threshold:** use only the 15 human-labeled calibration answers.
+  The verifier passes an answer when `score >= threshold` and citations are
+  valid. Choose the lowest threshold in `[0, 1]` for which zero human-labeled
+  unfaithful answers pass. If no threshold satisfies that rule, report the
+  judge as unsuitable for threshold selection instead of relaxing the rule.
+  Also report the false-refusal rate on human-labeled faithful answers at the
+  selected threshold and citation-invalid false refusals separately.
+- **Revision limit:** freeze at two revisions (at most three synthesis drafts)
+  before calibration; after the second unsuccessful verification, refuse with
+  `insufficient evidence`. Do not tune this limit on evaluation results.
+- **Golden-question false flags:** a false flag is any classifier outcome that
+  blocks a question in the answerable 66-item golden single-hop set. Invalid,
+  truncated, or unavailable classifier output counts as a block as well as a
+  positive verdict; report those causes separately. Sort IDs by
+  `SHA256("classifier-split-v1:" + id)`: first 33 are the tuning half and the
+  remaining 33 are the untouched report half. Any token-cap adjustment is made
+  using only the first half, then frozen before the second half is run.
+
+Run the classifier's 33-case tuning split first with
+`python scripts/evaluate_injection_classifier.py --split tuning`. Inspect both
+positive flags and `finish_reason`; `length`, invalid JSON, or provider errors
+count as false flags for benign questions. Adjust only `classifier_max_tokens`
+on these 33 cases if truncation occurs. Then freeze that cap and run
+`--split holdout`; only this untouched half supplies the reported golden false
+flag rate. The evaluator records finish reasons, token use, invalid outputs,
+and checkpoints after every case; it stops after three consecutive 429s and
+resumes by retrying those failed IDs.
+
+The blind router relabel uses `eval/router_blind_prompts.jsonl` with shuffled
+neutral IDs and labels in `eval/router_blind_labels.jsonl`. Its mapping is kept
+separately in `eval/router_blind_id_map.jsonl`; the labeler did not see the map
+while assigning labels. It was done in the same session rather than after the
+suggested 24-hour washout, and the assistant had previously seen these
+questions. Treat the result as a neutral-ID second pass, not a fully independent
+human relabel. It agrees with the Codex labels on 30/30, which is not evidence
+of independent accuracy. The comparison report is
+`eval/results/router-blind-relabel.json`.
+
 ## QA checkpoint state
 
 `src/aegisflow/rag/qa_state.py` defines the compact QA state contract. Evidence
@@ -102,11 +145,21 @@ negative, invalid, and short-circuit behavior. See
 residual risks. Real classifier and poisoned-evidence model evaluations remain
 quota-bound and are not claimed by deterministic tests.
 
+The regex rules and classifier prompt are frozen together in
+`eval/security/guardrail_freeze_v1.json`; tests verify both hashes. Only after
+that freeze, the new 15-case challenge was authored in
+`eval/security/direct_injection_challenge15_v1.jsonl`. The deterministic report
+shows 0/15 regex blocks; classifier performance has not been measured. The
+prior 15-case set remains `direct_injection_seen15.jsonl`. Structured
+classifier results preserve `finish_reason`, including `length` on truncation,
+so the first quota run can detect legitimate-question refusals caused by a
+too-small output cap.
+
 ## Phase 3-B test hygiene
 
 `pytest -q` excludes `live` and `heavy` tests by default. The full default suite
 was run with `GROQ_API_KEY` unset and PostgreSQL/Docker available:
-113 passed, with only the explicitly marked live test deselected. Run live tests
+119 passed, with only the explicitly marked live test deselected. Run live tests
 with `pytest -m live`; local model loads use `pytest -m heavy` after installing
 the optional `.[models]` extra. GitHub Actions configures Python 3.11 and the
 PostgreSQL 15 pgvector service and runs the default tests without secrets; a

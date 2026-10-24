@@ -43,6 +43,7 @@ async def test_valid_first_try_and_sends_json_schema():
     c, seen = scripted(['{"company":"Acme","year":2023}'])
     r = await complete_structured(c, MSGS, Facts)
     assert r.value == Facts(company="Acme", year=2023) and r.attempts == 1
+    assert r.finish_reason == "stop"
     rf = seen[0]["response_format"]
     assert rf["type"] == "json_schema" and rf["json_schema"]["name"] == "Facts"
     assert "company" in rf["json_schema"]["schema"]["properties"]
@@ -76,8 +77,9 @@ async def test_exhausted_repairs_raise_with_last_output():
 @pytest.mark.asyncio
 async def test_truncation_raises_immediately_without_repair():
     c, seen = scripted([lambda r: httpx.Response(200, json=body("", finish="length"))])
-    with pytest.raises(StructuredOutputError, match="truncated"):
+    with pytest.raises(StructuredOutputError, match="truncated") as e:
         await complete_structured(c, MSGS, Facts)
+    assert e.value.finish_reason == "length"
     assert len(seen) == 1
 
 

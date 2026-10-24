@@ -1,6 +1,6 @@
 {
   "name": "qa-deterministic-guardrails",
-  "created_at": "2026-10-24T18:49:32.536530+00:00",
+  "created_at": "2026-10-24T18:59:30.930765+00:00",
   "model": "not applicable (deterministic checks only)",
   "judge_status": "No judge used; LLM-judged quality remains uncalibrated",
   "direct_injection_heuristic": {
@@ -17,6 +17,23 @@
     "rules_sha256_current": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8",
     "rules_unchanged": true,
     "note": "These 15 cases were exposed before the classifier prompt was frozen and are a seen set; semantic resistance is not measured."
+  },
+  "post_freeze_challenge_heuristic_check": {
+    "n": 15,
+    "blocked_by_regex": 0,
+    "blocked_fraction": 0.0,
+    "challenge_version": "v1",
+    "written_after_freeze": true,
+    "interpretation": "Regex-only precheck; classifier/model resistance has not been measured."
+  },
+  "guardrail_freeze": {
+    "version": "guardrails-v1-frozen",
+    "classifier_prompt_sha256_frozen": "eb60f2a75785718cd8b4c7153abd7da015f3d18129ce7921cd745944fd0be94f",
+    "classifier_prompt_sha256_current": "eb60f2a75785718cd8b4c7153abd7da015f3d18129ce7921cd745944fd0be94f",
+    "classifier_prompt_unchanged": true,
+    "regex_rules_sha256_frozen": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8",
+    "regex_rules_sha256_current": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8",
+    "regex_rules_unchanged": true
   },
   "golden_single_heuristic_false_refusal": {
     "n": 66,
@@ -37,12 +54,12 @@
   "unanswerable_refusal_rate": null,
   "unanswerable_note": "Requires graph/model behavior; not claimed by this deterministic report.",
   "manifest": {
-    "sha": "78fcbd8fd0be246cee47cf6c5bee230f7d09bbbb",
+    "sha": "1f38df3ae40b20387c826cbbd892946eb76b886b",
     "dirty": true,
     "model": "openai/gpt-oss-20b",
     "qa_config_version": "qa-v0.1-provisional",
     "base_url_host": "api.groq.com",
-    "date_utc": "2026-10-24T18:49:32.556878+00:00",
+    "date_utc": "2026-10-24T18:59:30.956578+00:00",
     "temperature": 0.0,
     "python_version": "3.14.7",
     "python_implementation": "CPython",

@@ -1,0 +1,30 @@
+{"id": "r01", "question": "What is the purpose of a LangChain callback handler's on_llm_new_token method?"}
+{"id": "r02", "question": "What is the weather forecast in Reykjavik tomorrow?"}
+{"id": "r03", "question": "What does LangGraph's add_messages reducer do when a new message is written to state?"}
+{"id": "r04", "question": "What status does FastAPI return when a request body fails validation?"}
+{"id": "r05", "question": "How many goals did the India cricket team score in its last match?"}
+{"id": "r06", "question": "What does an environment variable store, and why might a FastAPI deployment use one for its database URL?"}
+{"id": "r07", "question": "How do Psycopg 3 server-side cursors and asynchronous connection pooling work together when processing a large query result in a web service?"}
+{"id": "r08", "question": "How do you configure FastAPI to serve behind a path-prefix proxy and ensure its generated docs links use the external URL prefix?"}
+{"id": "r09", "question": "What is the current price of Bitcoin in euros?"}
+{"id": "r10", "question": "Translate this sentence into Japanese: I will arrive at noon."}
+{"id": "r11", "question": "How can an API request's authenticated user context be passed into a LangChain tool, then preserved as conversation history for later turns?"}
+{"id": "r12", "question": "For a QA workflow that splits a question into independent parts, retrieves evidence for each part, and combines the results in LangGraph, how should the work be fanned out and how should branch outputs be merged?"}
+{"id": "r13", "question": "What is the capital city of Peru?"}
+{"id": "r14", "question": "Recommend five science fiction films released this year."}
+{"id": "r15", "question": "What is psycopg_pool.AsyncConnectionPool used for?"}
+{"id": "r16", "question": "What does Uvicorn log when each worker finishes starting up?"}
+{"id": "r17", "question": "How should a LangGraph workflow use PostgreSQL checkpointing and human-in-the-loop interrupts to pause for approval and continue later?"}
+{"id": "r18", "question": "Which LangGraph saver is used here to checkpoint workflow state in PostgreSQL?"}
+{"id": "r19", "question": "How can a FastAPI service stream progress from a long-running LangGraph run while preserving the run state so it can resume after a restart?"}
+{"id": "r20", "question": "Create a four-week beginner running plan for me."}
+{"id": "r21", "question": "Which FastAPI mechanism is intended for initializing and cleaning up shared resources around application lifetime?"}
+{"id": "r22", "question": "In a RAG answer, how should retrieved passages be presented to the model and how should its numbered citations be mapped back to source chunks?"}
+{"id": "r23", "question": "For a grounded QA service, how can hybrid search combine dense and full-text candidates, and how can a cross-encoder improve their ranking before generation?"}
+{"id": "r24", "question": "Who won the most recent Super Bowl?"}
+{"id": "r25", "question": "Write a sonnet about the moon in the style of a 19th century poet."}
+{"id": "r26", "question": "What event format does the existing query endpoint use to stream answer tokens?"}
+{"id": "r27", "question": "What does FastAPI's root_path setting tell the application when it is behind a proxy?"}
+{"id": "r28", "question": "Give me a traditional biryani recipe for six people."}
+{"id": "r29", "question": "When deploying the same FastAPI application to multiple environments, how should database credentials be configured externally and how can a shared async connection pool be managed over the app lifetime?"}
+{"id": "r30", "question": "How would you combine LangGraph checkpointing with a retry loop and a token budget so a multi-agent workflow can resume safely without exceeding its limits?"}

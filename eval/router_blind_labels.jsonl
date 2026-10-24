@@ -1,0 +1,30 @@
+{"id":"r01","label":"direct","rationale":"One focused question about the purpose of a single callback method."}
+{"id":"r02","label":"out_of_scope","rationale":"Asks for tomorrow's weather, unrelated to technical documentation."}
+{"id":"r03","label":"direct","rationale":"Asks about one reducer's behavior."}
+{"id":"r04","label":"direct","rationale":"Asks for one framework behavior on validation failure."}
+{"id":"r05","label":"out_of_scope","rationale":"Asks for a current cricket result, unrelated to technical documentation."}
+{"id":"r06","label":"direct","rationale":"Asks one configuration concept and a focused deployment use."}
+{"id":"r07","label":"multi_hop","rationale":"Combines server-side cursors with asynchronous pooling in a use case."}
+{"id":"r08","label":"multi_hop","rationale":"Combines proxy mounting with generated documentation URLs."}
+{"id":"r09","label":"out_of_scope","rationale":"Asks for live cryptocurrency pricing."}
+{"id":"r10","label":"out_of_scope","rationale":"Requests translation, unrelated to the technical documentation."}
+{"id":"r11","label":"multi_hop","rationale":"Combines user-context propagation into a tool with persistence as conversation history."}
+{"id":"r12","label":"multi_hop","rationale":"Combines branch fan-out and result merging in a multi-part QA workflow."}
+{"id":"r13","label":"out_of_scope","rationale":"Asks general geography unrelated to the documentation."}
+{"id":"r14","label":"out_of_scope","rationale":"Requests current entertainment recommendations."}
+{"id":"r15","label":"direct","rationale":"Asks the purpose of a single connection-pool class."}
+{"id":"r16","label":"direct","rationale":"Asks for one startup log detail."}
+{"id":"r17","label":"multi_hop","rationale":"Combines durable checkpoints with human approval interrupts and resumption."}
+{"id":"r18","label":"direct","rationale":"Asks which saver is configured for PostgreSQL checkpointing."}
+{"id":"r19","label":"multi_hop","rationale":"Combines live progress streaming with restart-safe run state."}
+{"id":"r20","label":"out_of_scope","rationale":"Requests personal fitness planning."}
+{"id":"r21","label":"direct","rationale":"Asks for one FastAPI application-lifetime mechanism."}
+{"id":"r22","label":"multi_hop","rationale":"Combines evidence presentation with mapping answer citations back to chunks."}
+{"id":"r23","label":"multi_hop","rationale":"Combines hybrid retrieval with reranking before generation."}
+{"id":"r24","label":"out_of_scope","rationale":"Asks current sports trivia."}
+{"id":"r25","label":"out_of_scope","rationale":"Requests creative writing rather than documentation help."}
+{"id":"r26","label":"direct","rationale":"Asks one detail about the query endpoint's stream format."}
+{"id":"r27","label":"direct","rationale":"Asks one setting's meaning behind a proxy."}
+{"id":"r28","label":"out_of_scope","rationale":"Requests a cooking recipe."}
+{"id":"r29","label":"multi_hop","rationale":"Combines external database credentials with application-lifetime pool management."}
+{"id":"r30","label":"multi_hop","rationale":"Combines checkpointing, retries, and budget enforcement."}
