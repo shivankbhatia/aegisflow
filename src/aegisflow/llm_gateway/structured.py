@@ -17,10 +17,15 @@ _FENCE = re.compile(r"^```[a-zA-Z]*\s*|\s*```$")
 
 
 class StructuredOutputError(Exception):
-    def __init__(self, message: str, attempts: int, last_raw: str):
+    def __init__(
+        self, message: str, attempts: int, last_raw: str,
+        usage: Usage | None = None, finish_reason: str | None = None,
+    ):
         super().__init__(message)
         self.attempts = attempts
         self.last_raw = last_raw
+        self.usage = usage or Usage()
+        self.finish_reason = finish_reason
 
 
 @dataclass(frozen=True)
@@ -29,6 +34,7 @@ class StructuredResult(Generic[T]):
     attempts: int  # validation attempts; 1 = valid on first try
     usage: Usage  # summed across all attempts
     raw: str
+    finish_reason: str | None = None
 
 
 def extract_json(text: str) -> str:
@@ -78,6 +84,7 @@ async def complete_structured(
 
     total = Usage()
     last_raw = ""
+    last_finish_reason = None
     for attempt in range(1, max_repairs + 2):
         try:
             resp = await client.complete(msgs, **opts)
@@ -95,16 +102,17 @@ async def complete_structured(
             total.completion_tokens + resp.usage.completion_tokens,
         )
         last_raw = resp.text
+        last_finish_reason = resp.finish_reason
 
         if resp.finish_reason == "length":
             raise StructuredOutputError(
                 "output truncated (finish_reason=length): raise max_tokens "
                 "or lower reasoning_effort; repairing cannot fix this",
-                attempt, last_raw,
+                attempt, last_raw, total, resp.finish_reason,
             )
         try:
             value = schema.model_validate_json(extract_json(resp.text))
-            return StructuredResult(value, attempt, total, resp.text)
+            return StructuredResult(value, attempt, total, resp.text, resp.finish_reason)
         except ValidationError as e:
             problem = _format_errors(e)
             log.warning("structured_invalid attempt=%d schema=%s errors=%s", attempt, schema.__name__, problem)
@@ -115,5 +123,6 @@ async def complete_structured(
             ]
 
     raise StructuredOutputError(
-        f"no valid {schema.__name__} after {max_repairs + 1} attempts", max_repairs + 1, last_raw
+        f"no valid {schema.__name__} after {max_repairs + 1} attempts",
+        max_repairs + 1, last_raw, total, last_finish_reason,
     )

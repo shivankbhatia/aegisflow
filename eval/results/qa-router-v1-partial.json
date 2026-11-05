@@ -1,0 +1,123 @@
+{
+  "name": "qa-router-v1-partial",
+  "created_at": "2026-10-24T18:07:51.300922+00:00",
+  "complete": false,
+  "status": "partial, not a clean test",
+  "model": "openai/gpt-oss-20b",
+  "n": 11,
+  "accuracy": 0.9090909090909091,
+  "prompt_history": "The router prompt was changed after these 11 results; the exact v1 prompt snapshot was not saved.",
+  "authorship": "Codex-authored queries; intended-scope labels assigned by Codex, not human-labeled.",
+  "per_query": [
+    {
+      "id": "direct-01",
+      "route": "direct",
+      "question": "What does an environment variable store, and why might a FastAPI deployment use one for its database URL?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 0,
+      "latency_s": 0.36387049999757437,
+      "attempts": 1
+    },
+    {
+      "id": "direct-02",
+      "route": "direct",
+      "question": "What does Uvicorn log when each worker finishes starting up?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 266,
+      "latency_s": 0.5516325419957866,
+      "attempts": 1
+    },
+    {
+      "id": "direct-03",
+      "route": "direct",
+      "question": "Which FastAPI mechanism is intended for initializing and cleaning up shared resources around application lifetime?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 247,
+      "latency_s": 0.5309988749941112,
+      "attempts": 1
+    },
+    {
+      "id": "direct-04",
+      "route": "direct",
+      "question": "What does LangGraph's add_messages reducer do when a new message is written to state?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 251,
+      "latency_s": 0.4521036660007667,
+      "attempts": 1
+    },
+    {
+      "id": "direct-05",
+      "route": "direct",
+      "question": "Which LangGraph saver is used here to checkpoint workflow state in PostgreSQL?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 261,
+      "latency_s": 0.561309832999541,
+      "attempts": 1
+    },
+    {
+      "id": "direct-06",
+      "route": "direct",
+      "question": "What is psycopg_pool.AsyncConnectionPool used for?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 261,
+      "latency_s": 0.19472379199578427,
+      "attempts": 1
+    },
+    {
+      "id": "direct-07",
+      "route": "direct",
+      "question": "What event format does the existing query endpoint use to stream answer tokens?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 246,
+      "latency_s": 0.41682479200244416,
+      "attempts": 1
+    },
+    {
+      "id": "direct-08",
+      "route": "direct",
+      "question": "What does FastAPI's root_path setting tell the application when it is behind a proxy?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 254,
+      "latency_s": 0.18566154099971754,
+      "attempts": 1
+    },
+    {
+      "id": "direct-09",
+      "route": "direct",
+      "question": "What is the purpose of a LangChain callback handler's on_llm_new_token method?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 240,
+      "latency_s": 0.6533908749988768,
+      "attempts": 1
+    },
+    {
+      "id": "direct-10",
+      "route": "direct",
+      "question": "What status does FastAPI return when a request body fails validation?",
+      "predicted_route": "direct",
+      "correct": true,
+      "tokens": 236,
+      "latency_s": 81.36841687500419,
+      "attempts": 1
+    },
+    {
+      "id": "multi_hop-01",
+      "route": "multi_hop",
+      "question": "For a QA workflow that splits a question into independent parts, retrieves evidence for each part, and combines the results in LangGraph, how should the work be fanned out and how should branch outputs be merged?",
+      "predicted_route": "direct",
+      "correct": false,
+      "tokens": 0,
+      "latency_s": 16.97851224999613,
+      "attempts": 1
+    }
+  ]
+}

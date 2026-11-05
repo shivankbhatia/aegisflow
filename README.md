@@ -17,20 +17,25 @@ Measured on Groq with `openai/gpt-oss-20b`: 20 concurrent calls complete in abou
 
 ## Architecture
 
-```
-POST /run ──► RunManager ──► LangGraph ──► triage ──► coder ──► reviewer ──┐
-                  │             │                        ▲                 │ rejected
-   WS /ws/events  │             │ checkpoint             └─────────────────┘ (max 3 attempts)
-                  ▼             ▼ after each node
-             live events    PostgreSQL ◄── GET /runs/{id}, POST /runs/{id}/resume
-                                    
-   agents ──► llm_gateway (retries, backoff, structured outputs) ──► Groq / any OpenAI-compatible API
-   reviewer ──► Docker sandbox (no network)
+```mermaid
+flowchart LR
+  API[FastAPI: /run, /query, /runs, WebSocket] --> RM[RunManager]
+  RM --> CG[Code-fix LangGraph\ntriage → coder → reviewer]
+  RM --> QG[QA LangGraph\nguardrails → router → retrieve / plan → synthesize → verify]
+  CG --> GW[LLM gateway\nretries, structured output, token accounting]
+  QG --> GW
+  GW --> MODEL[Groq / OpenAI-compatible API]
+  CG --> PG[(PostgreSQL\nAsyncPostgresSaver)]
+  QG --> PG
+  API --> PG
+  CG --> BOX[Docker sandbox]
+  QG --> RET[Retriever and document corpus]
+  RET --> PG
 ```
 
 ## Quickstart
 
-Requires Python 3.11+, Docker, and a Groq API key (or any OpenAI-compatible endpoint).
+Requires Python 3.11+, Docker, PostgreSQL, and either Ollama running locally or an OpenAI-compatible hosted endpoint.
 
 ```bash
 git clone https://github.com/shivankbhatia/aegisflow && cd aegisflow
@@ -43,13 +48,57 @@ uvicorn aegisflow.api.main:app --reload
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `GROQ_API_KEY` | (required) | API key for the endpoint |
+| `AEGIS_API_KEY` | unset | API key for the configured endpoint; Ollama's local server ignores it |
+| `GROQ_API_KEY` | unset | Backwards-compatible API key for Groq |
 | `AEGIS_MODEL` | `openai/gpt-oss-20b` | Model name |
 | `AEGIS_BASE_URL` | `https://api.groq.com/openai/v1` | Any OpenAI-compatible base URL |
+| `AEGIS_LLM_TIMEOUT` | `60` hosted / `300` local | Per-request timeout in seconds |
 | `AEGIS_PROMPT_OVERHEAD` | measured per model | Fixed prompt tokens added by the provider |
 | `DATABASE_URL` | `postgresql://aegis:password@localhost:5432/aegisflow` | Checkpoint database |
+| `AEGIS_RAG_ENABLED` | `0` | Enable RAG and load the selected local models during FastAPI startup |
+| `AEGIS_RAG_MODE` | `dense` | `dense`, `hybrid`, or `hybrid_rerank` |
+| `AEGIS_RAG_STRATEGY` | `structure-aware` | `fixed-size`, `structure-aware`, or `semantic` |
+| `AEGIS_INGEST_TOKEN` | unset | Required token for `POST /ingest` and `GET /ingest/{job_id}` |
+
+### Use Ollama locally
+
+The closest local swap for the former Groq model is Ollama's `gpt-oss:20b`.
+It is the same model family and parameter size, and its 131,072-token model
+context matches Groq's advertised window. Download it once, then set these
+values in `.env`:
+
+```bash
+ollama pull gpt-oss:20b
+```
+
+```dotenv
+AEGIS_BASE_URL=http://localhost:11434/v1
+AEGIS_API_KEY=ollama
+AEGIS_MODEL=gpt-oss:20b
+```
+
+Restart Ollama and the AegisFlow API after changing the context setting. Ollama
+can allocate a smaller context by default; set its context length to `131072`
+in Ollama's app settings, or start its server with
+`OLLAMA_CONTEXT_LENGTH=131072 ollama serve`. Larger contexts use substantially
+more memory. Confirm the active allocation and whether the model is on GPU or
+CPU with `ollama ps`. The gateway continues using the same OpenAI-compatible
+chat endpoint, so agent and RAG code do not need provider-specific changes.
+
+The provider's hosted token quota no longer applies to local inference. AegisFlow
+still has its own output lengths (2,000 tokens per code-agent call, 1,200 for
+direct RAG answers) and 50,000-token workflow budget; these are application
+guardrails, independent of the model's 128K context window.
 
 ## API
+
+The FastAPI service also serves the AegisFlow console at `/`. It provides a
+streaming grounded RAG chat, a live Tri-Agent code workflow view, the RAG QA
+graph, run checkpoints and approvals, and (when configured) corpus ingestion.
+By default the console calls the same origin as the page; use the settings
+button to point it at another API server. `GET /capabilities` reports whether
+the RAG runtime, QA graph, and ingestion endpoint are available without
+revealing the ingestion token.
 
 | Endpoint | Description |
 |---|---|
@@ -57,7 +106,32 @@ uvicorn aegisflow.api.main:app --reload
 | `GET /runs/{id}` | Status (`queued`, `running`, `completed`, `failed`, `interrupted`), plan, patches, attempts, tokens |
 | `POST /runs/{id}/resume` | Resume a `failed` or `interrupted` run from its last checkpoint |
 | `WS /ws/events/{id}` | Per-node events for the current process, then `done` or `error` |
+| `POST /query` `{"query": "...", "k": 5}` | Grounded RAG answer streamed as SSE `token`, `citations`, `done`, or `error` events |
+| `POST /ingest` | Start local corpus indexing in the background; requires `X-Ingest-Token` |
+| `GET /ingest/{job_id}` | Read ingestion job status and document/chunk counts; requires `X-Ingest-Token` |
 | `GET /health` | Liveness |
+
+Set `AEGIS_RAG_ENABLED=1` to load the embedder and selected retrieval mode
+during startup. The selected mode defaults to `dense` with `structure-aware`
+chunks, based on the current Phase A decision. The reranker loads only for
+`AEGIS_RAG_MODE=hybrid_rerank`. The embedder and reranker share a process-wide
+MPS inference lock. If Metal still reports a
+command-buffer assertion on your setup, set `AEGIS_RAG_DEVICE=cpu` to use CPU
+inference; `mps` is also an accepted explicit setting. Reranking defaults to 30
+hybrid candidates when that mode is selected; set `AEGIS_RAG_CANDIDATE_K` to a
+value from 1 to 50 to tune this tradeoff. The live `/query` endpoint further
+caps reranker candidates to the requested `k` (5 by default).
+Set a private `AEGIS_INGEST_TOKEN` in the server environment before using the
+ingest endpoints. Both the start request and job-status request must include
+the matching `X-Ingest-Token` header. If the variable is unset, ingestion
+returns 503; if the header is absent or incorrect, it returns 401.
+`POST /ingest` indexes Markdown and reStructuredText documents found under
+`data/raw/` using structure-aware chunks. `/query` cites retrieved contexts as
+`[n]`; the final `citations` event maps valid markers to chunk IDs and reports
+any invalid markers. Configure answer generation with `AEGIS_RAG_MAX_TOKENS`
+and `AEGIS_RAG_REASONING_EFFORT`. Request logs include retrieval and rerank
+latency, time to first token, estimated token count, and a configurable cost
+proxy (`AEGIS_COST_PER_TOKEN_USD`).
 
 ```bash
 curl -XPOST localhost:8000/run -H 'content-type: application/json' \
@@ -69,11 +143,17 @@ Run state is durable in Postgres. Live events and error text are in memory, so a
 ## Tests
 
 ```bash
-pytest -q                                # 35 tests; Postgres-backed tests skip if it is down
-pytest tests/test_e2e_live.py            # live end-to-end: needs GROQ_API_KEY and Docker
+pytest -q                                # excludes live model calls and heavy model loads
+pytest -m live                           # opt in to real model calls (needs GROQ_API_KEY)
+pytest -m heavy                          # opt in to local embedder/reranker model loads
+pytest -m 'live or heavy'                # run both opt-in groups
 python scripts/gateway_smoke.py          # live gateway: concurrency, token calibration, streaming
 python scripts/structured_smoke.py       # live structured extraction: validity and accuracy
 ```
+
+Install local embedding/reranking models only when needed with
+`pip install -e ".[models]"`. CI installs `.[dev]`, uses PostgreSQL, and runs
+the default suite without provider secrets.
 
 ## Layout
 
@@ -88,4 +168,53 @@ src/aegisflow/
 
 ## Roadmap
 
-Retrieval-augmented generation over a document corpus (hybrid search, reranking, evaluation harness), exposed to the agents as a tool.
+- [x] Retrieval-augmented generation over the pinned documentation corpus, with
+  pgvector dense retrieval, PostgreSQL full-text search, RRF, reranking, and a
+  streaming `/query` API. Current retrieval evidence is exploratory: chunker
+  metrics are compared at document level, and served hybrid + rerank at k=5 trails
+  dense-only on this source-derived set. See [RESULTS.md](RESULTS.md) for
+  limitations and reports.
+- [ ] Expose RAG retrieval as a tool to the multi-agent workflow.
+
+### Hybrid retrieval ranking note
+
+The RAG index combines pgvector cosine search with PostgreSQL full-text search
+using the `simple` configuration, then fuses their rankings with Reciprocal Rank
+Fusion (RRF). PostgreSQL's `ts_rank_cd` is **not true BM25**. If BM25 is worth
+testing later, compare `pg_search` or an in-memory `rank_bm25` index as an
+experiment.
+
+### Cross-encoder reranking
+
+Hybrid retrieval can rerank its candidate pool with
+`BAAI/bge-reranker-base`. The cross-encoder truncates each query/passage pair
+to 512 tokens, scores batches of 16, and uses MPS when PyTorch reports it
+available (otherwise CPU). Set `AEGIS_RAG_ENABLED=1` to load the embedder and
+reranker once in the FastAPI lifespan. Run `python scripts/evaluate_reranker.py`
+to compare MRR, recall@10, and latency with the hybrid baseline; it retries
+with 30 candidates if 50 adds at least 300 ms at p95.
+
+See [the live query latency investigation](eval/latency_investigation.md) for
+the measured CPU/MPS timings, the candidate-count adjustment, the Groq quota
+error, and the p95 measurement status.
+
+## Limitations
+
+- The current 81-question development set is source-derived: 72 questions
+  were recorded as “Codex (user-delegated),” six have no reviewer recorded,
+  and three are marked assistant-authored. The `verified` field in the file
+  does not mean the questions were independently human-authored or reviewed.
+- Tuning and evaluation used the same 81 questions. A separate held-out set
+  has not yet been created, reviewed, or run, so the current retrieval results
+  do not establish generalization. The selected dense / structure-aware mode
+  is a development-set decision.
+- No full answer-generation evaluation has measured faithfulness or citation
+  validity. The existing 90% judge agreement is based on synthetic examples
+  labeled by Codex under user delegation, not human calibration.
+- Five live queries are only a spot-check. Their 5,654 ms TTFT p95 is not a
+  stable product latency estimate. Offline CPU retrieval/reranking p95 is not
+  TTFT, and a larger live run was skipped because of the Groq quota limit.
+- PostgreSQL `ts_rank_cd` is not BM25; hybrid-search scores should not be
+  described as BM25 results.
+
+Detailed measurements and linked report files are in [RESULTS.md](RESULTS.md).

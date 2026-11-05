@@ -6,6 +6,7 @@ import os
 import random
 import time
 from typing import AsyncIterator, Awaitable, Callable, Sequence
+from urllib.parse import urlparse
 
 import httpx
 
@@ -205,16 +206,29 @@ class OpenAICompatClient:
 
 
 def from_env(**overrides) -> OpenAICompatClient:
-    api_key = os.getenv("GROQ_API_KEY")
+    base_url = os.getenv("AEGIS_BASE_URL", DEFAULT_BASE_URL)
+    parsed_url = urlparse(base_url)
+    is_local = parsed_url.hostname in {"localhost", "127.0.0.1", "::1"}
+    # Local OpenAI-compatible servers such as Ollama require an Authorization
+    # header for client compatibility but ignore its value. Keep GROQ_API_KEY
+    # as a backwards-compatible fallback for hosted deployments.
+    api_key = os.getenv("AEGIS_API_KEY") or os.getenv("GROQ_API_KEY")
+    if not api_key and is_local:
+        api_key = "ollama"
     if not api_key:
-        raise RuntimeError("GROQ_API_KEY environment variable is not set.")
+        raise RuntimeError(
+            "Set AEGIS_API_KEY for the configured endpoint or GROQ_API_KEY for Groq."
+        )
     model = os.getenv("AEGIS_MODEL", DEFAULT_MODEL)
+    overrides.setdefault(
+        "timeout", float(os.getenv("AEGIS_LLM_TIMEOUT", "300" if is_local else "60"))
+    )
     overrides.setdefault(
         "prompt_overhead",
         int(os.getenv("AEGIS_PROMPT_OVERHEAD", PROMPT_OVERHEAD.get(model, 0))),
     )
     return OpenAICompatClient(
-        base_url=os.getenv("AEGIS_BASE_URL", DEFAULT_BASE_URL),
+        base_url=base_url,
         api_key=api_key,
         model=model,
         **overrides,

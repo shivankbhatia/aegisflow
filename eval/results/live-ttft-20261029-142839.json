@@ -1,0 +1,215 @@
+{
+  "created_at": "2026-10-29T14:28:39.210008+00:00",
+  "api_url": "http://127.0.0.1:8000",
+  "query": "How do I add a background task?",
+  "k": 5,
+  "sample_count": 20,
+  "percentile_method": "nearest rank",
+  "p50_first_token_ms": 2289.7829590001493,
+  "p95_first_token_ms": 4792.105041000468,
+  "target_ms": 1500,
+  "target_passed": false,
+  "samples": [
+    {
+      "sample": 1,
+      "request_id": "b2c5a5f3-1dad-41f6-a958-15e29b1285c7",
+      "first_token_ms": 1850.6753749970812,
+      "retrieval_ms": 34.98416699585505,
+      "rerank_ms": 0.0,
+      "total_ms": 3684.395249998488,
+      "tokens": 866
+    },
+    {
+      "sample": 2,
+      "request_id": "b12baf81-c64b-4e61-9d3f-5e1d99843c8d",
+      "first_token_ms": 3737.947916997655,
+      "retrieval_ms": 60.64841699844692,
+      "rerank_ms": 0.0,
+      "total_ms": 4931.59079200268,
+      "tokens": 824
+    },
+    {
+      "sample": 3,
+      "request_id": "b0fe058c-594a-4700-b853-ffe1f260d173",
+      "first_token_ms": 1873.361959005706,
+      "retrieval_ms": 34.09749999991618,
+      "rerank_ms": 0.0,
+      "total_ms": 3893.233709000924,
+      "tokens": 873
+    },
+    {
+      "sample": 4,
+      "request_id": "b8b5af8d-78e4-4b17-a8e3-9f045f1bc6f1",
+      "first_token_ms": 2713.5152499977266,
+      "retrieval_ms": 31.673707999289036,
+      "rerank_ms": 0.0,
+      "total_ms": 4164.639208000153,
+      "tokens": 825
+    },
+    {
+      "sample": 5,
+      "request_id": "ab101fa2-43f3-4036-aec1-d44e3910829e",
+      "first_token_ms": 4792.105041000468,
+      "retrieval_ms": 32.90250000281958,
+      "rerank_ms": 0.0,
+      "total_ms": 5627.290124997671,
+      "tokens": 809
+    },
+    {
+      "sample": 6,
+      "request_id": "7bd270ba-9d9c-476e-bb5c-83a5df339071",
+      "first_token_ms": 2289.7829590001493,
+      "retrieval_ms": 39.442916997359134,
+      "rerank_ms": 0.0,
+      "total_ms": 4558.561459001794,
+      "tokens": 888
+    },
+    {
+      "sample": 7,
+      "request_id": "57f52b55-24a1-445c-bd27-21ee9b4a80cc",
+      "first_token_ms": 1633.3944579964736,
+      "retrieval_ms": 34.23320799629437,
+      "rerank_ms": 0.0,
+      "total_ms": 3063.0067079982837,
+      "tokens": 814
+    },
+    {
+      "sample": 8,
+      "request_id": "a6fdceee-624e-4bc8-892c-5914931191ab",
+      "first_token_ms": 4211.916499996732,
+      "retrieval_ms": 27.654625002469402,
+      "rerank_ms": 0.0,
+      "total_ms": 5160.584416997153,
+      "tokens": 823
+    },
+    {
+      "sample": 9,
+      "request_id": "258d3ef0-a30d-41f2-a460-4a717447c8f0",
+      "first_token_ms": 3870.815082998888,
+      "retrieval_ms": 50.80554100277368,
+      "rerank_ms": 0.0,
+      "total_ms": 4807.12108300213,
+      "tokens": 829
+    },
+    {
+      "sample": 10,
+      "request_id": "2acc1144-a50f-49e8-90f0-d9baf356f6dc",
+      "first_token_ms": 1987.2587920035585,
+      "retrieval_ms": 35.750875002122484,
+      "rerank_ms": 0.0,
+      "total_ms": 3233.486458004336,
+      "tokens": 799
+    },
+    {
+      "sample": 11,
+      "request_id": "a1b0c85e-2579-4069-9799-d49e55f64895",
+      "first_token_ms": 2190.3337499970803,
+      "retrieval_ms": 35.39229099988006,
+      "rerank_ms": 0.0,
+      "total_ms": 4078.2021249979152,
+      "tokens": 823
+    },
+    {
+      "sample": 12,
+      "request_id": "f203f0d0-a4ee-48d5-b4be-fae2a1063870",
+      "first_token_ms": 3254.859042004682,
+      "retrieval_ms": 33.213834001799114,
+      "rerank_ms": 0.0,
+      "total_ms": 3944.2639170010807,
+      "tokens": 797
+    },
+    {
+      "sample": 13,
+      "request_id": "8fabcdc0-423a-472d-b477-1e5da80d5f8a",
+      "first_token_ms": 2699.2904159997124,
+      "retrieval_ms": 34.78658299718518,
+      "rerank_ms": 0.0,
+      "total_ms": 3007.086707999406,
+      "tokens": 784
+    },
+    {
+      "sample": 14,
+      "request_id": "8d064677-918f-400e-9904-121aa0fca2b7",
+      "first_token_ms": 1965.226291998988,
+      "retrieval_ms": 33.4994589939015,
+      "rerank_ms": 0.0,
+      "total_ms": 3215.264833997935,
+      "tokens": 814
+    },
+    {
+      "sample": 15,
+      "request_id": "6a0af962-c772-4df0-bc80-003809247d24",
+      "first_token_ms": 2636.920375000045,
+      "retrieval_ms": 33.32754199800547,
+      "rerank_ms": 0.0,
+      "total_ms": 4601.644417001808,
+      "tokens": 827
+    },
+    {
+      "sample": 16,
+      "request_id": "4da316d4-55a9-4850-ad26-986ccc00e1eb",
+      "first_token_ms": 2597.496374997718,
+      "retrieval_ms": 34.95304099487839,
+      "rerank_ms": 0.0,
+      "total_ms": 3584.5143330006977,
+      "tokens": 806
+    },
+    {
+      "sample": 17,
+      "request_id": "98148883-1b0e-498c-8d0e-be7e007ee703",
+      "first_token_ms": 1272.7376670009107,
+      "retrieval_ms": 43.17587499826914,
+      "rerank_ms": 0.0,
+      "total_ms": 3430.4725420006434,
+      "tokens": 869
+    },
+    {
+      "sample": 18,
+      "request_id": "d9fd9bde-4e06-4292-9ba5-09c99bf8f5b2",
+      "first_token_ms": 5163.629624999885,
+      "retrieval_ms": 34.217708001961,
+      "rerank_ms": 0.0,
+      "total_ms": 6105.400833002932,
+      "tokens": 807
+    },
+    {
+      "sample": 19,
+      "request_id": "bcc4b8d3-25bb-4df2-925c-8a7aa11e3f55",
+      "first_token_ms": 1392.2004999985802,
+      "retrieval_ms": 50.7203329980257,
+      "rerank_ms": 0.0,
+      "total_ms": 2398.8693749997765,
+      "tokens": 865
+    },
+    {
+      "sample": 20,
+      "request_id": "ca03dd8e-65ff-4420-b2e2-c5ce2d18063f",
+      "first_token_ms": 1512.2608750025393,
+      "retrieval_ms": 37.64062499976717,
+      "rerank_ms": 0.0,
+      "total_ms": 3807.7739590007695,
+      "tokens": 927
+    }
+  ],
+  "manifest": {
+    "sha": "2afd85833a355709afca86a15365bcfc10adffdd",
+    "dirty": true,
+    "model": "beam:cloud",
+    "qa_config_version": "qa-v0.1-provisional",
+    "base_url_host": "localhost",
+    "date_utc": "2026-10-29T14:28:39.231482+00:00",
+    "temperature": 0.0,
+    "python_version": "3.14.7",
+    "python_implementation": "CPython",
+    "libraries": {
+      "aegisflow": "0.1.0",
+      "langgraph": "1.2.10",
+      "langgraph-checkpoint-postgres": "3.2.0",
+      "psycopg": "3.3.4",
+      "fastapi": "0.141.1",
+      "pydantic": "2.13.4",
+      "httpx": "0.28.1",
+      "sentence-transformers": "6.2.0"
+    }
+  }
+}

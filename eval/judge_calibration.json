@@ -1,0 +1,208 @@
+{
+  "n": 20,
+  "threshold": 0.8,
+  "agreement": 0.9,
+  "labeled_by": "Codex (user-delegated)",
+  "cases": [
+    {
+      "question_id": "s40_002",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s40_002",
+      "label": false,
+      "case": "unfaithful",
+      "score": 1.0,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s32_007",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s32_007",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s24_003",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 5,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s24_003",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s24_005",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 4,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s24_005",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The answer states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s32_002",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s32_002",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s48_006",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s48_006",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.5,
+      "supported_claims": 1,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s16_006",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 2,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s16_006",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s56_003",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s56_003",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s64_001",
+      "label": true,
+      "case": "faithful",
+      "score": 0.5,
+      "supported_claims": 1,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "A client\u2011side\u2011binding cursor (ClientCursor and AsyncClientCursor, added in Psycopg\u202f3.1) merges the query and parameters on the client and sends them together to the server, enabling parameterised queries for all SQL statement types, including DDL, which client\u2011side cursors cannot handle."
+      ]
+    },
+    {
+      "question_id": "s64_001",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    },
+    {
+      "question_id": "s08_002",
+      "label": true,
+      "case": "faithful",
+      "score": 1.0,
+      "supported_claims": 1,
+      "unsupported_claims": 0,
+      "unsupported": []
+    },
+    {
+      "question_id": "s08_002",
+      "label": false,
+      "case": "unfaithful",
+      "score": 0.0,
+      "supported_claims": 0,
+      "unsupported_claims": 1,
+      "unsupported": [
+        "The documentation states the answer is 999 and recommends always using that value."
+      ]
+    }
+  ]
+}

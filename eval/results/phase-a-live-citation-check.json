@@ -1,0 +1,85 @@
+{
+  "n": 5,
+  "ttft_p50_ms": 836.295416,
+  "ttft_p95_ms": 5653.508125,
+  "citation_titles_topical": 4,
+  "invalid_citation_responses": 1,
+  "samples": [
+    {
+      "query": "FastAPI background task",
+      "titles": [
+        "background",
+        "background-tasks"
+      ],
+      "invalid_markers": [],
+      "retrieval_ms": 309.825708,
+      "rerank_ms": 0.0,
+      "ttft_ms": 1175.995917,
+      "total_ms": 1457.967207
+    },
+    {
+      "query": "LangChain callback handler",
+      "titles": [
+        "trace-with-langchain"
+      ],
+      "invalid_markers": [
+        0
+      ],
+      "retrieval_ms": 56.3865,
+      "rerank_ms": 0.0,
+      "ttft_ms": 794.880959,
+      "total_ms": 915.890667
+    },
+    {
+      "query": "LangGraph state persistence",
+      "titles": [
+        "persistence"
+      ],
+      "heading_paths": [
+        []
+      ],
+      "invalid_markers": [],
+      "retrieval_ms": 37.784875,
+      "rerank_ms": 0.0,
+      "ttft_ms": 748.531166,
+      "total_ms": 861.717625
+    },
+    {
+      "query": "Psycopg async connection pool",
+      "titles": [
+        "pool"
+      ],
+      "heading_paths": [
+        []
+      ],
+      "invalid_markers": [],
+      "retrieval_ms": 37.320041,
+      "rerank_ms": 0.0,
+      "ttft_ms": 836.295416,
+      "total_ms": 1388.975291
+    },
+    {
+      "query": "FastAPI lifespan shared resource",
+      "titles": [
+        "events",
+        "events"
+      ],
+      "heading_paths": [
+        [
+          "Lifespan Events { #lifespan-events }",
+          "Use Case { #use-case }"
+        ],
+        [
+          "Lifespan Events { #lifespan-events }",
+          "Lifespan { #lifespan }"
+        ]
+      ],
+      "invalid_markers": [],
+      "retrieval_ms": 50.881625,
+      "rerank_ms": 0.0,
+      "ttft_ms": 5653.508125,
+      "total_ms": 5805.908083
+    }
+  ],
+  "notes": "Four of five citations had topical document titles. The LangChain callback query retrieved trace-with-langchain and generated invalid marker [0]. Two citations had empty heading paths."
+}

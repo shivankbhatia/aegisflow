@@ -1,0 +1,1676 @@
+{
+  "name": "hybrid-structure-aware-sparse-0.5",
+  "created_at": "2026-10-29T14:16:11.952499+00:00",
+  "manifest": {
+    "sha": "2afd85833a355709afca86a15365bcfc10adffdd",
+    "dirty": true,
+    "model": "beam:cloud",
+    "qa_config_version": "qa-v0.1-provisional",
+    "base_url_host": "localhost",
+    "date_utc": "2026-10-29T14:16:11.945911+00:00",
+    "temperature": 0.0,
+    "python_version": "3.14.7",
+    "python_implementation": "CPython",
+    "libraries": {
+      "aegisflow": "0.1.0",
+      "langgraph": "1.2.10",
+      "langgraph-checkpoint-postgres": "3.2.0",
+      "psycopg": "3.3.4",
+      "fastapi": "0.141.1",
+      "pydantic": "2.13.4",
+      "httpx": "0.28.1",
+      "sentence-transformers": "6.2.0"
+    }
+  },
+  "ks": [
+    10
+  ],
+  "overall": {
+    "n": 81,
+    "recall@10": 0.2345679012345679,
+    "hit@10": 0.24691358024691357,
+    "mrr": 0.1558103076621595,
+    "latency_p50_s": 0.07795058300689561,
+    "latency_p95_s": 0.09409545800008345
+  },
+  "by_kind": {
+    "multi_hop": {
+      "n": 15,
+      "recall@10": 0.06666666666666667,
+      "hit@10": 0.13333333333333333,
+      "mrr": 0.13333333333333333,
+      "latency_p50_s": 0.08185174999380251,
+      "latency_p95_s": 0.09409545800008345
+    },
+    "single": {
+      "n": 66,
+      "recall@10": 0.2727272727272727,
+      "hit@10": 0.2727272727272727,
+      "mrr": 0.1609187109187109,
+      "latency_p50_s": 0.07792049999989104,
+      "latency_p95_s": 0.09441645799961407
+    }
+  },
+  "per_question": [
+    {
+      "id": "s00_000",
+      "kind": "single",
+      "latency_s": 0.08140916599950287,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/trace-without-env-vars#0",
+        "langchain-docs/src/oss/deepagents/code/configuration#6",
+        "langchain-docs/src/langsmith/test-react-agent-pytest#3",
+        "langchain-docs/src/langsmith/setup-pyproject#3",
+        "langchain-docs/src/langsmith/setup-app-requirements-txt#2",
+        "langchain-docs/src/langsmith/setup-javascript#2",
+        "langchain-docs/src/langsmith/application-structure#11",
+        "langchain-docs/src/oss/langgraph/application-structure#8",
+        "langchain-docs/src/oss/deepagents/code/mcp-tools#10",
+        "langchain-docs/src/langsmith/trace-with-langchain#17"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s00_001",
+      "kind": "single",
+      "latency_s": 0.06148500000563217,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-subgraphs#36",
+        "langchain-docs/src/oss/langgraph/workflows-agents#13",
+        "langchain-docs/src/oss/langgraph/workflows-agents#32",
+        "langchain-docs/src/langsmith/interrupt-concurrent#3",
+        "langchain-docs/src/langsmith/trace-claude-code#12",
+        "langchain-docs/src/langsmith/trace-with-temporal#6",
+        "langchain-docs/src/oss/langgraph/workflows-agents#33",
+        "langchain-docs/src/oss/langgraph/workflows-agents#31",
+        "langchain-docs/src/oss/langgraph/choosing-apis#2",
+        "langchain-docs/src/langsmith/trace-with-codex#5"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s00_003",
+      "kind": "single",
+      "latency_s": 0.0791132079975796,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/sandbox-auth-proxy#3",
+        "langchain-docs/src/oss/deepagents/frontend/sandbox#9",
+        "langchain-docs/src/langsmith/sandbox-service-urls#9",
+        "langchain-docs/src/langsmith/prompt-commit#8",
+        "langchain-docs/openwiki/workflows/integration-listing-automation#6",
+        "langchain-docs/src/snippets/langsmith/saas-region-urls#0",
+        "langchain-docs/openwiki/testing/test-overview#5",
+        "langchain-docs/src/langsmith/prompt-commit#9",
+        "langchain-docs/src/oss/contributing/documentation#14",
+        "langchain-docs/src/oss/deepagents/frontend/sandbox#1"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s00_005",
+      "kind": "single",
+      "latency_s": 0.07208433299820172,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/managed-deep-agents-cli#2",
+        "langchain-docs/src/oss/deepagents/code/credentials#5",
+        "langchain-docs/src/langsmith/managed-deep-agents-mcp-endpoint#2",
+        "langchain-docs/src/langsmith/deploy-vite-langsmith#3",
+        "langchain-docs/src/langsmith/managed-deep-agents-connections#30",
+        "langchain-docs/src/langsmith/self-host-using-an-existing-secret#2",
+        "langchain-docs/src/langsmith/managed-deep-agents-identity#2",
+        "langchain-docs/src/langsmith/managed-deep-agents-deploy#6",
+        "langchain-docs/src/oss/javascript/integrations/tools/composio#1",
+        "langchain-docs/src/langsmith/managed-deep-agents-connections#21"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s00_006",
+      "kind": "single",
+      "latency_s": 0.07795058300689561,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/streaming#50",
+        "langchain-docs/src/oss/langgraph/use-graph-api#23",
+        "langchain-docs/src/oss/langgraph/use-graph-api#22",
+        "langchain-docs/src/oss/langgraph/streaming#51",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#7",
+        "langchain-docs/src/oss/langgraph/streaming#49",
+        "psycopg/advanced/typing#3",
+        "langchain-docs/src/langsmith/caching#4",
+        "langchain-docs/src/oss/deepagents/backends#45",
+        "langchain-docs/src/oss/python/integrations/llms/nvidia_ai_endpoints#1"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s00_007",
+      "kind": "single",
+      "latency_s": 0.09645270899636671,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/snippets/code-samples/subagents-troubleshooting-differentiate-js#0",
+        "langchain-docs/src/oss/deepagents/subagents#5",
+        "langchain-docs/src/oss/langchain/multi-agent/subagents#9",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_search#4",
+        "langchain-docs/src/oss/langchain/multi-agent/subagents#10",
+        "langchain-docs/src/snippets/code-samples/subagents-troubleshooting-differentiate-py#0",
+        "langchain-docs/src/oss/langchain/middleware/built-in#51",
+        "langchain-docs/src/snippets/code-samples/rag-create-agent-js#0",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_get_research#5",
+        "langchain-docs/src/snippets/code-samples/rag-deep-full-js#24"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s40_002",
+      "kind": "single",
+      "latency_s": 0.07713654200051678,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql#0",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#22",
+        "langchain-docs/src/oss/python/integrations/providers/azure_ai#3",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/azure_cosmosdb_nosql#1",
+        "langchain-docs/src/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore#0",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index#8",
+        "langchain-docs/src/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql#4",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#17",
+        "langchain-docs/src/oss/javascript/integrations/providers/all_providers#8",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/azure_cosmosdb_mongodb#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m24_005",
+      "kind": "multi_hop",
+      "latency_s": 0.04427274999761721,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/self-host-sandbox-egress-proxy#1",
+        "langchain-docs/src/langsmith/self-host-sandbox-egress-proxy#4",
+        "langchain-docs/src/langsmith/sandbox-auth-proxy#25",
+        "langchain-docs/src/langsmith/sandbox-auth-proxy#2",
+        "langchain-docs/src/langsmith/distributed-tracing#1",
+        "langchain-docs/src/langsmith/enable-self-hosted-sandboxes#13",
+        "langchain-docs/src/langsmith/llm-auth-proxy-self-hosted#29",
+        "langchain-docs/src/langsmith/self-host-sandbox-egress-proxy#2",
+        "langchain-docs/src/langsmith/self-host-sandbox-egress-proxy#3",
+        "langchain-docs/src/langsmith/sandbox-auth-proxy#13"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s32_007",
+      "kind": "single",
+      "latency_s": 0.08723066600214224,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/multi-agent/index#5",
+        "langchain-docs/src/oss/langchain/multi-agent/index#11",
+        "langchain-docs/src/oss/langchain/multi-agent/index#9",
+        "langchain-docs/src/oss/langchain/multi-agent/handoffs#22",
+        "langchain-docs/src/oss/langchain/multi-agent/index#1",
+        "langchain-docs/src/oss/langchain/multi-agent/index#2",
+        "langchain-docs/src/oss/langgraph/overview#0",
+        "langchain-docs/src/oss/langchain/multi-agent/index#10",
+        "langchain-docs/src/oss/langchain/streaming#36",
+        "langchain-docs/src/langsmith/multi-turn-simulation#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s24_003",
+      "kind": "single",
+      "latency_s": 0.08901808300288394,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/tools#1",
+        "langchain-docs/src/oss/langgraph/quickstart#23",
+        "langchain-docs/src/oss/langgraph/quickstart#12",
+        "langchain-docs/src/oss/deepagents/tools#0",
+        "langchain-docs/src/oss/python/integrations/tools/TEMPLATE#0",
+        "langchain-docs/src/oss/deepagents/tools#1",
+        "langchain-docs/src/oss/python/integrations/tools/azure_logic_apps#3",
+        "langchain-docs/src/langsmith/managed-deep-agents-tools#1",
+        "langchain-docs/src/langsmith/fleet/mcp-framework#1",
+        "langchain-docs/src/oss/langchain/tools#2"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m16_006",
+      "kind": "multi_hop",
+      "latency_s": 0.0757433749968186,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/databricks#11",
+        "langchain-docs/src/oss/langchain/context-engineering#16",
+        "langchain-docs/src/oss/langgraph/quickstart#19",
+        "langchain-docs/src/oss/langchain/context-engineering#34",
+        "langchain-docs/src/oss/python/integrations/chat/azure_chat_openai#16",
+        "langchain-docs/src/oss/langchain/middleware/custom#8",
+        "langchain-docs/src/snippets/code-samples/middleware-dynamic-prompt-class-py#0",
+        "langchain-docs/src/oss/langchain/context-engineering#36",
+        "langchain-docs/src/oss/python/integrations/chat/openrouter#21",
+        "langchain-docs/src/oss/python/integrations/chat/nvidia_ai_endpoints#12"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s24_005",
+      "kind": "single",
+      "latency_s": 0.047636458002671134,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/deepagents/fault-tolerance#4",
+        "langchain-docs/src/oss/langchain/errors/MODEL_RATE_LIMIT#1",
+        "langchain-docs/src/langsmith/handle-model-rate-limiting#0",
+        "langchain-docs/src/oss/langchain/models#44",
+        "langchain-docs/src/oss/langchain/middleware/built-in#15",
+        "langchain-docs/src/oss/langchain/middleware/built-in#16",
+        "langchain-docs/src/oss/langchain/middleware/built-in#32",
+        "langchain-docs/src/langsmith/cloud#22",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#12",
+        "langchain-docs/src/langsmith/handle-model-rate-limiting#1"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s32_002",
+      "kind": "single",
+      "latency_s": 0.07084429200040177,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/snippets/code-samples/rubric-code-generation-agent-py#0",
+        "langchain-docs/src/oss/python/integrations/tools/stagehand#3",
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py#0",
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py#2",
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py#1",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#6",
+        "langchain-docs/src/oss/python/integrations/sandboxes/daytona#2",
+        "langchain-docs/src/snippets/code-samples/acp-quickstart-py#0",
+        "langchain-docs/src/snippets/code-samples/customization-overview-py#1",
+        "langchain-docs/src/snippets/code-samples/dynamic-subagents-tournament-configure-py#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s48_006",
+      "kind": "single",
+      "latency_s": 0.07608245799929136,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/adapt#5",
+        "psycopg/basic/adapt#0",
+        "psycopg/basic/adapt#1",
+        "psycopg/basic/params#3",
+        "psycopg/api/sql#0",
+        "psycopg/basic/params#2",
+        "psycopg/advanced/pool#10",
+        "psycopg/basic/install#0",
+        "psycopg/advanced/cursors#2",
+        "psycopg/api/connections#0"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s16_006",
+      "kind": "single",
+      "latency_s": 0.08618620900233509,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/tools#11",
+        "langchain-docs/src/snippets/code-samples/long-term-memory-write-tool-inmemory-py#5",
+        "langchain-docs/src/snippets/code-samples/long-term-memory-read-tool-inmemory-py#5",
+        "langchain-docs/src/oss/concepts/context#0",
+        "langchain-docs/src/oss/langgraph/stores#10",
+        "langchain-docs/src/oss/langchain/context-engineering#42",
+        "langchain-docs/src/oss/python/integrations/memory/mongodb-long-term-memory#3",
+        "langchain-docs/src/oss/deepagents/context-engineering#18",
+        "langchain-docs/src/oss/javascript/integrations/memory/mongodb-long-term-memory#4",
+        "langchain-docs/src/langsmith/store-auth#1"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s56_003",
+      "kind": "single",
+      "latency_s": 0.07241299999441253,
+      "rr": 0.5,
+      "retrieved": [
+        "psycopg/api/sql#0",
+        "psycopg/api/sql#1",
+        "psycopg/api/adapt#0",
+        "psycopg/advanced/rows#1",
+        "psycopg/basic/copy#0",
+        "psycopg/basic/adapt#0",
+        "psycopg/api/index#0",
+        "psycopg/api/abc#0",
+        "psycopg/index#0",
+        "psycopg/api/errors#2"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s64_001",
+      "kind": "single",
+      "latency_s": 0.0653675840003416,
+      "rr": 0.5,
+      "retrieved": [
+        "psycopg/advanced/cursors#0",
+        "psycopg/advanced/cursors#1",
+        "psycopg/advanced/cursors#2",
+        "psycopg/api/cursors#0",
+        "psycopg/advanced/cursors#4",
+        "psycopg/advanced/cursors#3",
+        "psycopg/basic/from_pg2#0",
+        "psycopg/advanced/cursors#5",
+        "psycopg/api/cursors#7",
+        "psycopg/basic/from_pg2#2"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s08_002",
+      "kind": "single",
+      "latency_s": 0.03995341599511448,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/deepagents/code/hooks#4",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/runs-geturl#5",
+        "langchain-docs/src/oss/javascript/integrations/tools/composio#16",
+        "langchain-docs/src/oss/langchain/frontend/human-in-the-loop#7",
+        "langchain-docs/src/oss/langchain/structured-output#1",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/runs-retrieve#21",
+        "langchain-docs/src/oss/langchain/context-engineering#37",
+        "langchain-docs/src/oss/langchain/context-engineering#35",
+        "langchain-docs/src/oss/python/integrations/providers/typesafe#2",
+        "langchain-docs/src/oss/langchain/structured-output#3"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s32_003",
+      "kind": "single",
+      "latency_s": 0.06841724999685539,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-subgraphs#9",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#14",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#12",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#3",
+        "langchain-docs/src/oss/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE#0",
+        "langchain-docs/src/oss/langgraph/graph-api#2",
+        "langchain-docs/src/oss/langgraph/graph-api#25",
+        "langchain-docs/src/oss/python/integrations/providers/langfuse#5",
+        "langchain-docs/src/oss/langgraph/errors/INVALID_GRAPH_NODE_RETURN_VALUE#0",
+        "langchain-docs/src/oss/langgraph/application-structure#7"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s64_007",
+      "kind": "single",
+      "latency_s": 0.06602779200329678,
+      "rr": 0.14285714285714285,
+      "retrieved": [
+        "psycopg/basic/usage#2",
+        "psycopg/api/connections#0",
+        "psycopg/basic/usage#3",
+        "psycopg/advanced/pool#0",
+        "psycopg/api/pool#0",
+        "psycopg/advanced/prepare#0",
+        "psycopg/advanced/async#2",
+        "psycopg/basic/usage#1",
+        "psycopg/advanced/async#3",
+        "psycopg/api/dns#2"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s72_002",
+      "kind": "single",
+      "latency_s": 0.08068345799983945,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/cursors#5",
+        "psycopg/advanced/cursors#3",
+        "psycopg/basic/from_pg2#2",
+        "psycopg/advanced/cursors#0",
+        "psycopg/advanced/cursors#4",
+        "psycopg/basic/usage#0",
+        "psycopg/basic/params#4",
+        "psycopg/api/sql#1",
+        "psycopg/api/cursors#0",
+        "psycopg/advanced/typing#1"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s72_006",
+      "kind": "single",
+      "latency_s": 0.08652874999825144,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-graph-api#23",
+        "psycopg/advanced/typing#3",
+        "psycopg/basic/from_pg2#6",
+        "langchain-docs/src/langsmith/caching#4",
+        "psycopg/advanced/rows#1",
+        "psycopg/index#0",
+        "psycopg/advanced/rows#0",
+        "psycopg/advanced/adapt#0",
+        "psycopg/basic/params#3",
+        "psycopg/api/abc#0"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s48_005",
+      "kind": "single",
+      "latency_s": 0.07792049999989104,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/javascript/integrations/tools/anthropic#13",
+        "langchain-docs/src/oss/javascript/integrations/tools/anthropic#12",
+        "langchain-docs/src/langsmith/fleet/mcp-framework#3",
+        "langchain-docs/src/langsmith/managed-deep-agents-mcp-connectors#1",
+        "langchain-docs/src/langsmith/managed-deep-agents-search#2",
+        "langchain-docs/src/langsmith/server-mcp#3",
+        "langchain-docs/src/oss/javascript/integrations/tools/openai#1",
+        "langchain-docs/src/oss/javascript/migrate/langchain-mcp-adapters#4",
+        "langchain-docs/src/oss/langchain/mcp/tools#6",
+        "langchain-docs/src/langsmith/managed-deep-agents-mcp-connectors#2"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s56_006",
+      "kind": "single",
+      "latency_s": 0.0714460000017425,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/errors#3",
+        "psycopg/api/pool#2",
+        "psycopg/api/errors#2",
+        "psycopg/api/errors#1",
+        "psycopg/api/pool#5",
+        "psycopg/api/connections#0",
+        "psycopg/basic/usage#2",
+        "psycopg/api/module#0",
+        "psycopg/api/errors#8",
+        "psycopg/basic/usage#1"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "m16_005",
+      "kind": "multi_hop",
+      "latency_s": 0.053656125004636124,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/smithdb-sdk-migration#7",
+        "langchain-docs/src/oss/deepagents/fault-tolerance#8",
+        "langchain-docs/src/oss/javascript/integrations/providers/typesafe#4",
+        "langchain-docs/src/langsmith/smithdb-sdk-migration#6",
+        "langchain-docs/openwiki/testing/test-overview#8",
+        "langchain-docs/src/oss/deepagents/fault-tolerance#6",
+        "langchain-docs/src/oss/langchain/frontend/integrations/openui#7",
+        "langchain-docs/.agents/skills/docs-tooling-notion/SKILL#5",
+        "langchain-docs/src/oss/langchain/middleware/built-in#3",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/runs-retrieve#29"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m24_004",
+      "kind": "multi_hop",
+      "latency_s": 0.07590970800083596,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/distributed-tracing#1",
+        "psycopg/advanced/pool#3",
+        "langchain-docs/src/oss/python/integrations/middleware/aws#26",
+        "langchain-docs/src/langsmith/nest-traces#3",
+        "langchain-docs/src/oss/deepagents/going-to-production#11",
+        "langchain-docs/src/langsmith/nest-traces#2",
+        "langchain-docs/src/oss/langgraph/use-functional-api#18",
+        "langchain-docs/src/oss/deepagents/async-subagents#19",
+        "psycopg/api/cursors#9",
+        "langchain-docs/src/oss/langgraph/functional-api#18"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m00_005",
+      "kind": "multi_hop",
+      "latency_s": 0.08464333300071303,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/nvidia_ai_endpoints#17",
+        "langchain-docs/src/oss/python/integrations/chat/openrouter#14",
+        "langchain-docs/src/langsmith/prompt-commit#8",
+        "langchain-docs/src/langsmith/evaluate-with-attachments#16",
+        "langchain-docs/src/langsmith/prompt-commit#7",
+        "langchain-docs/src/langsmith/prompt-commit#6",
+        "langchain-docs/src/oss/python/integrations/chat/nvidia_ai_endpoints#8",
+        "langchain-docs/src/langsmith/log-multimodal-traces#0",
+        "langchain-docs/src/oss/deepagents/frontend/sandbox#1",
+        "langchain-docs/src/langsmith/sandbox-service-urls#9"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s56_000",
+      "kind": "single",
+      "latency_s": 0.0633822920062812,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/async#7",
+        "psycopg/basic/transactions#0",
+        "psycopg/basic/transactions#1",
+        "psycopg/news#9",
+        "psycopg/news#15",
+        "psycopg/api/connections#0",
+        "psycopg/basic/usage#2",
+        "psycopg/api/module#0",
+        "psycopg/advanced/pool#10",
+        "psycopg/api/pool#0"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s48_007",
+      "kind": "single",
+      "latency_s": 0.08442862499941839,
+      "rr": 0.2,
+      "retrieved": [
+        "psycopg/news_pool#0",
+        "psycopg/basic/install#0",
+        "psycopg/basic/from_pg2#0",
+        "psycopg/api/module#0",
+        "psycopg/news#16",
+        "psycopg/index#0",
+        "psycopg/news#0",
+        "psycopg/news#12",
+        "psycopg/api/pq#1",
+        "psycopg/api/index#0"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s16_004",
+      "kind": "single",
+      "latency_s": 0.0891335420019459,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-graph-api#23",
+        "psycopg/advanced/typing#3",
+        "langchain-docs/src/oss/langgraph/streaming#51",
+        "langchain-docs/src/oss/langgraph/streaming#49",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#7",
+        "langchain-docs/src/oss/langgraph/streaming#50",
+        "langchain-docs/src/oss/langgraph/use-graph-api#22",
+        "langchain-docs/.github/copilot-instructions#3",
+        "langchain-docs/src/oss/python/migrate/langchain-mcp-adapters#1",
+        "langchain-docs/src/oss/langgraph/use-graph-api#24"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s32_005",
+      "kind": "single",
+      "latency_s": 0.07899833300325554,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-subgraphs#3",
+        "langchain-docs/src/oss/langgraph/streaming#33",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#5",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#43",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#2",
+        "langchain-docs/src/langsmith/streaming#10",
+        "langchain-docs/src/oss/langgraph/use-graph-api#86",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#15",
+        "langchain-docs/src/oss/langgraph/use-subgraphs#10",
+        "langchain-docs/src/oss/langgraph/graph-api#44"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s40_003",
+      "kind": "single",
+      "latency_s": 0.08944199999677949,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#4",
+        "langchain-docs/src/oss/python/integrations/providers/google#0",
+        "langchain-docs/src/oss/javascript/integrations/providers/google#8",
+        "langchain-docs/src/oss/javascript/integrations/llms/google_vertex_ai#2",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_vertex_ai#2",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_vertex_ai#4",
+        "langchain-docs/src/oss/python/integrations/chat/google_vertex_ai#3",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_vertex_ai#3",
+        "langchain-docs/src/oss/javascript/integrations/llms/google_vertex_ai#4",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_vertex_ai#3"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s40_007",
+      "kind": "single",
+      "latency_s": 0.06786383299913723,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/tools/tavily_crawl#4",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_map#4",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_search#3",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_search#4",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_crawl#5",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_map#5",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_extract#3",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_map#1",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_map#6",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_extract#4"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s72_003",
+      "kind": "single",
+      "latency_s": 0.0733189590027905,
+      "rr": 0.5,
+      "retrieved": [
+        "psycopg/api/cursors#0",
+        "psycopg/api/cursors#2",
+        "psycopg/api/cursors#9",
+        "psycopg/basic/usage#1",
+        "psycopg/advanced/cursors#4",
+        "psycopg/api/cursors#7",
+        "psycopg/advanced/rows#1",
+        "psycopg/api/cursors#6",
+        "psycopg/api/cursors#5",
+        "psycopg/advanced/typing#4"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s64_006",
+      "kind": "single",
+      "latency_s": 0.03996841699699871,
+      "rr": 0.3333333333333333,
+      "retrieved": [
+        "psycopg/api/adapt#0",
+        "psycopg/api/abc#0",
+        "psycopg/advanced/adapt#2",
+        "psycopg/basic/params#4",
+        "psycopg/basic/params#3",
+        "psycopg/index#0",
+        "psycopg/api/types#0",
+        "psycopg/advanced/adapt#3",
+        "psycopg/advanced/adapt#1",
+        "psycopg/basic/adapt#0"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s72_001",
+      "kind": "single",
+      "latency_s": 0.04559762500139186,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/sql#0",
+        "psycopg/api/module#0",
+        "psycopg/basic/usage#0",
+        "psycopg/basic/params#2",
+        "psycopg/advanced/cursors#2",
+        "psycopg/api/pq#0",
+        "psycopg/basic/params#3",
+        "psycopg/basic/params#0",
+        "psycopg/basic/copy#0",
+        "langchain-docs/src/oss/langchain/sql-agent#5"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s64_002",
+      "kind": "single",
+      "latency_s": 0.041190957999788225,
+      "rr": 0.5,
+      "retrieved": [
+        "psycopg/advanced/pool#0",
+        "psycopg/advanced/pool#2",
+        "psycopg/api/pool#0",
+        "psycopg/advanced/pool#6",
+        "psycopg/api/pool#2",
+        "psycopg/news_pool#2",
+        "psycopg/news_pool#0",
+        "psycopg/news_pool#1",
+        "psycopg/advanced/pool#4",
+        "psycopg/advanced/pool#10"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s32_004",
+      "kind": "single",
+      "latency_s": 0.09305883400520543,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/snippets/chat-model-tabs-da#1",
+        "langchain-docs/src/snippets/sandboxes-basic-tabs-py#1",
+        "langchain-docs/src/snippets/chat-model-tabs#2",
+        "langchain-docs/src/snippets/deepagents-sandbox-basic-py#2",
+        "langchain-docs/src/snippets/deepagents-sandbox-basic-py#1",
+        "langchain-docs/src/oss/javascript/integrations/providers/anthropic#1",
+        "langchain-docs/src/oss/python/integrations/chat/anthropic#5",
+        "langchain-docs/src/oss/langgraph/quickstart#26",
+        "langchain-docs/src/oss/python/integrations/llms/anthropic#2",
+        "langchain-docs/src/oss/javascript/integrations/chat/anthropic#5"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m24_003",
+      "kind": "multi_hop",
+      "latency_s": 0.08385650000127498,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/test-react-agent-pytest#26",
+        "langchain-docs/src/langsmith/test-react-agent-pytest#9",
+        "langchain-docs/src/langsmith/test-react-agent-pytest#11",
+        "langchain-docs/src/langsmith/pytest#2",
+        "langchain-docs/src/oss/langchain/test/integration-testing#11",
+        "langchain-docs/src/langsmith/pytest#0",
+        "langchain-docs/src/langsmith/pytest#11",
+        "langchain-docs/src/oss/python/integrations/tools/parallel_search#5",
+        "langchain-docs/src/oss/python/integrations/retrievers/parallel#5",
+        "langchain-docs/src/oss/python/integrations/retrievers/egnyte#7"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s08_000",
+      "kind": "single",
+      "latency_s": 0.05081158300163224,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/prompt-commit#9",
+        "langchain-docs/src/langsmith/sandbox-service-urls#9",
+        "langchain-docs/src/oss/langgraph/backward-compatibility#0",
+        "langchain-docs/src/oss/langgraph/backward-compatibility#4",
+        "langchain-docs/src/langsmith/smithdb-sdk-migration#7",
+        "langchain-docs/src/langsmith/smithdb-sdk-migration#6",
+        "langchain-docs/src/langsmith/prompt-commit#8",
+        "langchain-docs/src/langsmith/prompt-commit#7",
+        "langchain-docs/src/oss/deepagents/fault-tolerance#8",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/threads-list-traces#9"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s48_001",
+      "kind": "single",
+      "latency_s": 0.09292120799364056,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/llms/google_vertex_ai#2",
+        "langchain-docs/src/oss/python/integrations/llms/google_generative_ai#1",
+        "langchain-docs/src/oss/python/integrations/providers/google#5",
+        "langchain-docs/src/oss/python/integrations/tools/google_imagen#1",
+        "langchain-docs/src/oss/python/integrations/document_loaders/google_classroom#14",
+        "langchain-docs/src/oss/python/integrations/chat/qwq#8",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_generative_ai#3",
+        "langchain-docs/src/snippets/code-samples/customization-interpreters-py#0",
+        "langchain-docs/src/snippets/code-samples/interpreters-quickstart-py#0",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#24"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s16_007",
+      "kind": "single",
+      "latency_s": 0.09112558299966622,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/providers/box#3",
+        "langchain-docs/src/langsmith/managed-deep-agents-channels-http#2",
+        "langchain-docs/src/langsmith/custom-auth#1",
+        "langchain-docs/src/oss/python/integrations/embeddings/oci_generative_ai#4",
+        "langchain-docs/src/langsmith/managed-deep-agents-channels-http#3",
+        "langchain-docs/src/langsmith/resource-auth#2",
+        "langchain-docs/src/langsmith/add-auth-server#4",
+        "langchain-docs/src/oss/langchain/multi-agent/router-knowledge-base#21",
+        "langchain-docs/src/oss/langchain/multi-agent/router-knowledge-base#28",
+        "langchain-docs/src/langsmith/managed-deep-agents-identity#5"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s08_003",
+      "kind": "single",
+      "latency_s": 0.083822708002117,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/distributed-tracing#1",
+        "langchain-docs/src/oss/python/integrations/middleware/aws#26",
+        "langchain-docs/src/langsmith/nest-traces#2",
+        "langchain-docs/src/langsmith/sandbox-sdk#18",
+        "langchain-docs/src/snippets/code-samples/resolve-experiment-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/runs-geturl-after-py#0",
+        "langchain-docs/src/langsmith/nest-traces#3",
+        "langchain-docs/src/oss/langgraph/use-graph-api#81",
+        "langchain-docs/src/oss/deepagents/async-subagents#19",
+        "langchain-docs/src/langsmith/prompt-commit#7"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s48_002",
+      "kind": "single",
+      "latency_s": 0.09536941700207535,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#14",
+        "langchain-docs/src/oss/python/integrations/llms/google_vertex_ai#13",
+        "langchain-docs/src/oss/python/integrations/chat/openrouter#14",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#23",
+        "langchain-docs/src/oss/python/integrations/chat/anthropic#20",
+        "langchain-docs/src/oss/javascript/integrations/chat/openrouter#11",
+        "langchain-docs/src/oss/python/integrations/llms/google_vertex_ai#18",
+        "langchain-docs/src/oss/python/integrations/llms/google_vertex_ai#15",
+        "langchain-docs/src/oss/python/integrations/chat/openai#52",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#18"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s32_006",
+      "kind": "single",
+      "latency_s": 0.0800301670024055,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/deploy-other-frameworks#5",
+        "langchain-docs/src/oss/python/integrations/middleware/anthropic#7",
+        "langchain-docs/src/oss/python/integrations/chat/anthropic#53",
+        "langchain-docs/src/langsmith/llm-gateway-admin-setup#8",
+        "langchain-docs/src/oss/deepagents/customization#22",
+        "langchain-docs/src/langsmith/deploy-other-frameworks#6",
+        "langchain-docs/src/oss/python/integrations/middleware/anthropic#6",
+        "langchain-docs/src/snippets/code-samples/long-term-memory-create-agent-inmemory-py#0",
+        "langchain-docs/src/oss/python/integrations/sandboxes/daytona#2",
+        "langchain-docs/src/oss/python/integrations/sandboxes/aws#2"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s32_001",
+      "kind": "single",
+      "latency_s": 0.08286754100117832,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/retrievers/graph_rag#5",
+        "langchain-docs/src/oss/javascript/integrations/tools/vectorstore#0",
+        "langchain-docs/src/oss/python/integrations/providers/cockroachdb#2",
+        "langchain-docs/src/snippets/code-samples/agentic-rag-create-retriever-tool-js#0",
+        "langchain-docs/src/oss/python/integrations/vectorstores/google_memorystore_redis#12",
+        "langchain-docs/src/oss/python/integrations/vectorstores/TEMPLATE#7",
+        "langchain-docs/src/oss/python/integrations/vectorstores/in_memory#0",
+        "langchain-docs/src/oss/python/integrations/vectorstores/azure_db_for_postgresql#13",
+        "langchain-docs/src/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#26",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/turbopuffer#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m16_003",
+      "kind": "multi_hop",
+      "latency_s": 0.08436770900152624,
+      "rr": 0.0,
+      "retrieved": [
+        "psycopg/basic/transactions#1",
+        "psycopg/advanced/pool#3",
+        "psycopg/api/connections#8",
+        "psycopg/advanced/pool#2",
+        "langchain-docs/src/oss/deepagents/event-streaming#5",
+        "psycopg/basic/transactions#0",
+        "psycopg/api/pool#2",
+        "psycopg/news_pool#1",
+        "langchain-docs/src/oss/python/integrations/tools/bedrock_agentcore_browser#16",
+        "psycopg/advanced/pool#10"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s40_000",
+      "kind": "single",
+      "latency_s": 0.09544512499996927,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/context-engineering#24",
+        "langchain-docs/src/oss/langchain/context-engineering#28",
+        "langchain-docs/src/oss/langchain/middleware/custom#30",
+        "langchain-docs/src/oss/python/migrate/langchain-v1#18",
+        "langchain-docs/src/oss/deepagents/models#8",
+        "langchain-docs/src/oss/langchain/models#54",
+        "langchain-docs/src/oss/python/integrations/providers/typesafe#7",
+        "langchain-docs/src/snippets/code-samples/sql-agent-create-agent-py#0",
+        "langchain-docs/src/oss/langchain/context-engineering#20",
+        "langchain-docs/src/oss/concepts/products#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s48_003",
+      "kind": "single",
+      "latency_s": 0.08359479100181488,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#6",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#4",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#2",
+        "langchain-docs/src/snippets/code-samples/acp-quickstart-py#0",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#1",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#8",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#0",
+        "langchain-docs/src/oss/python/integrations/providers/browserbase#9",
+        "langchain-docs/src/oss/deepagents/data-analysis#5",
+        "langchain-docs/src/oss/javascript/integrations/providers/modal#2"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s08_001",
+      "kind": "single",
+      "latency_s": 0.08780766700510867,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-graph-api#23",
+        "langchain-docs/src/oss/deepagents/code/config-file#18",
+        "langchain-docs/src/oss/langchain/models#52",
+        "langchain-docs/src/langsmith/caching#4",
+        "langchain-docs/src/oss/python/integrations/retrievers/elasticsearch_retriever#4",
+        "langchain-docs/src/oss/langgraph/streaming#51",
+        "langchain-docs/src/langsmith/observability-studio#4",
+        "langchain-docs/src/oss/langchain/models#53",
+        "psycopg/advanced/typing#3",
+        "langchain-docs/src/oss/langchain/structured-output#5"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s56_004",
+      "kind": "single",
+      "latency_s": 0.0732287089995225,
+      "rr": 0.1111111111111111,
+      "retrieved": [
+        "psycopg/basic/params#4",
+        "psycopg/api/sql#1",
+        "psycopg/basic/from_pg2#2",
+        "psycopg/advanced/cursors#3",
+        "psycopg/api/cursors#6",
+        "psycopg/index#0",
+        "psycopg/api/errors#1",
+        "psycopg/advanced/pool#10",
+        "psycopg/basic/from_pg2#5",
+        "psycopg/basic/params#3"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s64_003",
+      "kind": "single",
+      "latency_s": 0.08116091600095388,
+      "rr": 0.3333333333333333,
+      "retrieved": [
+        "psycopg/basic/install#0",
+        "psycopg/advanced/pipeline#0",
+        "psycopg/advanced/pipeline#4",
+        "psycopg/news#12",
+        "psycopg/index#0",
+        "psycopg/api/pq#0",
+        "psycopg/basic/params#4",
+        "psycopg/basic/install#2",
+        "psycopg/basic/install#1",
+        "psycopg/basic/install#3"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "m00_006",
+      "kind": "multi_hop",
+      "latency_s": 0.0911598340026103,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/openwiki/integrations/reference-docs#3",
+        "langchain-docs/openwiki/operations/adding-pages#8",
+        "langchain-docs/openwiki/workflows/langsmith-openapi-refresh#0",
+        "langchain-docs/src/langsmith/prompt-commit#8",
+        "langchain-docs/AGENTS#17",
+        "langchain-docs/openwiki/integrations/mintlify#7",
+        "langchain-docs/openwiki/workflows/langsmith-openapi-refresh#9",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_crawl#9",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_crawl#10",
+        "langchain-docs/src/langsmith/openapi-security#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s72_005",
+      "kind": "single",
+      "latency_s": 0.07888233300036518,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/pool#3",
+        "psycopg/api/pool#6",
+        "psycopg/advanced/pool#1",
+        "langchain-docs/src/oss/langchain/mcp/connections#9",
+        "psycopg/advanced/pool#11",
+        "psycopg/advanced/pool#2",
+        "psycopg/api/pool#5",
+        "psycopg/news_pool#2",
+        "psycopg/advanced/pool#6",
+        "psycopg/api/connections#8"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s40_001",
+      "kind": "single",
+      "latency_s": 0.0906786670020665,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#2",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#11",
+        "langchain-docs/src/snippets/embeddings-tabs-py#0",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index#4",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/azure_openai#0",
+        "langchain-docs/src/oss/python/integrations/vectorstores/azure_db_for_postgresql#5",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#5",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft#0",
+        "langchain-docs/src/oss/python/integrations/embeddings/azure_openai#1",
+        "langchain-docs/src/oss/javascript/integrations/chat/azure#10"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s16_002",
+      "kind": "single",
+      "latency_s": 0.0744540829982725,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/managed-deep-agents-cli#17",
+        "langchain-docs/src/langsmith/langsmith-collector#6",
+        "langchain-docs/src/langsmith/export-backend#1",
+        "langchain-docs/src/langsmith/audit-logs#5",
+        "langchain-docs/src/langsmith/langsmith-collector#1",
+        "langchain-docs/src/langsmith/diagnostics-self-hosted#5",
+        "langchain-docs/src/oss/deepagents/human-in-the-loop#9",
+        "langchain-docs/src/oss/python/integrations/callbacks/google_bigquery#38",
+        "langchain-docs/src/langsmith/event-streaming#18",
+        "langchain-docs/src/langsmith/byoc-shared-responsibility#6"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s40_006",
+      "kind": "single",
+      "latency_s": 0.04542058299557539,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector#38",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector#10",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector#39",
+        "langchain-docs/src/oss/python/integrations/vectorstores/sap_hanavector#9",
+        "langchain-docs/src/oss/python/integrations/vectorstores/oracle#9",
+        "langchain-docs/src/oss/python/integrations/vectorstores/sap_hanavector#33",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector#37",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/oracleai#4",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/pgvector#15",
+        "langchain-docs/src/oss/python/integrations/vectorstores/sap_hanavector#34"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s16_005",
+      "kind": "single",
+      "latency_s": 0.07743399999890244,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/auth#0",
+        "langchain-docs/src/langsmith/managed-deep-agents-connections#16",
+        "langchain-docs/src/oss/javascript/integrations/providers/google#8",
+        "langchain-docs/src/oss/javascript/integrations/tools/composio#1",
+        "langchain-docs/src/langsmith/auth#3",
+        "langchain-docs/src/oss/python/integrations/tools/composio#2",
+        "langchain-docs/src/langsmith/self-host-basic-auth#0",
+        "langchain-docs/src/oss/deepagents/going-to-production#9",
+        "langchain-docs/src/langsmith/fleet/mcp-framework#4",
+        "langchain-docs/src/oss/openwiki/personal-mode#4"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m16_001",
+      "kind": "multi_hop",
+      "latency_s": 0.08219316599570448,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/openwiki/testing/conditional-rendering#1",
+        "langchain-docs/openwiki/operations/cross-references#1",
+        "langchain-docs/src/oss/deepagents/going-to-production#14",
+        "langchain-docs/src/oss/langchain/middleware/custom#9",
+        "langchain-docs/src/oss/deepagents/backends#16",
+        "langchain-docs/src/oss/deepagents/memory#8",
+        "langchain-docs/openwiki/testing/builder-tests#0",
+        "langchain-docs/src/oss/deepagents/permissions#10",
+        "langchain-docs/src/langsmith/self-host-sandbox-architecture#8",
+        "langchain-docs/src/oss/deepagents/sandboxes#6"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s32_000",
+      "kind": "single",
+      "latency_s": 0.08170691700070165,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/concepts/memory#3",
+        "langchain-docs/src/oss/concepts/memory#0",
+        "langchain-docs/src/oss/deepagents/memory#0",
+        "langchain-docs/src/oss/concepts/memory#13",
+        "langchain-docs/src/oss/langgraph/add-memory#31",
+        "langchain-docs/src/oss/langgraph/add-memory#28",
+        "langchain-docs/src/oss/langgraph/add-memory#50",
+        "langchain-docs/src/oss/langgraph/add-memory#37",
+        "langchain-docs/src/oss/langgraph/add-memory#49",
+        "langchain-docs/src/oss/langgraph/add-memory#51"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s08_005",
+      "kind": "single",
+      "latency_s": 0.07899337499839021,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/snippets/code-samples/langgraph-sql-agent-define-steps-py#0",
+        "langchain-docs/src/langsmith/managed-deep-agents-local-development#1",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index#9",
+        "langchain-docs/src/oss/langchain/sql-agent#4",
+        "langchain-docs/src/snippets/langsmith/managed-deep-agents-prerequisites#0",
+        "langchain-docs/src/snippets/chat-model-tabs#2",
+        "langchain-docs/src/snippets/code-samples/langgraph-sql-agent-define-steps-js#0",
+        "langchain-docs/src/oss/python/integrations/providers/modelscope#0",
+        "langchain-docs/src/snippets/code-samples/sql-agent-studio-py#0",
+        "langchain-docs/src/oss/langchain/sql-agent#5"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s16_001",
+      "kind": "single",
+      "latency_s": 0.06825308300176403,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#17",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#10",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#9",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#16",
+        "langchain-docs/src/snippets/code-samples/subagents-email-tools-good-py#0",
+        "langchain-docs/src/oss/langchain/context-engineering#11",
+        "langchain-docs/src/oss/langgraph/thinking-in-langgraph#23",
+        "langchain-docs/src/langsmith/log-llm-trace#4",
+        "langchain-docs/src/oss/langchain/structured-output#14",
+        "langchain-docs/src/langsmith/run-data-format#1"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s16_000",
+      "kind": "single",
+      "latency_s": 0.0737767909959075,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/frontend/integrations/copilotkit#17",
+        "langchain-docs/src/langsmith/distributed-tracing#1",
+        "langchain-docs/src/snippets/langsmith/saas-region-urls#0",
+        "langchain-docs/src/langsmith/byoc-usage#3",
+        "langchain-docs/src/langsmith/sandbox-service-urls#9",
+        "langchain-docs/src/oss/deepagents/backends#16",
+        "langchain-docs/src/langsmith/trace-with-opentelemetry#1",
+        "langchain-docs/src/langsmith/cli#7",
+        "langchain-docs/src/langsmith/llm-gateway-api-formats#10",
+        "langchain-docs/src/langsmith/cicd-pipeline-example#20"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s08_004",
+      "kind": "single",
+      "latency_s": 0.08399758399900747,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/middleware/built-in#3",
+        "langchain-docs/src/oss/langchain/middleware/built-in#4",
+        "langchain-docs/src/oss/langgraph/fault-tolerance#18",
+        "langchain-docs/src/oss/langchain/structured-output#27",
+        "langchain-docs/src/oss/langchain/structured-output#30",
+        "langchain-docs/src/langsmith/smithdb-sdk-migration#7",
+        "langchain-docs/src/langsmith/smithdb-sdk-migration#6",
+        "langchain-docs/src/oss/deepagents/fault-tolerance#8",
+        "psycopg/api/errors#0",
+        "langchain-docs/src/langsmith/sandbox-sdk#20"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s24_004",
+      "kind": "single",
+      "latency_s": 0.08198599999741418,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/embeddings/google_generative_ai#1",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#4",
+        "langchain-docs/src/oss/langchain/quickstart#6",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_generative_ai#1",
+        "langchain-docs/src/oss/javascript/integrations/chat/google#3",
+        "langchain-docs/src/oss/deepagents/quickstart#7",
+        "langchain-docs/src/oss/python/integrations/llms/google_generative_ai#1",
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai#0",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_generative_ai#4",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_generative_ai#18"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m08_003",
+      "kind": "multi_hop",
+      "latency_s": 0.08774995899875648,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/filter-traces#0",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/runs-query#14",
+        "langchain-docs/src/langsmith/test-react-agent-pytest#9",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/runs-query#15",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/runs-query#17",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/experiment-runs-query#5",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/runs-retrieve#5",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/experiment-runs-query#6",
+        "langchain-docs/src/snippets/langsmith/smithdb-migration/experiment-runs-query#7",
+        "psycopg/api/abc#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s64_004",
+      "kind": "single",
+      "latency_s": 0.08409358400240308,
+      "rr": 0.5,
+      "retrieved": [
+        "psycopg/advanced/pool#4",
+        "psycopg/api/pool#7",
+        "psycopg/api/pool#3",
+        "psycopg/advanced/pool#5",
+        "psycopg/api/pool#1",
+        "langchain-docs/src/snippets/langsmith/env-vars/shared#10",
+        "psycopg/advanced/pool#9",
+        "langchain-docs/src/snippets/langsmith/env-vars/shared#21",
+        "langchain-docs/src/langsmith/data-export-monitor#9",
+        "langchain-docs/src/oss/langchain/mcp/connections#9"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "m16_002",
+      "kind": "multi_hop",
+      "latency_s": 0.06031049999728566,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/distributed-tracing#1",
+        "langchain-docs/src/oss/langchain/frontend/integrations/openui#7",
+        "langchain-docs/src/oss/python/integrations/chat/oci_generative_ai#6",
+        "langchain-docs/src/oss/langchain/agents#9",
+        "langchain-docs/src/langsmith/trace-generator-functions#0",
+        "langchain-docs/src/oss/deepagents/human-in-the-loop#9",
+        "langchain-docs/src/langsmith/sandbox-sdk#4",
+        "langchain-docs/src/langsmith/event-streaming#18",
+        "langchain-docs/src/oss/langchain/frontend/overview#1",
+        "langchain-docs/src/langsmith/nest-traces#3"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s08_007",
+      "kind": "single",
+      "latency_s": 0.06890291700256057,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/distributed-tracing#1",
+        "langchain-docs/src/langsmith/prompt-commit#6",
+        "langchain-docs/src/langsmith/sandbox-service-urls#9",
+        "langchain-docs/src/langsmith/prompt-commit#7",
+        "langchain-docs/src/oss/deepagents/frontend/sandbox#9",
+        "langchain-docs/src/oss/langgraph/event-streaming#5",
+        "langchain-docs/src/langsmith/prompt-commit#8",
+        "langchain-docs/src/langsmith/event-streaming#14",
+        "langchain-docs/src/langsmith/generative-ui-react#12",
+        "langchain-docs/src/langsmith/event-streaming#3"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s24_007",
+      "kind": "single",
+      "latency_s": 0.09441645799961407,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/openai#31",
+        "langchain-docs/src/oss/contributing/implement-langchain#1",
+        "langchain-docs/src/oss/langchain/frontend/integrations/copilotkit#13",
+        "langchain-docs/src/oss/javascript/integrations/tools/openai#0",
+        "langchain-docs/src/oss/javascript/integrations/chat/openai#18",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_search#7",
+        "langchain-docs/src/snippets/code-samples/subagents-flexible-search-js#0",
+        "langchain-docs/src/oss/langchain/multi-agent/router-knowledge-base#8",
+        "langchain-docs/src/oss/javascript/integrations/tools/exa_search#14",
+        "langchain-docs/src/oss/langgraph/agentic-rag#2"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s16_003",
+      "kind": "single",
+      "latency_s": 0.05477454200445209,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-graph-api#23",
+        "langchain-docs/openwiki/operations/adding-pages#8",
+        "langchain-docs/src/oss/langgraph/graph-api#5",
+        "langchain-docs/src/oss/langgraph/streaming#51",
+        "langchain-docs/src/oss/langgraph/use-graph-api#22",
+        "langchain-docs/src/oss/langgraph/use-graph-api#3",
+        "langchain-docs/openwiki/integrations/index#0",
+        "langchain-docs/openwiki/integrations/reference-docs#3",
+        "langchain-docs/src/oss/python/integrations/chat/amazon_nova#20",
+        "langchain-docs/src/oss/langgraph/use-graph-api#24"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s48_004",
+      "kind": "single",
+      "latency_s": 0.06451162500161445,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#15",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#6",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index#13",
+        "langchain-docs/src/oss/python/integrations/providers/weaviate#0",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#19",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/weaviate#2",
+        "langchain-docs/src/oss/python/integrations/llms/ollama#2",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#23",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#0",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/weaviate#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "m00_003",
+      "kind": "multi_hop",
+      "latency_s": 0.09409545800008345,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/openwiki/integrations/reference-docs#3",
+        "langchain-docs/src/oss/javascript/integrations/chat/openai#25",
+        "langchain-docs/src/langsmith/upload-existing-experiments#8",
+        "langchain-docs/src/oss/langchain/quickstart#19",
+        "langchain-docs/src/oss/javascript/integrations/chat/openai#10",
+        "langchain-docs/src/oss/python/integrations/tools/azure_logic_apps#8",
+        "langchain-docs/openwiki/workflows/langsmith-openapi-refresh#7",
+        "langchain-docs/src/oss/python/integrations/chat/azure_chat_openai#16",
+        "langchain-docs/src/oss/python/integrations/chat/azure_chat_openai#11",
+        "langchain-docs/openwiki/integrations/reference-docs#5"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s72_007",
+      "kind": "single",
+      "latency_s": 0.06478595899534412,
+      "rr": 0.5,
+      "retrieved": [
+        "psycopg/advanced/pool#0",
+        "psycopg/api/pool#4",
+        "psycopg/api/pool#0",
+        "psycopg/news_pool#0",
+        "psycopg/news_pool#3",
+        "psycopg/advanced/pool#10",
+        "psycopg/news_pool#2",
+        "psycopg/api/pool#1",
+        "psycopg/news_pool#1",
+        "psycopg/advanced/pool#7"
+      ],
+      "recall@10": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "id": "s24_000",
+      "kind": "single",
+      "latency_s": 0.07056933300191304,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/snippets/code-samples/resolve-experiment-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/experiment-runs-query-sort-after-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/experiment-runs-query-pagination-after-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/experiment-runs-query-basic-after-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/threads-list-traces-basic-after-py#0",
+        "langchain-docs/src/snippets/code-samples/resolve-evaluators-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/runs-query-selecting-fields-after-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/runs-query-fetch-by-id-after-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/runs-query-filter-root-after-py#0",
+        "langchain-docs/src/snippets/code-samples/smithdb-migration/runs-query-filter-errors-after-py#0"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s08_006",
+      "kind": "single",
+      "latency_s": 0.07065074999991339,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-graph-api#23",
+        "langchain-docs/src/oss/python/integrations/splitters/markdown_header_metadata_splitter#1",
+        "langchain-docs/src/oss/langgraph/streaming#51",
+        "langchain-docs/src/oss/python/integrations/providers/langchain_decorators#9",
+        "psycopg/advanced/typing#3",
+        "langchain-docs/src/langsmith/caching#4",
+        "langchain-docs/src/oss/langgraph/use-graph-api#24",
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate#7",
+        "psycopg/basic/tstrings#1",
+        "langchain-docs/src/oss/python/integrations/tools/parallel_search#7"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s24_002",
+      "kind": "single",
+      "latency_s": 0.08748875000310363,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/llm-auth-proxy-self-hosted#11",
+        "langchain-docs/src/langsmith/profile-configuration#8",
+        "langchain-docs/src/oss/langchain/mcp/auth#5",
+        "langchain-docs/src/langsmith/custom-auth#1",
+        "langchain-docs/src/snippets/langsmith/mda-oauth-catalog#0",
+        "langchain-docs/src/langsmith/playground-model-providers#46",
+        "langchain-docs/src/langsmith/add-auth-server#1",
+        "langchain-docs/src/langsmith/managed-deep-agents-connections#13",
+        "langchain-docs/src/langsmith/manage-organization-by-api#5",
+        "langchain-docs/src/oss/deepagents/going-to-production#9"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "s24_001",
+      "kind": "single",
+      "latency_s": 0.03776050000305986,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/langsmith/event-streaming#13",
+        "langchain-docs/src/langsmith/event-streaming#14",
+        "langchain-docs/src/oss/deepagents/code/hooks#10",
+        "langchain-docs/src/langsmith/event-streaming#18",
+        "langchain-docs/src/langsmith/prompt-commit#7",
+        "langchain-docs/src/oss/langgraph/event-streaming#11",
+        "langchain-docs/src/langsmith/prompt-commit#6",
+        "langchain-docs/src/langsmith/engine-notifications#15",
+        "langchain-docs/src/oss/deepagents/ag-ui#5",
+        "langchain-docs/src/oss/deepagents/code/hooks#9"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "mhand_001",
+      "kind": "multi_hop",
+      "latency_s": 0.04621366700303042,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/pool#0",
+        "psycopg/advanced/pool#3",
+        "psycopg/news_pool#2",
+        "psycopg/news_pool#0",
+        "psycopg/advanced/pool#10",
+        "psycopg/advanced/pool#0",
+        "psycopg/news_pool#1",
+        "psycopg/api/pool#6",
+        "psycopg/basic/usage#3",
+        "psycopg/advanced/async#3"
+      ],
+      "recall@10": 0.5,
+      "hit@10": 1.0
+    },
+    {
+      "id": "mhand_002",
+      "kind": "multi_hop",
+      "latency_s": 0.08185174999380251,
+      "rr": 0.0,
+      "retrieved": [
+        "langchain-docs/src/oss/concepts/products#3",
+        "langchain-docs/src/oss/langchain/philosophy#2",
+        "langchain-docs/src/oss/langgraph/overview#0",
+        "langchain-docs/src/.mintlify/skills/langgraph/SKILL#0",
+        "langchain-docs/src/langsmith/faq#11",
+        "langchain-docs/src/oss/langchain/multi-agent/index#5",
+        "langchain-docs/src/oss/concepts/products#4",
+        "langchain-docs/src/.mintlify/skills/langgraph/SKILL#1",
+        "langchain-docs/src/oss/langchain/multi-agent/index#11",
+        "langchain-docs/src/oss/langgraph/overview#4"
+      ],
+      "recall@10": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "id": "mhand_003",
+      "kind": "multi_hop",
+      "latency_s": 0.07405929100059438,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/pool#0",
+        "psycopg/basic/transactions#0",
+        "psycopg/api/connections#0",
+        "psycopg/advanced/pool#0",
+        "psycopg/news#0",
+        "psycopg/api/module#0",
+        "psycopg/basic/usage#3",
+        "psycopg/news_pool#0",
+        "psycopg/index#0",
+        "psycopg/advanced/pool#10"
+      ],
+      "recall@10": 0.5,
+      "hit@10": 1.0
+    }
+  ]
+}

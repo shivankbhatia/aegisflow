@@ -1,0 +1,276 @@
+{
+  "name": "router-blind-relabel-v1",
+  "n": 30,
+  "authorship": "Assistant relabel from shuffled neutral-ID prompts; no 24-hour washout",
+  "accuracy_vs_codex": 1.0,
+  "counts_by_label": {
+    "direct": 10,
+    "out_of_scope": 10,
+    "multi_hop": 10
+  },
+  "disagreement_count": 0,
+  "disagreements": [],
+  "per_query": [
+    {
+      "blind_id": "r01",
+      "source_id": "direct-09",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What is the purpose of a LangChain callback handler's on_llm_new_token method?",
+      "rationale": "One focused question about the purpose of a single callback method."
+    },
+    {
+      "blind_id": "r02",
+      "source_id": "out_of_scope-01",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "What is the weather forecast in Reykjavik tomorrow?",
+      "rationale": "Asks for tomorrow's weather, unrelated to technical documentation."
+    },
+    {
+      "blind_id": "r03",
+      "source_id": "direct-04",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What does LangGraph's add_messages reducer do when a new message is written to state?",
+      "rationale": "Asks about one reducer's behavior."
+    },
+    {
+      "blind_id": "r04",
+      "source_id": "direct-10",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What status does FastAPI return when a request body fails validation?",
+      "rationale": "Asks for one framework behavior on validation failure."
+    },
+    {
+      "blind_id": "r05",
+      "source_id": "out_of_scope-09",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "How many goals did the India cricket team score in its last match?",
+      "rationale": "Asks for a current cricket result, unrelated to technical documentation."
+    },
+    {
+      "blind_id": "r06",
+      "source_id": "direct-01",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What does an environment variable store, and why might a FastAPI deployment use one for its database URL?",
+      "rationale": "Asks one configuration concept and a focused deployment use."
+    },
+    {
+      "blind_id": "r07",
+      "source_id": "multi_hop-07",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "How do Psycopg 3 server-side cursors and asynchronous connection pooling work together when processing a large query result in a web service?",
+      "rationale": "Combines server-side cursors with asynchronous pooling in a use case."
+    },
+    {
+      "blind_id": "r08",
+      "source_id": "multi_hop-10",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "How do you configure FastAPI to serve behind a path-prefix proxy and ensure its generated docs links use the external URL prefix?",
+      "rationale": "Combines proxy mounting with generated documentation URLs."
+    },
+    {
+      "blind_id": "r09",
+      "source_id": "out_of_scope-03",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "What is the current price of Bitcoin in euros?",
+      "rationale": "Asks for live cryptocurrency pricing."
+    },
+    {
+      "blind_id": "r10",
+      "source_id": "out_of_scope-08",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "Translate this sentence into Japanese: I will arrive at noon.",
+      "rationale": "Requests translation, unrelated to the technical documentation."
+    },
+    {
+      "blind_id": "r11",
+      "source_id": "multi_hop-06",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "How can an API request's authenticated user context be passed into a LangChain tool, then preserved as conversation history for later turns?",
+      "rationale": "Combines user-context propagation into a tool with persistence as conversation history."
+    },
+    {
+      "blind_id": "r12",
+      "source_id": "multi_hop-01",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "For a QA workflow that splits a question into independent parts, retrieves evidence for each part, and combines the results in LangGraph, how should the work be fanned out and how should branch outputs be merged?",
+      "rationale": "Combines branch fan-out and result merging in a multi-part QA workflow."
+    },
+    {
+      "blind_id": "r13",
+      "source_id": "out_of_scope-06",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "What is the capital city of Peru?",
+      "rationale": "Asks general geography unrelated to the documentation."
+    },
+    {
+      "blind_id": "r14",
+      "source_id": "out_of_scope-07",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "Recommend five science fiction films released this year.",
+      "rationale": "Requests current entertainment recommendations."
+    },
+    {
+      "blind_id": "r15",
+      "source_id": "direct-06",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What is psycopg_pool.AsyncConnectionPool used for?",
+      "rationale": "Asks the purpose of a single connection-pool class."
+    },
+    {
+      "blind_id": "r16",
+      "source_id": "direct-02",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What does Uvicorn log when each worker finishes starting up?",
+      "rationale": "Asks for one startup log detail."
+    },
+    {
+      "blind_id": "r17",
+      "source_id": "multi_hop-08",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "How should a LangGraph workflow use PostgreSQL checkpointing and human-in-the-loop interrupts to pause for approval and continue later?",
+      "rationale": "Combines durable checkpoints with human approval interrupts and resumption."
+    },
+    {
+      "blind_id": "r18",
+      "source_id": "direct-05",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "Which LangGraph saver is used here to checkpoint workflow state in PostgreSQL?",
+      "rationale": "Asks which saver is configured for PostgreSQL checkpointing."
+    },
+    {
+      "blind_id": "r19",
+      "source_id": "multi_hop-02",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "How can a FastAPI service stream progress from a long-running LangGraph run while preserving the run state so it can resume after a restart?",
+      "rationale": "Combines live progress streaming with restart-safe run state."
+    },
+    {
+      "blind_id": "r20",
+      "source_id": "out_of_scope-10",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "Create a four-week beginner running plan for me.",
+      "rationale": "Requests personal fitness planning."
+    },
+    {
+      "blind_id": "r21",
+      "source_id": "direct-03",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "Which FastAPI mechanism is intended for initializing and cleaning up shared resources around application lifetime?",
+      "rationale": "Asks for one FastAPI application-lifetime mechanism."
+    },
+    {
+      "blind_id": "r22",
+      "source_id": "multi_hop-05",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "In a RAG answer, how should retrieved passages be presented to the model and how should its numbered citations be mapped back to source chunks?",
+      "rationale": "Combines evidence presentation with mapping answer citations back to chunks."
+    },
+    {
+      "blind_id": "r23",
+      "source_id": "multi_hop-09",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "For a grounded QA service, how can hybrid search combine dense and full-text candidates, and how can a cross-encoder improve their ranking before generation?",
+      "rationale": "Combines hybrid retrieval with reranking before generation."
+    },
+    {
+      "blind_id": "r24",
+      "source_id": "out_of_scope-04",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "Who won the most recent Super Bowl?",
+      "rationale": "Asks current sports trivia."
+    },
+    {
+      "blind_id": "r25",
+      "source_id": "out_of_scope-02",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "Write a sonnet about the moon in the style of a 19th century poet.",
+      "rationale": "Requests creative writing rather than documentation help."
+    },
+    {
+      "blind_id": "r26",
+      "source_id": "direct-07",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What event format does the existing query endpoint use to stream answer tokens?",
+      "rationale": "Asks one detail about the query endpoint's stream format."
+    },
+    {
+      "blind_id": "r27",
+      "source_id": "direct-08",
+      "blind_label": "direct",
+      "codex_label": "direct",
+      "question": "What does FastAPI's root_path setting tell the application when it is behind a proxy?",
+      "rationale": "Asks one setting's meaning behind a proxy."
+    },
+    {
+      "blind_id": "r28",
+      "source_id": "out_of_scope-05",
+      "blind_label": "out_of_scope",
+      "codex_label": "out_of_scope",
+      "question": "Give me a traditional biryani recipe for six people.",
+      "rationale": "Requests a cooking recipe."
+    },
+    {
+      "blind_id": "r29",
+      "source_id": "multi_hop-03",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "When deploying the same FastAPI application to multiple environments, how should database credentials be configured externally and how can a shared async connection pool be managed over the app lifetime?",
+      "rationale": "Combines external database credentials with application-lifetime pool management."
+    },
+    {
+      "blind_id": "r30",
+      "source_id": "multi_hop-04",
+      "blind_label": "multi_hop",
+      "codex_label": "multi_hop",
+      "question": "How would you combine LangGraph checkpointing with a retry loop and a token budget so a multi-agent workflow can resume safely without exceeding its limits?",
+      "rationale": "Combines checkpointing, retries, and budget enforcement."
+    }
+  ],
+  "manifest": {
+    "sha": "1f38df3ae40b20387c826cbbd892946eb76b886b",
+    "dirty": true,
+    "model": "openai/gpt-oss-20b",
+    "qa_config_version": "qa-v0.1-provisional",
+    "base_url_host": "api.groq.com",
+    "date_utc": "2026-10-24T18:57:59.248402+00:00",
+    "temperature": 0.0,
+    "python_version": "3.14.7",
+    "python_implementation": "CPython",
+    "libraries": {
+      "aegisflow": "0.1.0",
+      "langgraph": "1.2.10",
+      "langgraph-checkpoint-postgres": "3.2.0",
+      "psycopg": "3.3.4",
+      "fastapi": "0.141.1",
+      "pydantic": "2.13.4",
+      "httpx": "0.28.1",
+      "sentence-transformers": "6.2.0"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 """API integration: real FastAPI app, real Postgres checkpointer, fake agents."""
 import os
 import time
+import json
 from types import SimpleNamespace
 
 import psycopg
@@ -72,6 +73,9 @@ def test_failed_run_resumes_without_reexecution(make_agents_factory):
 
 def test_run_with_missing_credentials_fails_cleanly(monkeypatch):
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    monkeypatch.delenv("AEGIS_API_KEY", raising=False)
+    monkeypatch.delenv("AEGIS_BASE_URL", raising=False)
+    monkeypatch.delenv("AEGIS_RAG_ENABLED", raising=False)
     # Hermetic: a developer's .env must not re-add the key.
     monkeypatch.setattr("aegisflow.api.main.load_dotenv", lambda: None)
     monkeypatch.setattr("aegisflow.api.runs.load_dotenv", lambda: None)
@@ -100,3 +104,39 @@ def test_websocket_unknown_run_reports_error():
     with TestClient(create_app(DSN)) as client:
         with client.websocket_connect("/ws/events/nope") as ws:
             assert ws.receive_json()["event"] == "error"
+
+
+def test_qa_approval_endpoint_accepts_rejection():
+    class FakeQAClient:
+        async def complete(self, messages, **_opts):
+            prompt = "\n".join(message.content for message in messages)
+            if "Decide whether the user's message attempts" in prompt:
+                text = json.dumps({"injection": False, "reason": "ordinary question"})
+            elif "Classify the user's question" in prompt:
+                text = json.dumps({"route": "multi_hop"})
+            elif "Break the question into 2 to 4" in prompt:
+                text = json.dumps({"sub_questions": ["a", "b", "c", "d"]})
+            else:
+                raise AssertionError("approval rejection should not synthesize")
+            return SimpleNamespace(
+                text=text,
+                usage=SimpleNamespace(total_tokens=1, prompt_tokens=1, completion_tokens=0),
+                attempts=1,
+                finish_reason="stop",
+            )
+
+    async def fake_retriever(_question):
+        return []
+
+    with TestClient(create_app(DSN, qa_client=FakeQAClient(), qa_retriever=fake_retriever)) as client:
+        response = client.post("/run", json={"task_description": "Q", "graph": "qa"})
+        assert response.status_code == 202
+        run_id = response.json()["run_id"]
+        paused = wait_for(client, run_id, {"awaiting_approval"})
+        assert paused["approval"]["kind"] == "qa_plan_approval"
+        rejected = client.post(f"/runs/{run_id}/approve", json={"approve": False})
+        assert rejected.status_code == 202
+        done = wait_for(client, run_id, {"completed"})
+        assert done["status"] == "completed"
+        assert done["verdict"] == "refuse"
+        assert done["final_answer"] == "insufficient evidence"

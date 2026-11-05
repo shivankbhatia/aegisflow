@@ -1,0 +1,12 @@
+{
+  "version": "v1-frozen",
+  "patterns": [
+    "ignore\\s+(?:all\\s+)?(?:previous|prior|above)\\s+instructions",
+    "ignore\\s+(?:all\\s+)?(?:previous|prior|above)\\s+rules",
+    "reveal\\s+(?:the\\s+)?(?:system|developer)\\s+(?:prompt|message)",
+    "(?:bypass|disable|override)\\s+(?:the\\s+)?(?:guardrails|safety|instructions)",
+    "jailbreak",
+    "act\\s+as\\s+(?:an?\\s+)?(?:unrestricted|system)\\s+(?:model|assistant)"
+  ],
+  "sha256": "2a37a5ad21361ea823b824a232826e24ce2c44dd4613af378d879dbb89b466b8"
+}

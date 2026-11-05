@@ -1,0 +1,1096 @@
+{
+  "name": "served-doc-hybrid-rerank-structure-aware-k5-pool15",
+  "created_at": "2026-10-24T17:03:32.131289+00:00",
+  "ks": [
+    5
+  ],
+  "overall": {
+    "n": 81,
+    "recall@5": 0.9567901234567902,
+    "hit@5": 0.9753086419753086,
+    "mrr": 0.7880658436213992,
+    "latency_p50_s": 1.4961857910020626,
+    "latency_p95_s": 1.6074598749983124
+  },
+  "by_kind": {
+    "multi_hop": {
+      "n": 15,
+      "recall@5": 0.8333333333333334,
+      "hit@5": 0.9333333333333333,
+      "mrr": 0.8666666666666667,
+      "latency_p50_s": 1.497320916998433,
+      "latency_p95_s": 1.6270190829964122
+    },
+    "single": {
+      "n": 66,
+      "recall@5": 0.9848484848484849,
+      "hit@5": 0.9848484848484849,
+      "mrr": 0.7702020202020202,
+      "latency_p50_s": 1.4929811250040075,
+      "latency_p95_s": 1.6051079589960864
+    }
+  },
+  "per_question": [
+    {
+      "id": "s00_000",
+      "kind": "single",
+      "latency_s": 1.3944310839942773,
+      "rr": 0.5,
+      "retrieved": [
+        "fastapi/environment-variables",
+        "fastapi/advanced/settings",
+        "langchain-docs/src/langsmith/setup-pyproject"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s00_001",
+      "kind": "single",
+      "latency_s": 1.4720819170033792,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/deployment/server-workers",
+        "fastapi/tutorial/first-steps"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s00_003",
+      "kind": "single",
+      "latency_s": 1.4587930420020712,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/how-to/conditional-openapi"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s00_005",
+      "kind": "single",
+      "latency_s": 1.4796685000037542,
+      "rr": 0.3333333333333333,
+      "retrieved": [
+        "fastapi/features",
+        "fastapi/tutorial/security/first-steps",
+        "fastapi/deployment/concepts",
+        "fastapi/tutorial/security/oauth2-jwt",
+        "fastapi/tutorial/security/index"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s00_006",
+      "kind": "single",
+      "latency_s": 1.50543949999701,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s00_007",
+      "kind": "single",
+      "latency_s": 1.5309777079964988,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/dependencies/sub-dependencies",
+        "fastapi/tutorial/dependencies/index",
+        "fastapi/tutorial/dependencies/classes-as-dependencies"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s40_002",
+      "kind": "single",
+      "latency_s": 1.50166999999783,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/providers/microsoft",
+        "langchain/python/integrations/providers/microsoft",
+        "langchain-docs/src/oss/python/integrations/providers/azure_ai"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m24_005",
+      "kind": "multi_hop",
+      "latency_s": 1.3944564589983202,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/behind-a-proxy",
+        "fastapi/deployment/https"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_007",
+      "kind": "single",
+      "latency_s": 1.5476352919940837,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/multi-agent/index",
+        "langchain/langchain/multi-agent/index"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s24_003",
+      "kind": "single",
+      "latency_s": 1.3903257080019102,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/tools/TEMPLATE",
+        "langchain/python/integrations/tools/TEMPLATE",
+        "langchain-docs/src/oss/langchain/tools",
+        "langchain/langchain/tools",
+        "langchain-docs/src/oss/deepagents/tools"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m16_006",
+      "kind": "multi_hop",
+      "latency_s": 1.5967707919990062,
+      "rr": 0.0,
+      "retrieved": [
+        "fastapi/tutorial/response-model",
+        "fastapi/advanced/additional-responses"
+      ],
+      "recall@5": 0.0,
+      "hit@5": 0.0
+    },
+    {
+      "id": "s24_005",
+      "kind": "single",
+      "latency_s": 1.4605698749946896,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/errors/MODEL_RATE_LIMIT",
+        "langchain/langchain/errors/MODEL_RATE_LIMIT",
+        "langchain-docs/src/langsmith/handle-model-rate-limiting",
+        "langchain-docs/src/oss/deepagents/fault-tolerance"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_002",
+      "kind": "single",
+      "latency_s": 1.524989249999635,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/tools/stagehand",
+        "langchain/python/integrations/tools/stagehand",
+        "langchain-docs/src/snippets/code-samples/deepagents-mcp-tools-py"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s48_006",
+      "kind": "single",
+      "latency_s": 1.510583499999484,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/adapt",
+        "psycopg/basic/adapt",
+        "psycopg/basic/params",
+        "psycopg/api/pool"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_006",
+      "kind": "single",
+      "latency_s": 1.5098082499971497,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/extra-models",
+        "fastapi/tutorial/response-model",
+        "fastapi/tutorial/sql-databases"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s56_003",
+      "kind": "single",
+      "latency_s": 1.5339522920039599,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/sql",
+        "psycopg/advanced/cursors",
+        "psycopg/api/types",
+        "psycopg/api/abc"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s64_001",
+      "kind": "single",
+      "latency_s": 1.43046770899673,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/cursors",
+        "psycopg/api/connections"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_002",
+      "kind": "single",
+      "latency_s": 1.3353201249992708,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/response-model",
+        "fastapi/advanced/response-directly",
+        "fastapi/advanced/custom-response"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_003",
+      "kind": "single",
+      "latency_s": 1.4531946669958415,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-subgraphs",
+        "langchain/langgraph/use-subgraphs",
+        "langchain-docs/src/oss/langgraph/frontend/overview"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s64_007",
+      "kind": "single",
+      "latency_s": 1.4158547500046552,
+      "rr": 0.5,
+      "retrieved": [
+        "psycopg/basic/usage",
+        "psycopg/advanced/async",
+        "psycopg/api/connections"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s72_002",
+      "kind": "single",
+      "latency_s": 1.5197615419965587,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/cursors",
+        "psycopg/basic/params",
+        "psycopg/api/sql"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s72_006",
+      "kind": "single",
+      "latency_s": 1.5484305419959128,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/typing",
+        "psycopg/advanced/rows",
+        "fastapi/tutorial/body-fields",
+        "langchain-docs/src/langsmith/caching"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s48_005",
+      "kind": "single",
+      "latency_s": 1.493474958006118,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/javascript/integrations/tools/anthropic",
+        "langchain/javascript/integrations/tools/anthropic",
+        "langchain-docs/src/oss/python/migrate/langchain-mcp-adapters"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s56_006",
+      "kind": "single",
+      "latency_s": 1.475504166999599,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/errors"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m16_005",
+      "kind": "multi_hop",
+      "latency_s": 1.497320916998433,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m24_004",
+      "kind": "multi_hop",
+      "latency_s": 1.4593755829992006,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/async-tests",
+        "fastapi/tutorial/testing",
+        "fastapi/async"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m00_005",
+      "kind": "multi_hop",
+      "latency_s": 1.4844560000055935,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/advanced/custom-response",
+        "fastapi/reference/responses"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s56_000",
+      "kind": "single",
+      "latency_s": 1.4072464170021703,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/async",
+        "psycopg/basic/transactions",
+        "psycopg/news_pool",
+        "psycopg/news"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s48_007",
+      "kind": "single",
+      "latency_s": 1.508691875002114,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/news",
+        "psycopg/news_pool",
+        "psycopg/api/pq",
+        "psycopg/index"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_004",
+      "kind": "single",
+      "latency_s": 1.5696762919978937,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/how-to/migrate-from-pydantic-v1-to-pydantic-v2"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_005",
+      "kind": "single",
+      "latency_s": 1.5223316669944325,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/use-subgraphs",
+        "langchain/langgraph/use-subgraphs",
+        "langchain-docs/src/langsmith/streaming"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s40_003",
+      "kind": "single",
+      "latency_s": 1.5908187919994816,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/javascript/integrations/providers/google",
+        "langchain/javascript/integrations/providers/google",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_vertex_ai",
+        "langchain/javascript/integrations/embeddings/google_vertex_ai",
+        "langchain-docs/src/oss/javascript/integrations/llms/google_vertex_ai"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s40_007",
+      "kind": "single",
+      "latency_s": 1.5120632920006756,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/tools/tavily_map",
+        "langchain/python/integrations/tools/tavily_map",
+        "langchain-docs/src/oss/javascript/integrations/tools/tavily_map",
+        "langchain/javascript/integrations/tools/tavily_map",
+        "langchain-docs/src/oss/python/integrations/tools/tavily_crawl"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s72_003",
+      "kind": "single",
+      "latency_s": 1.4658274160028668,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/cursors",
+        "psycopg/api/connections",
+        "psycopg/basic/usage",
+        "psycopg/advanced/cursors"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s64_006",
+      "kind": "single",
+      "latency_s": 1.2500851659933687,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/adapt",
+        "psycopg/basic/adapt",
+        "psycopg/basic/params"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s72_001",
+      "kind": "single",
+      "latency_s": 1.3103103329995065,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/sql",
+        "psycopg/advanced/cursors",
+        "psycopg/basic/params",
+        "psycopg/advanced/typing",
+        "psycopg/basic/usage"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s64_002",
+      "kind": "single",
+      "latency_s": 1.4400493749999441,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/pool",
+        "psycopg/api/pool",
+        "psycopg/news_pool"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_004",
+      "kind": "single",
+      "latency_s": 1.533955958999286,
+      "rr": 0.25,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/anthropic",
+        "langchain/python/integrations/chat/anthropic",
+        "langchain-docs/src/oss/javascript/integrations/providers/anthropic",
+        "langchain/javascript/integrations/providers/anthropic",
+        "langchain-docs/src/oss/javascript/integrations/chat/anthropic"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m24_003",
+      "kind": "multi_hop",
+      "latency_s": 1.4961857910020626,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/async-tests",
+        "langchain-docs/src/oss/python/integrations/tools/parallel_search",
+        "langchain/python/integrations/tools/parallel_search",
+        "langchain-docs/src/langsmith/test-react-agent-pytest"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_000",
+      "kind": "single",
+      "latency_s": 1.4446295840025414,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s48_001",
+      "kind": "single",
+      "latency_s": 1.5448113329985063,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/providers/google",
+        "langchain/python/integrations/providers/google",
+        "langchain-docs/src/oss/python/integrations/tools/google_imagen",
+        "langchain/python/integrations/tools/google_imagen",
+        "langchain-docs/src/oss/javascript/integrations/chat/google_generative_ai"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_007",
+      "kind": "single",
+      "latency_s": 1.120093999998062,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/security/oauth2-jwt",
+        "fastapi/tutorial/security/simple-oauth2"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_003",
+      "kind": "single",
+      "latency_s": 1.4662987920019077,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/async-tests",
+        "fastapi/tutorial/testing"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s48_002",
+      "kind": "single",
+      "latency_s": 1.5777690839968272,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/google_generative_ai",
+        "langchain/python/integrations/chat/google_generative_ai"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_006",
+      "kind": "single",
+      "latency_s": 1.4929811250040075,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/middleware/anthropic",
+        "langchain/python/integrations/middleware/anthropic",
+        "langchain-docs/src/langsmith/llm-gateway-admin-setup"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_001",
+      "kind": "single",
+      "latency_s": 1.501148874995124,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/javascript/integrations/tools/vectorstore",
+        "langchain/javascript/integrations/tools/vectorstore",
+        "langchain-docs/src/oss/python/integrations/vectorstores/google_memorystore_redis",
+        "langchain/python/integrations/vectorstores/google_memorystore_redis",
+        "langchain-docs/src/oss/python/integrations/providers/cockroachdb"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m16_003",
+      "kind": "multi_hop",
+      "latency_s": 1.6270190829964122,
+      "rr": 0.5,
+      "retrieved": [
+        "fastapi/tutorial/sql-databases",
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/dependencies/dependencies-with-yield"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s40_000",
+      "kind": "single",
+      "latency_s": 1.5380168330011657,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/context-engineering",
+        "langchain/langchain/context-engineering",
+        "langchain-docs/src/oss/langchain/middleware/custom",
+        "langchain/langchain/middleware/custom",
+        "langchain-docs/src/oss/deepagents/models"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s48_003",
+      "kind": "single",
+      "latency_s": 1.410698791994946,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/providers/browserbase",
+        "langchain/python/integrations/providers/browserbase"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_001",
+      "kind": "single",
+      "latency_s": 1.5364383750056732,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/schema-extra-example",
+        "fastapi/tutorial/request-form-models",
+        "fastapi/tutorial/body-fields"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s56_004",
+      "kind": "single",
+      "latency_s": 1.4637859170034062,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/basic/from_pg2",
+        "psycopg/api/sql",
+        "psycopg/index",
+        "psycopg/news",
+        "psycopg/api/abc"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s64_003",
+      "kind": "single",
+      "latency_s": 1.4502075000054901,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/pipeline",
+        "psycopg/api/objects",
+        "psycopg/index",
+        "psycopg/basic/install"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m00_006",
+      "kind": "multi_hop",
+      "latency_s": 1.619537999999011,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/additional-status-codes",
+        "fastapi/advanced/additional-responses"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s72_005",
+      "kind": "single",
+      "latency_s": 1.5718522910028696,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/advanced/pool",
+        "psycopg/news_pool",
+        "fastapi/benchmarks"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s40_001",
+      "kind": "single",
+      "latency_s": 1.6505648750026012,
+      "rr": 0.25,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/embeddings/azure_openai",
+        "langchain/python/integrations/embeddings/azure_openai",
+        "langchain-docs/src/oss/python/integrations/providers/microsoft",
+        "langchain/python/integrations/providers/microsoft",
+        "langchain-docs/src/oss/python/integrations/vectorstores/index"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_002",
+      "kind": "single",
+      "latency_s": 1.4225536250014557,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/opentelemetry",
+        "fastapi/advanced/advanced-dependencies",
+        "fastapi/tutorial/handling-errors"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s40_006",
+      "kind": "single",
+      "latency_s": 1.418889541993849,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/sap_hanavector",
+        "langchain/javascript/integrations/vectorstores/sap_hanavector",
+        "langchain-docs/src/oss/python/integrations/vectorstores/sap_hanavector"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_005",
+      "kind": "single",
+      "latency_s": 1.4756529580045026,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/security/index",
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/tutorial/security/oauth2-jwt"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m16_001",
+      "kind": "multi_hop",
+      "latency_s": 1.4589979579977808,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/dependencies/dependencies-with-yield",
+        "fastapi/advanced/advanced-dependencies"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s32_000",
+      "kind": "single",
+      "latency_s": 1.5230097499952535,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langgraph/add-memory",
+        "langchain/langgraph/add-memory",
+        "langchain-docs/src/langsmith/semantic-search"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_005",
+      "kind": "single",
+      "latency_s": 1.5261300000056508,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/sql-databases",
+        "langchain-docs/src/langsmith/managed-deep-agents-local-development",
+        "langchain-docs/src/oss/langchain/sql-agent"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_001",
+      "kind": "single",
+      "latency_s": 1.4830395000026328,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/request-form-models"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_000",
+      "kind": "single",
+      "latency_s": 1.5745148330024676,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/bigger-applications",
+        "fastapi/advanced/behind-a-proxy"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_004",
+      "kind": "single",
+      "latency_s": 1.5298901670030318,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/reference/exceptions",
+        "fastapi/tutorial/handling-errors"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s24_004",
+      "kind": "single",
+      "latency_s": 1.4892854999998235,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/javascript/integrations/chat/google",
+        "langchain/javascript/integrations/chat/google",
+        "langchain-docs/src/oss/python/integrations/llms/google_generative_ai",
+        "langchain/python/integrations/llms/google_generative_ai",
+        "langchain-docs/src/oss/javascript/integrations/embeddings/google_generative_ai"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m08_003",
+      "kind": "multi_hop",
+      "latency_s": 1.5187671659950865,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/dependencies/sub-dependencies",
+        "fastapi/tutorial/dependencies/index",
+        "fastapi/tutorial/dependencies/classes-as-dependencies"
+      ],
+      "recall@5": 0.5,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s64_004",
+      "kind": "single",
+      "latency_s": 1.6051079589960864,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/pool",
+        "psycopg/advanced/pool"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m16_002",
+      "kind": "multi_hop",
+      "latency_s": 1.5335519169966574,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/dependencies/dependencies-with-yield",
+        "fastapi/advanced/advanced-dependencies"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_007",
+      "kind": "single",
+      "latency_s": 1.4386042909973185,
+      "rr": 0.0,
+      "retrieved": [
+        "fastapi/features",
+        "fastapi/index",
+        "langchain-docs/src/langsmith/sandbox-service-urls"
+      ],
+      "recall@5": 0.0,
+      "hit@5": 0.0
+    },
+    {
+      "id": "s24_007",
+      "kind": "single",
+      "latency_s": 1.6074598749983124,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/chat/openai",
+        "langchain/python/integrations/chat/openai",
+        "langchain-docs/src/oss/langchain/frontend/integrations/copilotkit",
+        "langchain/langchain/frontend/integrations/copilotkit",
+        "langchain-docs/src/oss/contributing/implement-langchain"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s16_003",
+      "kind": "single",
+      "latency_s": 1.4712825000024168,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/how-to/separate-openapi-schemas"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s48_004",
+      "kind": "single",
+      "latency_s": 1.455110834001971,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/python/integrations/vectorstores/weaviate",
+        "langchain/python/integrations/vectorstores/weaviate",
+        "langchain-docs/src/oss/javascript/integrations/vectorstores/weaviate"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "m00_003",
+      "kind": "multi_hop",
+      "latency_s": 1.5950184170069406,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/additional-responses",
+        "fastapi/tutorial/response-status-code",
+        "fastapi/how-to/separate-openapi-schemas",
+        "fastapi/tutorial/first-steps"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s72_007",
+      "kind": "single",
+      "latency_s": 1.535250625005574,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/pool",
+        "psycopg/advanced/pool",
+        "psycopg/news_pool"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s24_000",
+      "kind": "single",
+      "latency_s": 1.51881908300129,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/async-tests",
+        "fastapi/tutorial/bigger-applications",
+        "fastapi/tutorial/testing"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s08_006",
+      "kind": "single",
+      "latency_s": 1.1302636670006905,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/tutorial/header-param-models",
+        "fastapi/tutorial/header-params"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s24_002",
+      "kind": "single",
+      "latency_s": 1.6284203750037705,
+      "rr": 1.0,
+      "retrieved": [
+        "fastapi/advanced/security/oauth2-scopes",
+        "fastapi/tutorial/security/simple-oauth2"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "s24_001",
+      "kind": "single",
+      "latency_s": 1.3267470409991802,
+      "rr": 0.5,
+      "retrieved": [
+        "fastapi/reference/sse",
+        "fastapi/tutorial/server-sent-events"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "mhand_001",
+      "kind": "multi_hop",
+      "latency_s": 1.3957989999980782,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/pool",
+        "psycopg/advanced/pool",
+        "psycopg/news_pool"
+      ],
+      "recall@5": 0.5,
+      "hit@5": 1.0
+    },
+    {
+      "id": "mhand_002",
+      "kind": "multi_hop",
+      "latency_s": 1.5647732079960406,
+      "rr": 0.5,
+      "retrieved": [
+        "langchain-docs/src/oss/langchain/multi-agent/index",
+        "langchain/langchain/multi-agent/index",
+        "langchain-docs/src/langsmith/faq",
+        "langchain-docs/src/oss/langgraph/overview",
+        "langchain/langgraph/overview"
+      ],
+      "recall@5": 1.0,
+      "hit@5": 1.0
+    },
+    {
+      "id": "mhand_003",
+      "kind": "multi_hop",
+      "latency_s": 1.469752040997264,
+      "rr": 1.0,
+      "retrieved": [
+        "psycopg/api/pool",
+        "fastapi/advanced/advanced-dependencies",
+        "psycopg/advanced/pool",
+        "fastapi/tutorial/sql-databases"
+      ],
+      "recall@5": 0.5,
+      "hit@5": 1.0
+    }
+  ]
+}
