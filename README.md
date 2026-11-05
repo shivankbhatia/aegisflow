@@ -35,7 +35,7 @@ flowchart LR
 
 ## Quickstart
 
-Requires Python 3.11+, Docker, and a Groq API key (or any OpenAI-compatible endpoint).
+Requires Python 3.11+, Docker, PostgreSQL, and either Ollama running locally or an OpenAI-compatible hosted endpoint.
 
 ```bash
 git clone https://github.com/shivankbhatia/aegisflow && cd aegisflow
@@ -48,9 +48,11 @@ uvicorn aegisflow.api.main:app --reload
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `GROQ_API_KEY` | (required) | API key for the endpoint |
+| `AEGIS_API_KEY` | unset | API key for the configured endpoint; Ollama's local server ignores it |
+| `GROQ_API_KEY` | unset | Backwards-compatible API key for Groq |
 | `AEGIS_MODEL` | `openai/gpt-oss-20b` | Model name |
 | `AEGIS_BASE_URL` | `https://api.groq.com/openai/v1` | Any OpenAI-compatible base URL |
+| `AEGIS_LLM_TIMEOUT` | `60` hosted / `300` local | Per-request timeout in seconds |
 | `AEGIS_PROMPT_OVERHEAD` | measured per model | Fixed prompt tokens added by the provider |
 | `DATABASE_URL` | `postgresql://aegis:password@localhost:5432/aegisflow` | Checkpoint database |
 | `AEGIS_RAG_ENABLED` | `0` | Enable RAG and load the selected local models during FastAPI startup |
@@ -58,7 +60,45 @@ uvicorn aegisflow.api.main:app --reload
 | `AEGIS_RAG_STRATEGY` | `structure-aware` | `fixed-size`, `structure-aware`, or `semantic` |
 | `AEGIS_INGEST_TOKEN` | unset | Required token for `POST /ingest` and `GET /ingest/{job_id}` |
 
+### Use Ollama locally
+
+The closest local swap for the former Groq model is Ollama's `gpt-oss:20b`.
+It is the same model family and parameter size, and its 131,072-token model
+context matches Groq's advertised window. Download it once, then set these
+values in `.env`:
+
+```bash
+ollama pull gpt-oss:20b
+```
+
+```dotenv
+AEGIS_BASE_URL=http://localhost:11434/v1
+AEGIS_API_KEY=ollama
+AEGIS_MODEL=gpt-oss:20b
+```
+
+Restart Ollama and the AegisFlow API after changing the context setting. Ollama
+can allocate a smaller context by default; set its context length to `131072`
+in Ollama's app settings, or start its server with
+`OLLAMA_CONTEXT_LENGTH=131072 ollama serve`. Larger contexts use substantially
+more memory. Confirm the active allocation and whether the model is on GPU or
+CPU with `ollama ps`. The gateway continues using the same OpenAI-compatible
+chat endpoint, so agent and RAG code do not need provider-specific changes.
+
+The provider's hosted token quota no longer applies to local inference. AegisFlow
+still has its own output lengths (2,000 tokens per code-agent call, 1,200 for
+direct RAG answers) and 50,000-token workflow budget; these are application
+guardrails, independent of the model's 128K context window.
+
 ## API
+
+The FastAPI service also serves the AegisFlow console at `/`. It provides a
+streaming grounded RAG chat, a live Tri-Agent code workflow view, the RAG QA
+graph, run checkpoints and approvals, and (when configured) corpus ingestion.
+By default the console calls the same origin as the page; use the settings
+button to point it at another API server. `GET /capabilities` reports whether
+the RAG runtime, QA graph, and ingestion endpoint are available without
+revealing the ingestion token.
 
 | Endpoint | Description |
 |---|---|

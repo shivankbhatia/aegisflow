@@ -62,6 +62,15 @@ Codex-authored, not independently human-labeled.
 Groq quota is model-specific for planning purposes. Keep the model name in
 every report and budget each stage against that model's observed remaining
 daily quota. Do not count the retrieval-only baseline as quota-consuming.
+On 2026-10-25, Groq reported 159 tokens remaining for
+`openai/gpt-oss-20b` (TPD reset in about 76 seconds); later responses showed 222
+and then 87 tokens remaining, with reset estimates around 1m45s. The classifier
+tuning half was initially estimated at about 9,489 tokens from measured prompt
+counts plus the 128-token output cap per call. The run is checkpointed at 20/33
+cases in `eval/results/injection-classifier-tuning-max128.json`: 0 false flags,
+0 invalid outputs, all 20 had `finish_reason=stop`, and mean usage was 317.35
+tokens/call. The remaining 13 are estimated at about 4,125 tokens from observed
+usage; resume after the quota is available and verify the live balance first.
 
 The script writes `eval/results/phase3-human-review.jsonl` after the complete
 run. Label 15 answers for correctness and faithfulness, then calculate judge
@@ -101,15 +110,12 @@ flag rate. The evaluator records finish reasons, token use, invalid outputs,
 and checkpoints after every case; it stops after three consecutive 429s and
 resumes by retrying those failed IDs.
 
-The blind router relabel uses `eval/router_blind_prompts.jsonl` with shuffled
-neutral IDs and labels in `eval/router_blind_labels.jsonl`. Its mapping is kept
-separately in `eval/router_blind_id_map.jsonl`; the labeler did not see the map
-while assigning labels. It was done in the same session rather than after the
-suggested 24-hour washout, and the assistant had previously seen these
-questions. Treat the result as a neutral-ID second pass, not a fully independent
-human relabel. It agrees with the Codex labels on 30/30, which is not evidence
-of independent accuracy. The comparison report is
-`eval/results/router-blind-relabel.json`.
+The first neutral-ID relabel in `eval/router_blind_prompts.jsonl` was completed
+by the assistant after it had seen the questions; its 30/30 agreement is not an
+independent human result. A fresh shuffled, neutral-ID sheet is prepared at
+`eval/router_blind_relabel_v2.jsonl`. The human labeler must fill its `label`
+field without consulting route labels, then save it; compare by exact question
+text against `eval/router_queries.jsonl` only after labeling is complete.
 
 ## QA checkpoint state
 
@@ -162,8 +168,11 @@ was run with `GROQ_API_KEY` unset and PostgreSQL/Docker available:
 119 passed, with only the explicitly marked live test deselected. Run live tests
 with `pytest -m live`; local model loads use `pytest -m heavy` after installing
 the optional `.[models]` extra. GitHub Actions configures Python 3.11 and the
-PostgreSQL 15 pgvector service and runs the default tests without secrets; a
-hosted push result is still needed to claim CI green.
+PostgreSQL 15 pgvector service and runs the default tests without secrets. The
+initial hosted run exposed a sparse-search test that assumed preloaded corpus
+data; commit `2afd858` made the test seed and clean up an isolated row. The full
+local suite passed (119 passed, 1 deselected), and hosted CI passed for that
+commit: https://github.com/shivankbhatia/aegisflow/actions/runs/40123905986.
 
 The new manifest helper records git SHA/dirty state, model, endpoint host, UTC
 date, temperature, Python, QA config version, and key library versions.

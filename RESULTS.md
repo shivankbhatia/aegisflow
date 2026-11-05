@@ -98,6 +98,52 @@ same dev set used for tuning.
   citations. A larger live latency run was skipped because of the Groq quota
   limit.
 
+## Latest local-model run (2026-10-29)
+
+The following measurements were collected after switching the configured
+generation endpoint to Ollama Beam and rebuilding the local structure-aware
+index with the canonical source roots (946 pages: 751 LangChain, 155 FastAPI,
+and 40 psycopg; 9,777 chunks). The retrieval-only benchmark made no generation
+calls. Its results are therefore not model-quality scores.
+
+| Measurement | Result | Method / interpretation |
+|---|---:|---|
+| Dense chunk Recall@10 | 0.938 | 81-question dev set; chunk-level match |
+| Dense chunk Hit@10 | 0.975 | Fraction of questions with at least one relevant chunk in top 10 |
+| Dense chunk MRR | 0.789 | Reciprocal rank of the first relevant chunk |
+| Dense retrieval p95 | 25.5 ms | Retrieval-only latency |
+| Hybrid chunk Recall@10 | 0.889 | Same questions and corrected index |
+| Hybrid chunk Hit@10 | 0.926 | At least one relevant chunk in top 10 |
+| Hybrid chunk MRR | 0.541 | Reciprocal rank of the first relevant chunk |
+| Hybrid retrieval p95 | 75.9 ms | Retrieval-only latency |
+| Dense document Recall@10 | 0.981 | 50 retrieved chunks deduplicated by document; separate document-level protocol |
+| Dense document Hit@10 | 1.000 | Same document-level run |
+| Dense document MRR | 0.906 | Same document-level run |
+| Live `/query` TTFT p50 / p95 | 2,289.8 / 4,792.1 ms | 20 streamed requests; p95 exceeds the configured 1,500 ms target |
+
+Chunk-level and document-level scores use different relevance matching
+protocols and should not be compared as if they were the same metric. The
+document-level run is the closest comparison to earlier document-level
+results, but its corpus/index snapshot differs from the historical
+26,774-chunk index. Differences cannot be attributed to the LLM change alone.
+
+TTFT here is **server-measured time to the first generated token**: the API
+starts the timer before retrieval and records the time when the model stream
+first yields a token. The endpoint returns Server-Sent Events; the benchmark
+consumes the full stream to collect the server's timing event, but does not use
+full-response completion time as TTFT. It is not browser-observed latency and
+does not include client/network buffering. Retrieval in these live requests
+took about 28–61 ms, so generation accounts for most of the TTFT.
+
+The answer faithfulness evaluation did not complete: Beam's judge response
+failed the required structured `FaithfulnessVerdict` schema after retries.
+No new faithfulness score is available from this run.
+
+Reports: [live TTFT](eval/results/live-ttft-20261029-142839.json), [dense
+chunk retrieval](eval/results/dense-structure-aware-20261029-142515.json),
+[hybrid chunk retrieval](eval/results/hybrid-structure-aware-sparse-0.5-20261029-142515.json),
+and [dense document retrieval](eval/results/doc-level-dense-structure-aware-current-index-20261029-142535.json).
+
 ## Limitations
 
 The development set is source-derived and not independently human-verified.

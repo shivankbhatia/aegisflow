@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 import pytest
 
 from aegisflow.api import main as api_main
+from aegisflow.rag import runtime as rag_runtime
 from aegisflow.rag.runtime import (
     DEFAULT_RAG_MODE,
     DEFAULT_RAG_STRATEGY,
@@ -44,6 +45,35 @@ def test_default_served_configuration_matches_selection(monkeypatch):
     monkeypatch.delenv("AEGIS_RAG_STRATEGY", raising=False)
     assert rag_config_from_env() == (DEFAULT_RAG_MODE, DEFAULT_RAG_STRATEGY)
     assert rag_config_from_env() == ("dense", "structure-aware")
+
+
+@pytest.mark.asyncio
+async def test_load_runtime_initializes_vector_index_before_serving(monkeypatch):
+    monkeypatch.setenv("AEGIS_RAG_MODE", "dense")
+    monkeypatch.setenv("AEGIS_RAG_STRATEGY", "structure-aware")
+
+    class FakeIndex:
+        initialized = False
+
+        def __init__(self, _dsn):
+            pass
+
+        def initialize(self):
+            self.initialized = True
+
+    class FakeEmbedder:
+        def __init__(self, **_kwargs):
+            pass
+
+        def embed_query(self, _query):
+            return [0.0] * 384
+
+    monkeypatch.setattr(rag_runtime, "PgVectorIndex", FakeIndex)
+    monkeypatch.setattr(rag_runtime, "BGEEmbedder", FakeEmbedder)
+
+    runtime = await rag_runtime.load_rag_runtime("unused-dsn")
+
+    assert runtime.index.initialized
 
 
 @pytest.mark.asyncio

@@ -35,6 +35,11 @@ DEFAULT_RAG_MODE = "dense"
 DEFAULT_RAG_STRATEGY = "structure-aware"
 RAG_MODES = {"dense", "hybrid", "hybrid_rerank"}
 RAG_STRATEGIES = {"fixed-size", "structure-aware", "semantic"}
+DEFAULT_CORPUS_SOURCES = {
+    "langchain": Path("langchain-docs/src/oss"),
+    "fastapi": Path("fastapi/docs/en/docs"),
+    "psycopg": Path("psycopg/docs"),
+}
 
 
 def rag_config_from_env() -> tuple[str, str]:
@@ -78,6 +83,11 @@ def make_mode_retriever(index, embed_query, *, mode, strategy, reranker=None, ca
 async def load_rag_runtime(dsn: str) -> RAGRuntime:
     """Load only the selected retrieval models once, off the event loop."""
     mode, strategy = rag_config_from_env()
+    index = PgVectorIndex(dsn)
+    # Ensure pgvector and the selected tables/indexes exist before any query
+    # connection tries to register the vector adapter. Do this at startup so
+    # a missing extension fails before the API starts accepting RAG requests.
+    await asyncio.to_thread(index.initialize)
     # Serialize both models on the shared Metal command stream.
     inference_lock = threading.Lock()
     device = os.getenv("AEGIS_RAG_DEVICE") or None
@@ -90,7 +100,6 @@ async def load_rag_runtime(dsn: str) -> RAGRuntime:
         reranker = await asyncio.to_thread(
             CrossEncoderReranker, device=device, inference_lock=inference_lock,
         )
-    index = PgVectorIndex(dsn)
     retrieve = make_mode_retriever(
         index, embedder.embed_query, mode=mode, strategy=strategy,
         reranker=reranker, candidate_k=candidate_k,
@@ -102,19 +111,18 @@ async def load_rag_runtime(dsn: str) -> RAGRuntime:
 
 
 def ingest_local_corpus(runtime: RAGRuntime, root: str | Path = "data/raw") -> dict[str, int]:
-    """Build and transactionally replace the structure-aware local corpus index."""
+    """Build the pinned documentation corpus and replace the strategy snapshot."""
     docs_root = Path(root)
     chunks = []
     doc_ids: list[str] = []
     import tiktoken
 
     encoder = tiktoken.get_encoding("o200k_base")
-    for source_dir in sorted(path for path in docs_root.iterdir() if path.is_dir()):
-        docs_path = source_dir / "docs"
+    for source, relative_docs_path in DEFAULT_CORPUS_SOURCES.items():
+        docs_path = docs_root / relative_docs_path
         if not docs_path.is_dir():
-            # LangChain docs repository stores its content below docs.
-            docs_path = source_dir
-        for doc_id, source, relative_path, raw in iter_documents(docs_path, source_dir.name):
+            raise FileNotFoundError(f"configured {source} corpus is missing: {docs_path}")
+        for doc_id, source, relative_path, raw in iter_documents(docs_path, source):
             title, sections = clean_markdown(raw, relative_path)
             chunks.extend(structure_aware_chunks(
                 sections, doc_id=doc_id, source=source, title=title,

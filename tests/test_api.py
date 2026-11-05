@@ -73,6 +73,9 @@ def test_failed_run_resumes_without_reexecution(make_agents_factory):
 
 def test_run_with_missing_credentials_fails_cleanly(monkeypatch):
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    monkeypatch.delenv("AEGIS_API_KEY", raising=False)
+    monkeypatch.delenv("AEGIS_BASE_URL", raising=False)
+    monkeypatch.delenv("AEGIS_RAG_ENABLED", raising=False)
     # Hermetic: a developer's .env must not re-add the key.
     monkeypatch.setattr("aegisflow.api.main.load_dotenv", lambda: None)
     monkeypatch.setattr("aegisflow.api.runs.load_dotenv", lambda: None)

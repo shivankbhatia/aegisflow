@@ -131,12 +131,13 @@ class PgVectorIndex:
             with connection.cursor() as cursor:
                 for offset in range(0, len(rows), batch_size):
                     cursor.executemany(UPSERT_SQL, rows[offset : offset + batch_size])
-                if doc_ids:
-                    cursor.execute(
-                        "DELETE FROM chunks WHERE strategy = %s AND doc_id = ANY(%s) "
-                        "AND id <> ALL(%s)",
-                        (strategy, list(doc_ids), ids),
-                    )
+                # This method replaces a complete strategy snapshot. Delete
+                # stale IDs across the whole strategy, including documents
+                # removed from the corpus since the previous index build.
+                cursor.execute(
+                    "DELETE FROM chunks WHERE strategy = %s AND id <> ALL(%s)",
+                    (strategy, ids),
+                )
 
     def _rows(self, chunks, embeddings):
         if len(chunks) != len(embeddings):

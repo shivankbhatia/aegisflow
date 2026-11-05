@@ -83,7 +83,7 @@ def test_pgvector_counts_source_filter_and_query_latency():
             chunks[:1],
             vectors[:1],
             strategy=strategy,
-            doc_ids=doc_ids,
+            doc_ids=[chunks[0].doc_id],
         )
         assert index.count(strategy) == 1
     finally:

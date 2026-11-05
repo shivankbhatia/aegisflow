@@ -1,9 +1,11 @@
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 from ..orchestrator.ledger import postgres_checkpointer
 from ..llm_gateway import from_env
@@ -68,9 +70,24 @@ def create_app(
     )
     app.include_router(router)
 
+    @app.get("/", include_in_schema=False)
+    async def frontend():
+        return FileResponse(Path(__file__).parent / "static" / "index.html")
+
     @app.get("/health")
     async def health_check():
         return {"status": "healthy"}
+
+    @app.get("/capabilities")
+    async def capabilities():
+        runs = getattr(app.state, "runs", None)
+        rag_enabled = getattr(app.state, "rag", None) is not None
+        return {
+            "service": "AegisFlow",
+            "rag_enabled": rag_enabled,
+            "qa_graph_enabled": bool(getattr(runs, "qa_enabled", False)),
+            "ingest_enabled": bool(os.getenv("AEGIS_INGEST_TOKEN")) and rag_enabled,
+        }
 
     return app
 
